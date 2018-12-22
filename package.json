@@ -1,12 +1,12 @@
 {
-  "name": "core-client",
+  "name": "mek-manager",
   "version": "0.1.0",
-  "description": "The browser client for the core Mek Manager application.",
+  "description": "The browser client for the Mek Manager application.",
   "main": "index.js",
-  "repository": "git@gitlab.com:mek-manager/core-client.git",
+  "repository": "git@gitlab.com:mek-manager/mek-manager.git",
   "author": "Eric Hopkins <eric.on.tech@gmail.com>",
   "license": "GPL-3.0",
-  "private": false,
+  "private": true,
   "devDependencies": {
     "typescript": "^3.1.1"
   }

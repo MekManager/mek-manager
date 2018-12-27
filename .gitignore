@@ -1,1 +1,8 @@
-node_modules/
+# General
+*.*~
+
+# Client
+client/www/node_modules/
+client/www/index.js
+client/www/*.*.map
+client/www/.rpt2_cache

@@ -1,0 +1,29 @@
+{
+  "name": "mek-manager",
+  "version": "0.1.0",
+  "description": "The browser client for the Mek Manager application.",
+  "main": "index.js",
+  "repository": "git@gitlab.com:mek-manager/mek-manager.git",
+  "author": "Eric Hopkins <eric.on.tech@gmail.com>",
+  "license": "GPL-3.0",
+  "private": true,
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "@types/kefir": "^3.7.0",
+    "@types/mithril": "^1.1.13",
+    "rollup": "^0.68.2",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-node-resolve": "^4.0.0",
+    "rollup-plugin-terser": "^3.0.0",
+    "rollup-plugin-typescript2": "^0.18.1",
+    "rollup-plugin-uglify": "^6.0.0",
+    "tslint": "^5.12.0",
+    "typescript": "^3.2.2"
+  },
+  "dependencies": {
+    "kefir": "^3.8.5",
+    "mithril": "^1.1.6"
+  }
+}

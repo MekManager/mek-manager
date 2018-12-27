@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "removeComments": true,
+    "noImplicitAny": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "inlineSources": true
+  },
+  "include": ["*.ts"],
+  "exclude": ["node_modules"]
+}

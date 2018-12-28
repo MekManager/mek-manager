@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "kefir": "^3.8.5",
-    "mithril": "^1.1.6"
+    "mithril": "^1.1.6",
+    "rambdax": "^1.5.5"
   }
 }

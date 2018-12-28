@@ -550,6 +550,11 @@ process-nextick-args@~2.0.0:
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.0.tgz#a37d732f4271b4ab1ad070d35508e8290788ffaa"
   integrity sha512-MtEC1TqN0EU5nephaJ4rAtThHtC86dNN9qCuEhtshvpVBkAW5ZO7BASN9REnF9eoXGcRub+pFuKEpOHE+HbEMw==
 
+rambdax@^1.5.5:
+  version "1.5.5"
+  resolved "https://registry.yarnpkg.com/rambdax/-/rambdax-1.5.5.tgz#241978de69ab3143c9b4448f55979ac2d295a719"
+  integrity sha512-x0WN7ST85XrydVIcjupaPL5UbhDZq8Rxk2htM/144KxvXvcH9DMY/vqe2g2C2xkpjZDFbfkpGezrWzUZxPn7QQ==
+
 randomatic@^3.0.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/randomatic/-/randomatic-3.1.1.tgz#b776efc59375984e36c537b2f51a1f0aff0da1ed"

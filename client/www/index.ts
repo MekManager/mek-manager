@@ -1,5 +1,6 @@
 import m, { route, RouteDefs, Vnode } from "mithril";
 import { fromEvents } from "kefir";
+import { compose, map } from "rambdax";
 
 // #region Interfaces
 interface Route {
@@ -27,10 +28,6 @@ interface State {
 // #endregion
 
 // #region Initial
-const compose = <T>(
-  f: (t: any) => any,
-  g: (t: any) => any
-) => (x: any): T => f(g(x));
 const element = document.body;
 const EVENT_NAME = "user:event";
 const eventValue = (event: Event) => {
@@ -81,7 +78,7 @@ const increase = dispatchAction(ActionID.TEMP_INCREASE);
 const newText = dispatchAction(ActionID.TEXT_CHANGE);
 const routeChange = dispatchAction(ActionID.ROUTE_CHANGE);
 
-const withEventValue = (action: any) => compose<string>(action, eventValue);
+const withEventValue = (action: any) => compose(action, eventValue);
 // #endregion
 
 // #region view
@@ -89,16 +86,17 @@ const Nav = {
   view: ({ attrs }: Vnode<RouteModel>) => m(
     'nav',
     { style: 'margin-bottom: 10px' },
-    attrs.routes.map(r => m(
-      'a',
-      {
-        href: r.path,
-        oncreate: route.link,
-        style: 'margin: 0 5px'
-      },
-      r.name
-    ),
-    attrs.routes
+    map(
+      (r) => m(
+        'a',
+        {
+          href: r.path,
+          oncreate: route.link,
+          style: 'margin: 0 5px'
+        },
+        r.name
+      ),
+      attrs.routes
     )
   )
 };

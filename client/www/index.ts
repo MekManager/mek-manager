@@ -1,5 +1,5 @@
-import m, { route, RouteDefs, Vnode } from "mithril";
 import { fromEvents } from "kefir";
+import m, { route, RouteDefs, Vnode } from "mithril";
 import { compose, map } from "rambdax";
 
 // #region Interfaces
@@ -32,6 +32,7 @@ const element = document.body;
 const EVENT_NAME = "user:event";
 const eventValue = (event: Event) => {
   const target = event.currentTarget as HTMLInputElement;
+
   return target.value;
 };
 const getSettings = (): RouteSettings => {
@@ -43,7 +44,7 @@ const getSettings = (): RouteSettings => {
 
   return {
     routes,
-    defaultRoute
+    defaultRoute,
   };
 };
 const settings = getSettings();
@@ -52,10 +53,10 @@ const initialState: State = {
     routes: settings.routes.slice(),
     defaultRoute: settings.defaultRoute,
     routeName: settings.defaultRoute,
-    params: undefined
+    params: undefined,
   },
   value: 20,
-  text: ""
+  text: "",
 };
 // #endregion
 
@@ -66,7 +67,7 @@ const initialState: State = {
 enum ActionID {
   TEMP_INCREASE = "temp:increase",
   TEXT_CHANGE   = "text:change",
-  ROUTE_CHANGE  = "route:change"
+  ROUTE_CHANGE  = "route:change",
 }
 
 const dispatchAction = (name: ActionID) => (value: any) => {
@@ -92,13 +93,13 @@ const Nav = {
         {
           href: r.path,
           oncreate: route.link,
-          style: 'margin: 0 5px'
+          style: 'margin: 0 5px',
         },
         r.name
       ),
       attrs.routes
     )
-  )
+  ),
 };
 
 const Main = {
@@ -109,8 +110,8 @@ const Main = {
       m(
         'button',
         {
-          onclick: () => { increase(1) },
-          style: 'display: block'
+          onclick: () => { increase(1); },
+          style: 'display: block',
         },
         'increase temp'
       ),
@@ -118,14 +119,14 @@ const Main = {
         type: 'text',
         style: 'display: block',
         placeholder: 'enter something',
-        onkeyup: withEventValue(newText)
-      })
-    ])
+        onkeyup: withEventValue(newText),
+      }),
+    ]),
 };
 
 const Alt = {
   view: (_: Vnode<State>) =>
-    m('#alt', [m('h1', 'this is the alternate page')])
+    m('#alt', [m('h1', 'this is the alternate page')]),
 };
 
 const whereTo = (attrs: State) => {
@@ -140,16 +141,17 @@ const whereTo = (attrs: State) => {
 
 const Root = {
   view: ({ attrs }: Vnode<State>) =>
-    m('#root', [m(Nav, attrs.routing), whereTo(attrs)])
+    m('#root', [m(Nav, attrs.routing), whereTo(attrs)]),
 };
 // #endregion
 
 // #region router
 const createRouteDefinition = (model: State): RouteDefs => {
   const { routing } = model;
+
   return routing.routes.reduce((accumulator, r) => {
     accumulator[r.path] = {
-      onmatch: function(params: any, _: any) {
+      onmatch: (params: any, _: any) => {
         /* NOTE: This gets invoked on every update, don't fire an event to
          * change the route unless it's actually changed, or there will be
          * callstack errors.
@@ -157,14 +159,15 @@ const createRouteDefinition = (model: State): RouteDefs => {
         if (model.routing.routeName !== r.path) {
           routeChange({
             routeName: r.path,
-            params
+            params,
           });
         }
       },
-      render: function() {
+      render: () => {
         return m(Root, model);
-      }
+      },
     };
+
     return accumulator;
   },
   {} as { [id: string]: any }
@@ -179,17 +182,20 @@ const commandBus = (state: State, command: CustomEvent): State => {
   switch (detail.name) {
     case ActionID.TEMP_INCREASE:
       state.value += detail.value;
+
       return state;
     case ActionID.TEXT_CHANGE:
       state.text = detail.value;
+
       return state;
     case ActionID.ROUTE_CHANGE:
       state.routing.routeName = detail.value.routeName;
       state.routing.defaultRoute = detail.value.params;
+
       return state;
     default:
       return state;
-  };
+  }
 };
 // #endregion
 

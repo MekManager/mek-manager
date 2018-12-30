@@ -4,9 +4,9 @@ import commonjs from 'rollup-plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
 
 export default {
-  input: './index.ts',
+  input: './src/index.ts',
   output: {
-    file: 'index.js',
+    file: './dist/index.js',
     format: 'iife', // immediately-invoked function expression - for <script> tags
     sourcemap: true
   },

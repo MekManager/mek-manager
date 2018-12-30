@@ -8,6 +8,7 @@ export default {
   output: {
     file: './dist/index.js',
     format: 'iife', // immediately-invoked function expression - for <script> tags
+    name: 'mekManager',
     sourcemap: true
   },
   sourcemap: true,

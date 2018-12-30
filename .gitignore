@@ -2,6 +2,7 @@
 *.*~
 
 # Client
+client/www/build/
 client/www/node_modules/
 client/www/dist/index.js
 client/www/dist/*.*.map

@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
     "target": "es5",
+    "module": "commonjs",
     "outDir": "build/",
+    "inlineSourceMap": true,
     "removeComments": true,
     "noImplicitAny": true,
     "preserveConstEnums": true,
-    "sourceMap": true,
     "allowSyntheticDefaultImports": true,
   },
   "include": ["src/**/*.ts"],

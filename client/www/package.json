@@ -10,10 +10,12 @@
   "scripts": {
     "build": "rollup -c",
     "karma": "karma start --auto-watch",
+    "karma:single": "karma start --no-auto-watch --single-run --browsers PhantomJS",
     "lint": "tslint -p . *.ts",
     "merge-check": "yarn run lint && yarn run test:ci",
     "test": "yarn run tsc && yarn run karma",
-    "test:ci": "yarn run tsc && karma start --no-auto-watch --single-run --browsers PhantomJS",
+    "test:mocha": "mocha build/**/specs/*.spec.js",
+    "test:ci": "yarn run tsc && yarn run test:mocha",
     "test:watch": "yarn run tsc && concurrently \"yarn run tsc:watch\" \"yarn run karma\"",
     "tsc": "tsc -p ./tsconfig.spec.json",
     "tsc:watch": "tsc -w -p ./tsconfig.spec.json"

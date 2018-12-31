@@ -1,4 +1,6 @@
 before_script:
+  - pwd
+  - ls -al
   - apt-get update -qq && apt-get install -y -qq curl
   - curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh
   - bash nodesource_setup.sh
@@ -8,7 +10,14 @@ before_script:
   - npm i -g yarn
   - cd client/www && yarn install
 
+build:
+  script:
+    - yarn run build
+
 tslint:
   script:
-    - yarn lint
+    - yarn run lint
 
+test:
+  script:
+    - yarn run test:ci

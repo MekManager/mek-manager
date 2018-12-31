@@ -5,6 +5,7 @@ const buble = require("rollup-plugin-buble");
 
 module.exports = function (config) {
   config.set({
+    browsers: ['PhantomJS'],
     frameworks: ['mocha', 'chai'],
     files: [
       { pattern: 'build/**/specs/*.spec.js' }

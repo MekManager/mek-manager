@@ -7,6 +7,9 @@
     "preserveConstEnums": true,
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
+    "lib": [
+      "dom", "es5", "es2015.collection", "es2015.promise"
+    ]
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]

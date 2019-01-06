@@ -8,12 +8,13 @@ module.exports = function (config) {
     browsers: ['PhantomJS'],
     frameworks: ['mocha', 'chai'],
     files: [
+      './node_modules/core-js/client/shim.min.js',
       { pattern: 'build/**/specs/*.spec.js' }
     ],
     preprocessors: {
       'build/**/specs/*.spec.js': ['rollup'],
     },
-    reporters: ["progress"],
+    reporters: ["dots"],
     rollupPreprocessor: {
       plugins: [
         commonjs({

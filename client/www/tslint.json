@@ -41,7 +41,6 @@
     "no-inferrable-types": true,
     "no-invalid-template-strings": true,
     "no-invalid-this": true,
-    "no-magic-numbers": true,
     "no-namespace": true,
     "no-non-null-assertion": true,
     "no-null-keyword": true,

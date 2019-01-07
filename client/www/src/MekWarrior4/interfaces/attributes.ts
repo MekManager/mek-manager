@@ -115,11 +115,7 @@ export const changeXP = (
  * @param xp the anount of experience to be converted
  * @returns the score computed from the provided XP.
  */
-export const calculateScore = (xp: number): number => {
-    const divisionAmount = 100;
-
-    return Math.floor(xp / divisionAmount);
-};
+export const calculateScore = (xp: number): number => Math.floor(xp / 100);
 
 /**
  * Takes the score of an `AttributeValues` object and determines the link

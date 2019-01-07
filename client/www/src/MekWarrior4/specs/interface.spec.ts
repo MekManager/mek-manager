@@ -3,13 +3,14 @@ import "mocha";
 import {
     Attribute,
     calculateLinkValue,
-    emptyAttributes,
+    changeXP,
     emptyAttributeValues,
+    newAttributes,
 } from "../interfaces/attributes";
 
 describe("Attributes", () => {
     it("should create an empty attribute set", () => {
-        const attrs = emptyAttributes();
+        const attrs = newAttributes();
         const emptyValues = emptyAttributeValues();
 
         expect(attrs.get(Attribute.STR)).to.deep.equal(emptyValues);
@@ -20,6 +21,30 @@ describe("Attributes", () => {
         expect(attrs.get(Attribute.WIL)).to.deep.equal(emptyValues);
         expect(attrs.get(Attribute.CHA)).to.deep.equal(emptyValues);
         expect(attrs.get(Attribute.EDG)).to.deep.equal(emptyValues);
+    });
+
+    describe("Attribute constructor function", () => {
+        const firstAttrs = newAttributes();
+        const firstValues = emptyAttributeValues();
+        firstValues.xp = 100;
+        firstAttrs.set(Attribute.STR, firstValues);
+
+        const secondAttrs = newAttributes(firstAttrs);
+        const secondValues = secondAttrs.get(Attribute.BOD);
+        secondValues.xp = 200;
+        secondAttrs.set(Attribute.BOD, secondValues);
+
+        it("should not create a reference to the original", () => {
+            expect(secondAttrs).not.to.equal(firstAttrs);
+        });
+
+        it("should not change the values of the original", () => {
+            expect(firstAttrs.get(Attribute.BOD)).to.deep.equal(emptyAttributeValues());
+        });
+
+        it("should pass original values to the child", () => {
+            expect(secondAttrs.get(Attribute.STR)).to.deep.equal(firstValues);
+        });
     });
 
     describe("Link modifiers", () => {
@@ -74,4 +99,15 @@ describe("Attributes", () => {
         });
     });
 
+    describe("Changing XP values", () => {
+        it("should update the link and score when changing XP", () => {
+            const attrs = newAttributes();
+            const target = Attribute.DEX;
+            const updated = changeXP(attrs, target, 400);
+
+            expect(updated.get(target).xp).to.equal(400);
+            expect(updated.get(target).link).to.equal(0);
+            expect(updated.get(target).score).to.equal(4);
+        });
+    });
 });

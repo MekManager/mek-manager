@@ -7,7 +7,7 @@ export interface Trait {
     points: number;
     /** The amount of raw XP a trait has. */
     experience: number;
-    /** If a character is allowed to to multiple of this trait. */
+    /** If a character is allowed to have multiple of this trait. */
     multipleAllowed: boolean;
     /**
      * A further description of a trait, usually to differentiate a trait taken
@@ -47,16 +47,22 @@ export const newTrait = (): Trait => ({
     multipleAllowed: false,
 });
 
-export const calculatePoints = (xp: number) => Math.floor(xp / 100);
+export const calculatePoints = (t: Trait, xp: number) => {
+    const points = Math.floor(xp / 100);
+
+    if (t.max && points > t.max) {
+        return t.max;
+    } else if (t.min && points < t.min) {
+        return 0;
+    } else {
+        return points;
+    }
+};
 
 export const changeXP = (t: Trait, newXP: number): Trait => {
     const trait = deepCopy(t);
-    let points = calculatePoints(newXP);
     trait.experience = newXP;
-    if (t.max) {
-        points = points > t.max ? t.max : points;
-    }
-    trait.points = points;
+    trait.points = calculatePoints(t, newXP);
 
     return trait;
 };

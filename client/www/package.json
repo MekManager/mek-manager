@@ -17,7 +17,7 @@
     "test:mocha": "mocha build/**/specs/*.spec.js",
     "test:mocha:watch": "mocha -w build/**/specs/*.spec.js",
     "test:ci": "yarn run tsc && yarn run test:mocha",
-    "test:ci:watch": "yarn run tsc && concurently \"yarn run tsc:watch\" \"yarn run test:mocha:watch\"",
+    "test:ci:watch": "yarn run tsc && concurrently \"yarn run tsc:watch\" \"yarn run test:mocha:watch\"",
     "test:watch": "yarn run tsc && concurrently \"yarn run tsc:watch\" \"yarn run karma\"",
     "tsc": "tsc -p ./tsconfig.spec.json",
     "tsc:watch": "tsc -w -p ./tsconfig.spec.json"

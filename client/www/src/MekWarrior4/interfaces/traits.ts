@@ -3,7 +3,10 @@ import { deepCopy } from "../../Utils/objects";
 export interface Trait {
     /** The name of the `Trait` */
     name: string;
-    /** The amount of Trait Points or TP a trait has. */
+    /**
+     * The amount of Trait Points or TP a trait has.
+     * NOTE: this isn't a great name. Maybe "score" or "level"?
+     */
     points: number;
     /** The amount of raw XP a trait has. */
     experience: number;

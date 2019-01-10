@@ -13,7 +13,7 @@ describe("Traits", () => {
         const trait = newTrait();
 
         expect(trait.name).to.exist;
-        expect(trait.points).to.be.a('number');
+        expect(trait.level).to.be.a('number');
         expect(trait.experience).to.be.a('number');
         expect(trait.multipleAllowed).to.equal(false);
     });
@@ -22,7 +22,7 @@ describe("Traits", () => {
         it("should update the XP and points of a trait", () => {
             const trait = changeXP(newTrait(), 325);
 
-            expect(trait.points).to.equal(3);
+            expect(trait.level).to.equal(3);
             expect(trait.experience).to.equal(325);
         });
     });
@@ -57,13 +57,13 @@ describe("Traits", () => {
         });
         it("should be active if it has a positive number of points", () => {
             const trait = newTrait();
-            trait.points = 3;
+            trait.level = 3;
 
             expect(isActive(trait)).to.equal(true);
         });
         it("should be active if it has a negative number of points", () => {
             const trait = newTrait();
-            trait.points = -2;
+            trait.level = -2;
 
             expect(isActive(trait)).to.equal(true);
         });
@@ -85,7 +85,7 @@ describe("Traits", () => {
         it("should include the point value, if the trait is active", () => {
             const trait = newTrait();
             trait.name = traitName;
-            trait.points = pointValue;
+            trait.level = pointValue;
 
             expect(toString(trait)).to.equal(`${traitName} (${pointValue})`);
         });
@@ -93,7 +93,7 @@ describe("Traits", () => {
         it("should include the sub-description, if there is one", () => {
             const trait = newTrait();
             trait.name = traitName;
-            trait.points = pointValue;
+            trait.level = pointValue;
             trait.subDescription = subDesc;
 
             expect(toString(trait))
@@ -104,7 +104,7 @@ describe("Traits", () => {
         it("should include the subject, if there is one", () => {
             const trait = newTrait();
             trait.name = traitName;
-            trait.points = pointValue;
+            trait.level = pointValue;
             trait.subDescription = subDesc;
             trait.subject = subject;
 

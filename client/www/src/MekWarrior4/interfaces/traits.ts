@@ -3,11 +3,8 @@ import { deepCopy } from "../../Utils/objects";
 export interface Trait {
     /** The name of the `Trait` */
     name: string;
-    /**
-     * The amount of Trait Points or TP a trait has.
-     * NOTE: this isn't a great name. Maybe "score" or "level"?
-     */
-    points: number;
+    /** The amount of Trait Points or TP a trait has. */
+    level: number;
     /** The amount of raw XP a trait has. */
     experience: number;
     /** If a character is allowed to have multiple of this trait. */
@@ -41,11 +38,11 @@ export interface Trait {
  * @param t The trait to test
  * @returns if the trait is actively effecting the character
  */
-export const isActive = (t: Trait): boolean => t.points !== 0;
+export const isActive = (t: Trait): boolean => t.level !== 0;
 
 export const newTrait = (): Trait => ({
     name: '',
-    points: 0,
+    level: 0,
     experience: 0,
     multipleAllowed: false,
 });
@@ -65,7 +62,7 @@ export const calculatePoints = (t: Trait, xp: number) => {
 export const changeXP = (t: Trait, newXP: number): Trait => {
     const trait = deepCopy(t);
     trait.experience = newXP;
-    trait.points = calculatePoints(t, newXP);
+    trait.level = calculatePoints(t, newXP);
 
     return trait;
 };
@@ -73,7 +70,7 @@ export const changeXP = (t: Trait, newXP: number): Trait => {
 export const toString = (t: Trait): string => {
     let str = t.name;
     if (isActive(t)) {
-        str = `${str} (${t.points})`;
+        str = `${str} (${t.level})`;
     }
     if (t.subDescription) {
         str = `${str}/${t.subDescription}`;

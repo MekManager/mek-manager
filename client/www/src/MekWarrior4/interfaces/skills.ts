@@ -71,6 +71,7 @@ const tieredValue = <T>(s: Skill, l: Learning, ts: T[]): T => {
 
 export const changeXP = (s: Skill, l: Learning, xp: number): Skill => {
   const experience = s.experience + xp;
+
   return {
     ...s,
     experience,
@@ -94,4 +95,16 @@ export const complexity = (s: Skill, l: Learning) => {
 
 export const links = (s: Skill, l: Learning) => {
   return tieredValue<Attribute | Attribute[]>(s, l, s.linkedAttributes);
+};
+
+export const toString = (s: Skill) => {
+  let str = s.name;
+  if (s.subSkill) {
+    str = `${str}/${s.subSkill}`;
+  }
+  if (s.specialty) {
+    str = `${str} (${s.specialty})`;
+  }
+
+  return str;
 };

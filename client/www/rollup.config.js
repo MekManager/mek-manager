@@ -13,7 +13,9 @@ export default {
   },
   sourcemap: true,
   plugins: [
-    typescript(),
+    typescript({
+      tsconfig: './tsconfig.json',
+    }),
     resolve({ jsnext: true }),
     commonjs({
       namedExports: {

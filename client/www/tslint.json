@@ -37,7 +37,7 @@
     "no-empty-interface": true,
     "no-eval": true,
     "no-for-in-array": true,
-    "no-implicit-dependencies": true,
+    "no-implicit-dependencies": false,
     "no-inferrable-types": true,
     "no-invalid-template-strings": true,
     "no-invalid-this": true,

@@ -1,6 +1,15 @@
 import { fromEvents } from "kefir";
 import m, { route, RouteDefs, Vnode } from "mithril";
-import { compose, map } from "rambdax";
+import { compose, map } from "ramda";
+import { Character, newCharacter } from './MekWarrior4/interfaces/characters';
+import { fastXP, slowXP, standardXP } from './MekWarrior4/interfaces/skills';
+
+// #region Testing
+const character = newCharacter();
+const xp1 = standardXP;
+const xp2 = slowXP;
+const xp3 = fastXP;
+// #endregion
 
 // #region Interfaces
 interface Route {
@@ -126,7 +135,10 @@ const Main = {
 
 const Alt = {
   view: (_: Vnode<State>) =>
-    m('#alt', [m('h1', 'this is the alternate page')]),
+    m('#alt', [
+      m('h1', 'this is the alternate page'),
+      map((x) => m('p', x), fastXP),
+    ]),
 };
 
 const whereTo = (attrs: State) => {

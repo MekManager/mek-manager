@@ -19,9 +19,8 @@
  *  + Need to use ts-ignore on an import.
  *  + There should be more documentation.
  */
-// @ts-ignore
-import * as findLastIndex from 'lodash.findlastindex';
-import { map } from 'rambdax';
+import { map } from 'ramda';
+import { findLastIndex } from '../../Utils/collections';
 import { Attribute } from './attributes';
 
 // NOTE: Everything about XP lists and learning should maybe go in it's own file
@@ -83,7 +82,7 @@ export const changeXP = (s: Skill, l: Learning, xp: number): Skill => {
  * Determines the level of a skill based on XP.
  */
 export const levelForXP = (l: Learning, xp: number) =>
-  findLastIndex(xpList(l), (n: number) => xp >= n);
+  findLastIndex((n: number) => xp >= n, xpList(l));
 
 export const targetNumber = (s: Skill, l: Learning) => {
   return tieredValue<number>(s, l, s.targetNumbers);

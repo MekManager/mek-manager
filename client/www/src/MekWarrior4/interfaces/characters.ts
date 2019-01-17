@@ -1,4 +1,4 @@
-import { map } from "rambdax";
+import { map } from "ramda";
 import { Attributes, newAttributes } from "./attributes";
 import {
     Skill,

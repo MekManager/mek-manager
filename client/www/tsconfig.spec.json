@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
     "outDir": "build/",
     "inlineSourceMap": true,
     "removeComments": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "preserveConstEnums": true,
     "allowSyntheticDefaultImports": true,
+    "baseUrl": "./src",
     "lib": [
       "dom", "es5", "es2015.collection", "es2015.promise"
     ]

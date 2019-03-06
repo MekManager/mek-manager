@@ -19,8 +19,7 @@
  *  + Need to use ts-ignore on an import.
  *  + There should be more documentation.
  */
-import { map } from 'ramda';
-import { findLastIndex } from '../../Utils/collections';
+import { findLastIndex, map } from 'ramda';
 import { Attribute } from './attributes';
 
 // NOTE: Everything about XP lists and learning should maybe go in it's own file

@@ -5,6 +5,7 @@ import { terser } from 'rollup-plugin-terser';
 
 export default {
   input: './src/index.ts',
+  treeshake: true, // ensure this is always on, don't rely on defaults
   output: {
     file: './dist/index.js',
     format: 'iife', // immediately-invoked function expression - for <script> tags

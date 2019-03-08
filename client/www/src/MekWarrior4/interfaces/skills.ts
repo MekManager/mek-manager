@@ -59,7 +59,7 @@ export interface Skill {
   specialty?: string;
 }
 
-const tieredValue = <T>(s: Skill, l: Learning, ts: T[]): T => {
+const tieredValue = <T>(s: Skill, ts: T[]): T => {
   if (s.tiered) {
     return s.level <= 3 ? ts[0] : ts[1];
   } else {
@@ -83,16 +83,16 @@ export const changeXP = (s: Skill, l: Learning, xp: number): Skill => {
 export const levelForXP = (l: Learning, xp: number) =>
   findLastIndex((n: number) => xp >= n, xpList(l));
 
-export const targetNumber = (s: Skill, l: Learning) => {
-  return tieredValue<number>(s, l, s.targetNumbers);
+export const targetNumber = (s: Skill) => {
+  return tieredValue<number>(s, s.targetNumbers);
 };
 
-export const complexity = (s: Skill, l: Learning) => {
-  return tieredValue<string>(s, l, s.complexityRatings);
+export const complexity = (s: Skill) => {
+  return tieredValue<string>(s, s.complexityRatings);
 };
 
-export const links = (s: Skill, l: Learning) => {
-  return tieredValue<Attribute | Attribute[]>(s, l, s.linkedAttributes);
+export const links = (s: Skill) => {
+  return tieredValue<Attribute | Attribute[]>(s, s.linkedAttributes);
 };
 
 export const toString = (s: Skill) => {

@@ -156,9 +156,9 @@ describe("Skills", () => {
 
     it("should have the basic tier traits below skill level 3", () => {
       expect(skill.level).to.equal(3);
-      expect(targetNumber(skill, learning)).to.equal(8);
-      expect(complexity(skill, learning)).to.equal("CB");
-      expect(links(skill, learning)).to.equal(Attribute.INT);
+      expect(targetNumber(skill)).to.equal(8);
+      expect(complexity(skill)).to.equal("CB");
+      expect(links(skill)).to.equal(Attribute.INT);
     });
 
     it("should have the advanced tier traits at level 4 or above", () => {
@@ -166,9 +166,9 @@ describe("Skills", () => {
 
       expect(higherSkill.experience).to.equal(120);
       expect(higherSkill.level).to.equal(4);
-      expect(targetNumber(higherSkill, learning)).to.equal(9);
-      expect(complexity(higherSkill, learning)).to.equal("CA");
-      expect(links(higherSkill, learning))
+      expect(targetNumber(higherSkill)).to.equal(9);
+      expect(complexity(higherSkill)).to.equal("CA");
+      expect(links(higherSkill))
         .to.deep.equal([Attribute.DEX, Attribute.INT]);
     });
   });

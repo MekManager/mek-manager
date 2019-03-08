@@ -1,24 +1,21 @@
 image: "node:10.15.0-alpine"
 
 before_script:
-  - pwd
-  - ls -al
   - apk update
-  - node -v
-  - npm -v
-  - cd client/www && yarn install
+  - apk add make
+  - make ci-web-prelude
 
 build:
   stage: build
   script:
-    - yarn run build
+    - make web-build
 
 tslint:
   stage: test
   script:
-    - yarn run lint
+    - make web-lint
 
 test:
   stage: test
   script:
-    - yarn run test:ci
+    - make web-test

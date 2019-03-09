@@ -1,8 +1,8 @@
 import { fromEvents } from "kefir";
 import m, { route, RouteDefs, Vnode } from "mithril";
 import { compose, map } from "ramda";
-import { Character, newCharacter } from './MekWarrior4/interfaces/characters';
-import { fastXP, slowXP, standardXP } from './MekWarrior4/interfaces/skills';
+import { Character, newCharacter } from './MekWarrior4/characters';
+import { fastXP, slowXP, standardXP } from './MekWarrior4/skills';
 
 // #region Testing
 const character = newCharacter();

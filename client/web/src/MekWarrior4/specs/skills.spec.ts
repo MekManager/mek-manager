@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import "mocha";
-import { Attribute } from "../interfaces/attributes";
+import { Attribute } from "../attributes";
 import {
   changeXP,
   complexity,
@@ -11,7 +11,7 @@ import {
   Skill,
   slowXP,
   targetNumber,
-} from "../interfaces/skills";
+} from "../skills";
 
 describe("Skills", () => {
   describe("XP lists", () => {

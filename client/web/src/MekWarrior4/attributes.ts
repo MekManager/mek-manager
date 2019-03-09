@@ -1,4 +1,4 @@
-import { deepCopy } from "../../Utils/objects";
+import { deepCopy } from "../Utils/objects";
 
 /**
  * Keys for each of the eight Attribues in MekWarrior4.

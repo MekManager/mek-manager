@@ -6,7 +6,7 @@ import {
     isActive,
     newTrait,
     toString
-} from "../interfaces/traits";
+} from "../traits";
 
 describe("Traits", () => {
     it("should have a way to create an empty trait", () => {

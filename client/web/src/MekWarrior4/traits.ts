@@ -1,4 +1,4 @@
-import { deepCopy } from "../../Utils/objects";
+import { deepCopy } from "../Utils/objects";
 
 export interface Trait {
     /** The name of the `Trait` */

@@ -2,8 +2,9 @@
 *.*~
 
 # Client
-client/www/build/
-client/www/node_modules/
-client/www/dist/index.js
-client/www/dist/*.*.map
-client/www/.rpt2_cache
+client/web/build/
+client/web/node_modules/
+client/web/dist/index.js
+client/web/dist/*.*.map
+client/web/dist/.DS_STORE
+client/web/.rpt2_cache

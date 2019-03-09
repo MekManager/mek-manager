@@ -1,6 +1,6 @@
 .PHONY: ci-web-echo web-test
 
-WEB_DIR := client/www
+WEB_DIR := client/web
 
 ci-web-echo:
 	pwd

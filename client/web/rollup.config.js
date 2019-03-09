@@ -9,10 +9,10 @@ export default {
   output: {
     file: './dist/index.js',
     format: 'iife', // immediately-invoked function expression - for <script> tags
+    globals: {},
     name: 'mekManager',
     sourcemap: true
   },
-  sourcemap: true,
   plugins: [
     typescript({
       tsconfig: './tsconfig.json',
@@ -26,6 +26,5 @@ export default {
     }),
     terser({ sourcemap: true })
   ],
-  globals: {},
   external: []
 }

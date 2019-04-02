@@ -6,5 +6,5 @@
  * @returns a deep copy of `subject`.
  */
 export const deepCopy = <T>(subject: T): T => {
-    return JSON.parse(JSON.stringify(subject)) as T;
+  return JSON.parse(JSON.stringify(subject)) as T;
 };

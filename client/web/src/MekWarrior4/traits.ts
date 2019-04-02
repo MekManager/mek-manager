@@ -1,83 +1,89 @@
-import { deepCopy } from "../Utils/objects";
+export class TraitBase {
+  /** The name of the `Trait` */
+  public readonly name: string;
+  /** If a character is allowed to have multiple of this trait. */
+  public readonly multipleAllowed: boolean;
+  /** The maximum `points` this trait can have. */
+  public readonly max?: number;
+  /** The minimum `points` this trait can have. */
+  public readonly min?: number;
 
-export interface Trait {
-    /** The name of the `Trait` */
-    name: string;
-    /** The amount of Trait Points or TP a trait has. */
-    level: number;
-    /** The amount of raw XP a trait has. */
-    experience: number;
-    /** If a character is allowed to have multiple of this trait. */
-    multipleAllowed: boolean;
-    /**
-     * A further description of a trait, usually to differentiate a trait taken
-     * multiple times.
-     */
-    subDescription?: string;
-    /**
-     * Further clarification on a `subDescription`. This is useful in
-     * situations where there's multiple of the same thing. i.e:
-     *   Dependent (-2)/Son (Albert)
-     *   Dependent (-2)/Son (Brent)
-     */
-    subject?: string;
-    /**
-     * If a character has multiple identities, this specifies which of those
-     * identities this belongs to.
-     */
-    identity?: string;
-    /** The minimum `points` this trait can have. */
-    min?: number;
-    /** The maximum `points` this trait can have. */
-    max?: number;
+  constructor (data: Object) {
+    this.name = data['name'] || '';
+    this.multipleAllowed = data['multipleAllowed'] || false;
+    this.max = data['max'];
+    this.min = data['min'];
+  }
 }
+export class Trait {
+  public readonly base: TraitBase;
+  /** The amount of Trait Points or TP a trait has. */
+  public level: number;
+  /** The amount of raw XP a trait has. */
+  public experience: number;
+  /**
+   * A further description of a trait, usually to differentiate a trait taken
+   * multiple times.
+   */
+  public subDescription?: string;
+  /**
+   * Further clarification on a `subDescription`. This is useful in
+   * situations where there's multiple of the same thing. i.e:
+   *   Dependent (-2)/Son (Albert)
+   *   Dependent (-2)/Son (Brent)
+   */
+  public subject?: string;
+  /**
+   * If a character has multiple identities, this specifies which of those
+   * identities this belongs to.
+   */
+  public identity?: string;
+
+  constructor (base: TraitBase) {
+    this.base = base;
+    this.level = this._calculatePoints(0);
+  }
 
 /**
- * Determines if a `Trait` is currently active on the character it belongs to.
+ * Determines if this `Trait` is currently active.
  *
- * @param t The trait to test
- * @returns if the trait is actively effecting the character
+ * @returns if the trait is actively effecting a character
  */
-export const isActive = (t: Trait): boolean => t.level !== 0;
+  public isActive (): boolean {
+    return this.level !== 0;
+  }
 
-export const newTrait = (): Trait => ({
-    name: '',
-    level: 0,
-    experience: 0,
-    multipleAllowed: false,
-});
+  // NOTE: Why do traits have their XP set, but skills have their XP added?
+  public setXP (newXP: number): void {
+    this.experience = newXP;
+    this.level = this._calculatePoints(newXP);
+  }
 
-export const calculatePoints = (t: Trait, xp: number) => {
-    const points = Math.floor(xp / 100);
+  public toString (): string {
+    let str = this.base.name;
 
-    if (t.max && points > t.max) {
-        return t.max;
-    } else if (t.min && points < t.min) {
-        return 0;
-    } else {
-        return points;
+    if (this.isActive()) {
+      str = `${str} (${this.level})`;
     }
-};
-
-export const changeXP = (t: Trait, newXP: number): Trait => {
-    const trait = deepCopy(t);
-    trait.experience = newXP;
-    trait.level = calculatePoints(t, newXP);
-
-    return trait;
-};
-
-export const toString = (t: Trait): string => {
-    let str = t.name;
-    if (isActive(t)) {
-        str = `${str} (${t.level})`;
+    if (this.subDescription) {
+      str = `${str}/${this.subDescription}`;
     }
-    if (t.subDescription) {
-        str = `${str}/${t.subDescription}`;
-    }
-    if (t.subject) {
-        str = `${str} (${t.subject})`;
+    if (this.subject) {
+      str = `${str} (${this.subject})`;
     }
 
     return str;
-};
+  }
+
+  private _calculatePoints (xp: number): number {
+    const points = Math.floor(xp / 100);
+
+    if (this.base.max && points > this.base.max) {
+      return this.base.max;
+    } else if (this.base.min && points < this.base.min) {
+      return 0;
+    } else {
+      return points;
+    }
+  }
+}

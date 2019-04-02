@@ -1,108 +1,103 @@
-/* TODO: This file is not coming together as well as the others. Unlike the
- * other interfaces, it's not obvious how to keep the state of an individual
- * skill and the basic information about a skill in one place.
- *
- * Parts of this file that ought to change:
- *  + Code about XP lists and learning levels should be somewhere else
- *  + No clean way to represent the difference between an individual instance
- *    of a Skill, and the Skill data it's based on.
- *    - If something is altered here, that pattern should also be applied to
- *      traits for consistency.
- *  + Learning values need to get passed around *a lot*.
- *    - There might be a possible solution to this with functions that deal
- *      with characters wrapping over these skill functions, so it's not really
- *      seen outside of character functions.
- *  + Have to recalculate current target number, complexity, and link
- *    attributes on every change, and it's not cached.
- *  + There should probably be some kind of type or union representing a
- *    complexity rating.
- *  + Need to use ts-ignore on an import.
- *  + There should be more documentation.
- */
-import { findLastIndex, map } from 'ramda';
+import { findLastIndex } from 'ramda';
 import { Attribute } from './attributes';
+import { Learning, xpList } from './learning';
 
-// NOTE: Everything about XP lists and learning should maybe go in it's own file
-export const standardXP: number[] = [20, 30, 50, 80, 120, 170, 230, 300, 380, 470, 570];
-export const fastXP: number[] = map(x => Math.floor(x * 0.9), standardXP);
-export const slowXP: number[] = map(x => Math.floor(x * 1.1), standardXP);
+export class SkillBase {
+  public readonly name: string;
+  public readonly targetNumbers: [number, number?];
+  // TODO: There should probably be some type representing complexity ratings
+  public readonly complexityRatings: [string, string?];
+  public readonly linkedAttributes: [Attribute, [Attribute, Attribute]?];
+  public readonly tiered: boolean;
 
-export enum Learning {
-  FAST = 'Fast',
-  STANDARD = 'Standard',
-  SLOW = 'Slow',
+  constructor (data: Object) {
+    this.name = data['name'];
+    this.targetNumbers = data['targetNumbers'];
+    this.complexityRatings = data['complexityRatings'];
+    this.linkedAttributes = data['linkedAttributes'];
+    this.tiered = data['tiered'];
+  }
 }
 
-export const xpList = (l: Learning): number[] => {
-  switch (l) {
-    case Learning.FAST:
-      return fastXP;
-    case Learning.STANDARD:
-      return standardXP;
-    case Learning.SLOW:
-      return slowXP;
-    default:
-      return standardXP;
-  }
-};
-
-export interface Skill {
-  name: string;
-  level: number;
-  experience: number;
-  targetNumbers: [number, number?];
+// TODO: write more documentation for this
+export class Skill {
+  public readonly base: SkillBase;
+  public level: number;
+  public experience: number;
   // NOTE: this might benefit from stricter typing.
-  complexityRatings: [string, string?];
-  linkedAttributes: [Attribute, [Attribute, Attribute]?];
-  tiered: boolean;
-  subSkill?: string;
-  specialty?: string;
+  public subSkill?: string;
+  public specialty?: string;
+  public complexity: string;
+  public links: Attribute | Attribute[];
+  public targetNumber: number;
+
+  constructor (base: SkillBase) {
+    this.base = base;
+  }
+
+  public setXP (l: Learning, xp: number): void {
+    this.experience = xp;
+    this._calculateLevel(l);
+    this._calculateComplexity();
+    this._calculateLinks();
+    this._calculateTargetNumber();
+  }
+
+  public toString (): string {
+    let str = this.base.name;
+    if (this.subSkill) {
+      str = `${str}/${this.subSkill}`;
+    }
+    if (this.specialty) {
+      str = `${str} (${this.specialty})`;
+    }
+
+    return str;
+  }
+
+
+  private _calculateComplexity (): string {
+    const value = this._tieredValue<string>(this.base.complexityRatings);
+    this.complexity = value;
+
+    return value;
+  }
+
+  /**
+   * Determines and sets the level for the skill based on it's current XP.
+   */
+  private _calculateLevel (l: Learning): number {
+    const value = findLastIndex((n: number) =>
+      this.experience >= n, xpList(l));
+    this.level = value;
+
+    return value;
+  }
+
+  private _calculateLinks (): Attribute | Attribute[] {
+    const value = this._tieredValue<Attribute | Attribute[]>(
+      this.base.linkedAttributes
+     );
+     this.links = value;
+
+     return value;
+  }
+
+  private _calculateTargetNumber (): number {
+    const value = this._tieredValue<number>(this.base.targetNumbers);
+    this.targetNumber = value;
+
+    return value;
+  }
+
+  private _tieredValue<T> (tieredSubject: T[]): T {
+    if (this.base.tiered) {
+      return this.level <= 3
+        ? tieredSubject[0]
+        : tieredSubject[1];
+    } else {
+      return tieredSubject[0];
+    }
+  }
 }
 
-const tieredValue = <T>(s: Skill, ts: T[]): T => {
-  if (s.tiered) {
-    return s.level <= 3 ? ts[0] : ts[1];
-  } else {
-    return ts[0];
-  }
-};
-
-export const changeXP = (s: Skill, l: Learning, xp: number): Skill => {
-  const experience = s.experience + xp;
-
-  return {
-    ...s,
-    experience,
-    level: levelForXP(l, experience),
-  };
-};
-
-/**
- * Determines the level of a skill based on XP.
- */
-export const levelForXP = (l: Learning, xp: number) =>
-  findLastIndex((n: number) => xp >= n, xpList(l));
-
-export const targetNumber = (s: Skill) => {
-  return tieredValue<number>(s, s.targetNumbers);
-};
-
-export const complexity = (s: Skill) => {
-  return tieredValue<string>(s, s.complexityRatings);
-};
-
-export const links = (s: Skill) => {
-  return tieredValue<Attribute | Attribute[]>(s, s.linkedAttributes);
-};
-
-export const toString = (s: Skill) => {
-  let str = s.name;
-  if (s.subSkill) {
-    str = `${str}/${s.subSkill}`;
-  }
-  if (s.specialty) {
-    str = `${str} (${s.specialty})`;
-  }
-
-  return str;
-};

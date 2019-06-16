@@ -3,8 +3,6 @@
 
 # Client
 client/web/build/
+client/web/dist/
 client/web/node_modules/
-client/web/dist/index.js
-client/web/dist/*.*.map
-client/web/dist/.DS_STORE
-client/web/.rpt2_cache
+client/web/.rpt2_cache/

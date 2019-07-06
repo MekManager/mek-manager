@@ -1,5 +1,202 @@
-# General
-*.*~
+# General Ignores {{{
+
+# Operating Systems {{{
+
+## Linux {{{
+
+### Temporary files which can be created if a process still has a handle open
+### of a deleted file
+.fuse_hidden*
+
+### KDE directory preferences
+.directory
+
+### Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+### .nfs files are created when an open file is removed but is still
+### being accessed
+.nfs*
+
+## }}}
+
+## MacOS {{{
+
+### General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+### Icon must end with two \r
+Icon
+
+### Thumbnails
+._*
+
+### Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+### Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+## }}}
+
+## Windows {{{
+
+### Thumbnail cache files
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehtumbs_vista.db
+
+### Dump file
+*.stackdump
+
+### Folder config file
+[Dd]esktop.ini
+
+### Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+### Windows Installer files
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+
+### Windows shortcuts
+*.lnk
+
+## }}}
+
+# ======================================================================= }}}
+
+# Editors {{{
+
+## Vim {{{
+
+### Swap
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+Session.vim
+
+### Session
+Sessionx.vim
+
+### Temporary
+.netrwhist
+*~
+
+### Persistent undo
+[._]*.un~
+
+## }}}
+
+## Emacs {{{
+
+### Backups
+*~
+\#*\#
+.\#*
+
+### Flymake
+*_flymake.*
+
+### eshell
+/eshell/history
+/eshell/lastdir
+
+### Flycheck
+flycheck_*.el
+
+### Projectile
+.projectile
+
+### Directory config
+.dir-locals.el
+
+## }}}
+
+## VSCode {{{
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+## }}}
+
+## JetBrains IDEs {{{
+
+### User-specific files
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+
+### Generated files
+.idea/**/contentModel.xml
+
+### Sensitive or high-churn files
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/dbnavigator.xml
+
+## }}}
+
+## Sublime Text {{{
+
+### Cache files
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+
+### Workpace files are user-specific
+*.sublime-workspace
+
+### SFTP config file
+stfp-config.json
+
+### Package control specific files
+Package Control.last-run
+Package Control.ca-list
+Package Control.ca-bundle
+Package Control.system-ca-bundle
+Package Control.cache/
+Package Control.ca-certs/
+Package Control.merged-ca-bundle
+Package Control.user-ca-bundle
+oscrypto-ca-bundle.crt
+bh_unicode_properties.cache
+
+### Sublime-github package stores a github token in this file
+GitHub.sublime-settings
+
+## }}}
+
+# ======================================================================= }}}
+
+# ========================================================================== }}}
 
 # Client
 client/web/build/
@@ -8,6 +205,6 @@ client/web/node_modules/
 client/web/.rpt2_cache/
 
 # plugins
-plugins/names_db/target/debug/
-plugins/names_db/target/.rustc_info.json
-plugins/names_db/target/release/
+plugins/names_db/target/
+# backup files created by `rustfmt`
+plugins/names_db/**/*.rs.bk

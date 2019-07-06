@@ -10,3 +10,4 @@ client/web/.rpt2_cache/
 # plugins
 plugins/names_db/target/debug/
 plugins/names_db/target/.rustc_info.json
+plugins/names_db/target/release/

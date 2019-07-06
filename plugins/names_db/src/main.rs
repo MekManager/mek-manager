@@ -15,55 +15,17 @@
 extern crate r2d2;
 extern crate r2d2_postgres;
 
-use actix_web::{middleware, web, App, HttpResponse, HttpServer, Responder};
+mod models;
+
+mod db;
+use db::Pool;
+
+mod controllers;
+use controllers::{index, name_sets, names, sexes};
+
+use actix_web::{middleware, web, App, HttpServer};
 use r2d2_postgres::{PostgresConnectionManager, TlsMode};
-use serde_derive::{Deserialize, Serialize};
 use std::env;
-
-type Pool = r2d2::Pool<PostgresConnectionManager>;
-type Connection = r2d2::PooledConnection<PostgresConnectionManager>;
-
-#[derive(Serialize, Deserialize)]
-struct NameData {
-    latin_name: String,
-    native_name: Option<String>,
-    set: String,
-    name_type: String,
-    sex: String,
-}
-
-fn index() -> impl Responder {
-    HttpResponse::Ok().body("Hello world!")
-}
-
-fn data_test(db: web::Data<Pool>) -> impl Responder {
-    let conn: Connection = db.get().unwrap();
-
-    let statement = "SELECT * FROM denormalized_name_alt LIMIT 250";
-
-    let result: Vec<NameData> = conn
-        .query(statement, &[])
-        .unwrap()
-        .into_iter()
-        .map(|row| {
-            let latin_name: String = row.get(0);
-            let native_name: Option<String> = row.get(1);
-            let set: String = row.get(2);
-            let name_type: String = row.get(3);
-            let sex: String = row.get(4);
-
-            NameData {
-                latin_name,
-                native_name,
-                set,
-                name_type,
-                sex,
-            }
-        })
-        .collect();
-
-    HttpResponse::Ok().json(result)
-}
 
 fn main() {
     env::set_var("RUST_LOG", "actix_web=info");
@@ -84,7 +46,9 @@ fn main() {
             .data(pool.clone())
             .wrap(middleware::Logger::default())
             .service(web::resource("/").route(web::get().to(index)))
-            .service(web::resource("/data").route(web::get().to(data_test)))
+            .service(web::resource("/name").route(web::get().to(names)))
+            .service(web::resource("/name_set").route(web::get().to(name_sets)))
+            .service(web::resource("/sex").route(web::get().to(sexes)))
     })
     .bind(&address)
     .unwrap()

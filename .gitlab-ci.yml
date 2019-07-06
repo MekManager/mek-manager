@@ -5,10 +5,18 @@ before_script:
   - apk add make
   - make ci-web-prelude
 
-build:
+build-web:
   stage: build
   script:
     - make web-build
+
+build-names-db:
+  image: rust:1-stretch
+  before_script:
+    - make names-db-prelude
+  stage: build
+  script:
+    - make names-db-build
 
 tslint:
   stage: test

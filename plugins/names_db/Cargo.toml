@@ -1,0 +1,20 @@
+[package]
+name = "names_db"
+version = "0.1.0"
+authors = ["Eric Hopkins <eric.on.tech@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+actix-rt = "0.2.3"
+actix-web = "1.0.3"
+# There's an off chance futures will be needed later on, leaving it for now but
+# it can go soon if not.
+futures = "0.1.28"
+postgres = "0.15.2"
+r2d2 = "0.8.5"
+r2d2_postgres = "0.14.0"
+# Not sure if all of these serde packages are required. Only serde_derive is
+# used directly.
+serde = "1.0.94"
+serde_derive = "1.0.94"
+serde_json = "1.0.40"

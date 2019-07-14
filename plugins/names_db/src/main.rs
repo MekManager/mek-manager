@@ -29,6 +29,17 @@ use std::env;
 
 fn main() {
     env::set_var("RUST_LOG", "actix_web=info");
+
+    let debug: bool = match env::var("NAMES_DB_DEBUG") {
+        Ok(val) => {
+            if val == "t" || val == "true" {
+                true
+            } else {
+                false
+            }
+        }
+        Err(_) => false,
+    };
     let address = match env::var("NAMES_DB_ADDRESS") {
         Ok(val) => val,
         Err(_e) => panic!("No address was defined, the server cannot start. Exiting"),
@@ -38,10 +49,27 @@ fn main() {
         Err(_e) => panic!("No connection information defined for the database. Exiting"),
     };
 
-    let manager = PostgresConnectionManager::new(db_address, TlsMode::None).unwrap();
-    let pool: Pool = r2d2::Pool::new(manager).unwrap();
+    let manager = match PostgresConnectionManager::new(db_address, TlsMode::None) {
+        Ok(val) => {
+            if debug {
+                println!("Created a database connection manager");
+            }
+            val
+        }
+        Err(_e) => panic!("Couldn't create a Database connection manager. Exiting"),
+    };
 
-    HttpServer::new(move || {
+    let pool: Pool = match r2d2::Pool::new(manager) {
+        Ok(val) => {
+            if debug {
+                println!("Created a connection pool for the database");
+            }
+            val
+        }
+        Err(_e) => panic!("Error creating a Database connection pool. Exiting"),
+    };
+
+    match HttpServer::new(move || {
         App::new()
             .data(pool.clone())
             .wrap(middleware::Logger::default())
@@ -51,7 +79,22 @@ fn main() {
             .service(web::resource("/sex").route(web::get().to(sexes)))
     })
     .bind(&address)
-    .unwrap()
-    .run()
-    .unwrap();
+    {
+        Ok(bound_server) => match bound_server.run() {
+            Ok(val) => {
+                if debug {
+                    // NOTE: this value isn't returned until the server is
+                    // shutting down.
+                    println!("Unbinding port");
+                }
+                val
+            }
+            Err(e) => panic!("Failed to start the server after binding: {}", e),
+        },
+        Err(e) => panic!("Failed to bind server to port: {}", e),
+    }
+
+    if debug {
+        println!("Shutting down");
+    }
 }

@@ -16,7 +16,7 @@ build-names-db:
     - make names-db-prelude
   stage: build
   script:
-    - make names-db-build
+    - make names-db-build-unoptimized
 
 tslint:
   stage: test

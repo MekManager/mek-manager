@@ -16,7 +16,7 @@ module.exports = function (config) {
       plugins: [
         commonjs(),
         resolve({
-          jsnext: true,
+          mainFields: ['module', 'main', 'jsnext:main'],
         }),
       ],
       output: {

@@ -17,7 +17,7 @@ export default {
     typescript({
       tsconfig: './tsconfig.json',
     }),
-    resolve({ jsnext: true }),
+    resolve({ mainFields: ['module', 'main', 'jsnext:main'] }),
     commonjs({
       namedExports: {
         './node_modules/mithril/mithril.js': ['route'],

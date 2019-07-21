@@ -15,6 +15,7 @@ export class TraitBase {
     this.min = data['min'];
   }
 }
+
 export class Trait {
   public readonly base: TraitBase;
   /** The amount of Trait Points or TP a trait has. */

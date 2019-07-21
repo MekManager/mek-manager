@@ -69,7 +69,7 @@
     "return-undefined": true,
     "semicolon": [true, "always"],
     "space-before-function-paren": true,
-    "switch-default": true,
+    "switch-default": false,
     "trailing-comma": [
       true,
       {
@@ -84,7 +84,7 @@
     ],
     "triple-equals": true,
     "typedef": true,
-    "use-isnan": true 
+    "use-isnan": true
   },
   "rulesDirectory": []
 }

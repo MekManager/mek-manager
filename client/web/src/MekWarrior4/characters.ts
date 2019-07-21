@@ -1,27 +1,8 @@
 import { map } from "ramda";
 import { Attributes, newAttributes } from "./attributes";
+import { CharacterFlavor, newCharacterFlavor } from './characterFlavor';
 import { Skill } from "./skills";
 import { Trait } from "./traits";
-
-export interface CharacterFlavor {
-  /** A character's height, in centimeters. */
-  height: number;
-  /** A character's weight, in kilograms. */
-  weight: number;
-  /** A character's hair color. */
-  hair: string;
-  /** A character's eye color. */
-  eyes: string;
-  biography: string;
-}
-
-export const newCharacterFlavor = () => ({
-  height: 170, // Roughly 5' 7"
-  weight: 79, // Roughly 175lbs
-  hair: '',
-  eyes: '',
-  biography: '',
-});
 
 export class Character {
   // TODO: names should have more to them than just being a single string.

@@ -1,21 +1,26 @@
-import { Affiliation } from './affiliation';
 import { Character } from './characters';
 import { ValidationError } from './errorMessage';
 import { LifeModule } from './lifeModule';
 import { LifeStage } from './lifeStage';
+import { Trait } from './traits';
+import { ValidatorFactory } from './validators/validatorFactory';
 
+/**
+ * This "harness" is making less sense as I'm going on with it. I'm not sure if
+ * I'm going to need it much longer. I think I'm going to be able to fold it
+ * into the Character class at this rate.
+ *
+ * The intent of this class is to be something that knows how to do things like
+ * undo and redo as a user alters their character during creation.
+ */
 export class CharacterCreationHarness {
   public errors: ValidationError[];
 
   private _character: Character;
-  private _affiliations: Affiliation[];
-  private _lifeModules: { stage: LifeStage, module: LifeModule }[];
   private _valid: boolean;
 
   constructor (character: Character = undefined) {
     this._valid = false;
-    this._affiliations = [];
-    this._lifeModules = [];
 
     if (character) {
       this._character = character;
@@ -24,44 +29,32 @@ export class CharacterCreationHarness {
     }
   }
 
-  public addAffiliation (a: Affiliation): void {
-    this._affiliations.push(a);
+  public addAffiliation (lm: LifeModule): void {
+    this.addModule(LifeStage.AFFILIATION, lm);
   }
 
   public addModule (stage: LifeStage, module: LifeModule): void {
-    this._lifeModules.push({ stage, module });
+    this._character.addLifeModule(stage, module);
+  }
+
+  public addTrait (trait: Trait): void {
+    this._character.traits.push(trait);
   }
 
   public valid (): boolean {
     return this._valid;
   }
 
-  private legalChildLabor (): boolean {
-    const found = this._affiliations.filter(affil => affil.legalChildLabor());
-
-    return found && found.length > 0;
-  }
-
-  /*
-   * TODO: Find a better way to accomplish validation. This is getting pretty
-   * gross pretty fast. The way this is shaping up, the `validate` method is
-   * going to have to know about every special rule and what would comply with
-   * or break that rule.
-   */
   public validate (): void {
-    this.errors = this._lifeModules.reduce((acc, lm) => {
-      if (lm.stage !== lm.module.stage) {
-        if (this.legalChildLabor() && lm.stage === 2 && lm.module.stage === 4) {
-          return acc;
-        } else {
-          return acc.concat([{
-            message: `Module ${lm.module.name} cannot be used for stage ${lm.stage} it is a stage ${lm.module.stage} module`,
-          }]);
-        }
+    const validators = ValidatorFactory.validators();
+
+    this.errors = validators.reduce((errors, validator) => {
+      if (validator.validate(this._character)) {
+        return errors;
       } else {
-        return acc;
+        return errors.concat(validator.errors);
       }
-    }, [] as { message: string }[]);
+    }, [] as ValidationError[]);
 
     this._valid = this.errors.length === 0;
   }

@@ -2,5 +2,5 @@
  * As a placeholder.
  */
 export type ValidationError = {
-    message: string;
+  message: string;
 };

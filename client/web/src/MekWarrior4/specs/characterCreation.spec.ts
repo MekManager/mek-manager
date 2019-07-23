@@ -1,5 +1,5 @@
-import { expect } from "chai";
-import "mocha";
+import { expect } from 'chai';
+import 'mocha';
 import { CharacterCreationHarness } from '../characterCreationHarness';
 import { mockAffiliations } from './mocks/affiliations';
 import { mockLifeModules } from './mocks/lifeModules';
@@ -12,20 +12,18 @@ import { mockTraits } from './mocks/traits';
 describe("Character Creation", () => {
 
   it("should not allow taking stage 4 modules as stage 2 if child labor is illegal", () => {
-      const harness = new CharacterCreationHarness();
-      harness.addAffiliation(mockAffiliations.default);
-      harness.addModule(1, mockLifeModules.farm);
-      harness.addModule(2, mockLifeModules.civilianJob);
-      harness.validate();
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.default);
+    harness.addModule(1, mockLifeModules.farm);
+    harness.addModule(2, mockLifeModules.civilianJob);
 
-      expect(harness.valid()).to.equal(false);
-    });
+    expect(harness.validate()).to.equal(false);
+  });
 
   it("should not allow taking the same affiliation twice", () => {
     const harness = new CharacterCreationHarness();
     harness.addAffiliation(mockAffiliations.default);
     harness.addAffiliation(mockAffiliations.default);
-    harness.validate();
 
     expect(harness.modules().length).to.equal(1);
   });
@@ -35,9 +33,8 @@ describe("Character Creation", () => {
     harness.addAffiliation(mockAffiliations.childLabor);
     harness.addModule(1, mockLifeModules.farm);
     harness.addModule(2, mockLifeModules.civilianJob);
-    harness.validate();
 
-    expect(harness.valid()).to.equal(true);
+    expect(harness.validate()).to.equal(true);
   });
 
   it("should not allow taking Clan modules for a non-Clan character", () => {
@@ -45,9 +42,8 @@ describe("Character Creation", () => {
     harness.addAffiliation(mockAffiliations.default);
     harness.addModule(1, mockLifeModules.farm);
     harness.addModule(2, mockLifeModules.freebornSibko);
-    harness.validate();
 
-    expect(harness.valid()).to.equal(false);
+    expect(harness.validate()).to.equal(false);
   });
 
   it("should allow Clan characters to take Clan modules", () => {
@@ -55,9 +51,8 @@ describe("Character Creation", () => {
     harness.addAffiliation(mockAffiliations.clan);
     harness.addModule(1, mockLifeModules.farm);
     harness.addModule(2, mockLifeModules.freebornSibko);
-    harness.validate();
 
-    expect(harness.valid()).to.equal(true);
+    expect(harness.validate()).to.equal(true);
   });
 
   it("should allow hybrid IS/Clan affiliations to take Clan modules", () => {
@@ -65,9 +60,8 @@ describe("Character Creation", () => {
     harness.addAffiliation(mockAffiliations.sphereClanHybrid);
     harness.addModule(1, mockLifeModules.farm);
     harness.addModule(2, mockLifeModules.freebornSibko);
-    harness.validate();
 
-    expect(harness.valid()).to.equal(true);
+    expect(harness.validate()).to.equal(true);
   });
 
   it("should not allow hybrid IS/Clan affiliations to use trueborn restricted modules", () => {
@@ -75,9 +69,8 @@ describe("Character Creation", () => {
     harness.addAffiliation(mockAffiliations.sphereClanHybrid);
     harness.addModule(1, mockLifeModules.farm);
     harness.addModule(2, mockLifeModules.truebornSibko);
-    harness.validate();
 
-    expect(harness.valid()).to.equal(false);
+    expect(harness.validate()).to.equal(false);
   });
 
   it("should allow Trueborn Clan warriors to use Trueborn restricted modules", () => {
@@ -86,8 +79,7 @@ describe("Character Creation", () => {
     harness.addTrait(mockTraits.mechwarriorPhenotype);
     harness.addModule(1, mockLifeModules.truebornCreche);
     harness.addModule(2, mockLifeModules.truebornSibko);
-    harness.validate();
 
-    expect(harness.valid()).to.equal(true);
+    expect(harness.validate()).to.equal(true);
   });
 });

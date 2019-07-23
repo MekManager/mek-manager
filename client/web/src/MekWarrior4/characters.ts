@@ -29,6 +29,10 @@ export class Character {
     this.traits = [] as Trait[];
   }
 
+  public addAffiliation (lm: LifeModule): void {
+    this.addLifeModule(LifeStage.AFFILIATION, lm);
+  }
+
   public addLifeModule (stage: LifeStage, lm: LifeModule): void {
     const alreadyTaken = this._lifeModules.filter(
       l => l.stage === stage && l.module.name === lm.name

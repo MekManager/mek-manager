@@ -31,7 +31,7 @@ export class CharacterCreationHarness {
   }
 
   public addAffiliation (lm: LifeModule): void {
-    this.addModule(LifeStage.AFFILIATION, lm);
+    this._character.addAffiliation(lm);
   }
 
   public addModule (stage: LifeStage, module: LifeModule): void {
@@ -51,7 +51,7 @@ export class CharacterCreationHarness {
     return this._character.lifeModules();
   }
 
-  public validate (): void {
+  public validate (): boolean {
     const validators = ValidatorFactory.validators();
 
     this.errors = validators.reduce((errors, validator) => {
@@ -63,5 +63,7 @@ export class CharacterCreationHarness {
     }, [] as ValidationError[]);
 
     this._valid = this.errors.length === 0;
+
+    return this.valid();
   }
 }

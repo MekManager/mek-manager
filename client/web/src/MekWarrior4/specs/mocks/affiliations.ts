@@ -1,6 +1,6 @@
 import { LifeModule } from '../../lifeModule';
 import { LifeStage } from '../../lifeStage';
-import { Rule } from '../../specialRules';
+import { Rule } from '../../rules';
 
 const defaultAffiliation = new LifeModule(
   LifeStage.AFFILIATION,

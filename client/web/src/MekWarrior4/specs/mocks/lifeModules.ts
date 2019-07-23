@@ -1,5 +1,5 @@
 import { LifeModule } from '../../lifeModule';
-import { Rule } from '../../specialRules';
+import { Rule } from '../../rules';
 
 const farm = new LifeModule(1, 'Farm', []);
 const freebornSibko = new LifeModule(2, 'Freeborn Sibko', [], true);

@@ -1,4 +1,4 @@
-import { Rule } from '../specialRules';
+import { Rule } from '../rules';
 import { ChildLaborValidator } from './childLaborValidator';
 import { ClanValidator } from './clanValidator';
 import { Validator } from './validator';

@@ -1,7 +1,7 @@
 import { Character } from '../characters';
 import { ValidationError } from '../errorMessage';
 import { LifeStage } from '../lifeStage';
-import { Rule } from '../specialRules';
+import { Rule } from '../rules';
 import { Validator } from './validator';
 
 export class ClanValidator implements Validator {

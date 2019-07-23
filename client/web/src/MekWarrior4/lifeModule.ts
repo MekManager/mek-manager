@@ -17,7 +17,6 @@ export class LifeModule {
     rules: Rule[],
     isClan = false
   ) {
-    console.log(rules);
     this.stage = stage;
     this.name = name;
     this.rules = rules;

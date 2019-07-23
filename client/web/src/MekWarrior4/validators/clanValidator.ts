@@ -12,7 +12,7 @@ export class ClanValidator implements Validator {
     this.name = 'Clan Validator';
   }
 
-  public validate (character: Character): boolean {
+  public valid (character: Character): boolean {
     const hasClanAffiliation = character
       .affiliations()
       .filter(a => a.module.isClan)

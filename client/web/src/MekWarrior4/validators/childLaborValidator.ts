@@ -12,7 +12,7 @@ export class ChildLaborValidator implements Validator {
     this.errors = [];
   }
 
-  public validate (character: Character): boolean {
+  public valid (character: Character): boolean {
     const legalChildLabor = character
       .affiliations()
       .filter(a => a.module.legalChildLabor())

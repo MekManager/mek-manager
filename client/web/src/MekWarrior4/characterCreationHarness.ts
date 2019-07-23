@@ -49,7 +49,7 @@ export class CharacterCreationHarness {
     const validators = ValidatorFactory.validators();
 
     this.errors = validators.reduce((errors, validator) => {
-      if (validator.validate(this._character)) {
+      if (validator.valid(this._character)) {
         return errors;
       } else {
         return errors.concat(validator.errors);

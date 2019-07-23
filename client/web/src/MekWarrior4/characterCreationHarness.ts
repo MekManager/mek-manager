@@ -1,3 +1,4 @@
+import { CharacterLifeModule } from './characterLifeModule';
 import { Character } from './characters';
 import { ValidationError } from './errorMessage';
 import { LifeModule } from './lifeModule';
@@ -43,6 +44,11 @@ export class CharacterCreationHarness {
 
   public valid (): boolean {
     return this._valid;
+  }
+
+  // NOTE: this is again showing how this is pretty quickly being outgrown.
+  public modules (): CharacterLifeModule[] {
+    return this._character.lifeModules();
   }
 
   public validate (): void {

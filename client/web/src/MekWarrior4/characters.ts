@@ -30,6 +30,15 @@ export class Character {
   }
 
   public addLifeModule (stage: LifeStage, lm: LifeModule): void {
+    const alreadyTaken = this._lifeModules.filter(
+      l => l.stage === stage && l.module.name === lm.name
+    ).length > 0;
+
+    // Can't take the same affiliation twice
+    if (stage === LifeStage.AFFILIATION && alreadyTaken) {
+      return;
+    }
+
     this._lifeModules.push(new CharacterLifeModule(stage, lm));
 
     /* If the `LifeModule` being added is an affiliation make sure that the

@@ -21,6 +21,15 @@ describe("Character Creation", () => {
       expect(harness.valid()).to.equal(false);
     });
 
+  it("should not allow taking the same affiliation twice", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.default);
+    harness.addAffiliation(mockAffiliations.default);
+    harness.validate();
+
+    expect(harness.modules().length).to.equal(1);
+  });
+
   it("should allow taking stage 4 modules as stage 2 if child labor is legal", () => {
     const harness = new CharacterCreationHarness();
     harness.addAffiliation(mockAffiliations.childLabor);

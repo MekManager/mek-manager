@@ -82,4 +82,11 @@ describe("Character Creation", () => {
 
     expect(harness.validate()).to.equal(true);
   });
+
+  it("should be invalid if the only affiliation cannot be the sole affiliation", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.cantBeOnly);
+
+    expect(harness.validate()).to.equal(false);
+  });
 });

@@ -52,7 +52,7 @@ export class CharacterCreationHarness {
   }
 
   public validate (): boolean {
-    const validators = ValidatorFactory.validators();
+    const validators = ValidatorFactory.validators(this._character);
 
     this.errors = validators.reduce((errors, validator) => {
       if (validator.valid(this._character)) {

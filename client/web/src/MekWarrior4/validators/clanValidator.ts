@@ -1,7 +1,7 @@
 import { Character } from '../characters';
 import { ValidationError } from '../errorMessage';
 import { LifeStage } from '../lifeStage';
-import { Rule } from '../rules';
+import { RuleName } from '../rule';
 import { Validator } from './validator';
 
 export class ClanValidator implements Validator {
@@ -20,7 +20,7 @@ export class ClanValidator implements Validator {
 
     const canActAsClan = character
       .affiliations()
-      .filter(a => a.module.rules.includes(Rule.ACTS_AS_CLAN))
+      .filter(a => a.module.hasRuleFor(RuleName.ACTS_AS_CLAN))
       .length > 0;
 
     const characterIsTrueborn = character
@@ -35,7 +35,7 @@ export class ClanValidator implements Validator {
         }
 
         if (lifeModule.module.isClan) {
-          const truebornExclusive = lifeModule.module.rules.includes(Rule.TRUEBORN_ONLY);
+          const truebornExclusive = lifeModule.module.hasRuleFor(RuleName.TRUEBORN_ONLY);
           const canTakeClanModules = (hasClanAffiliation || canActAsClan);
 
           if (!truebornExclusive && !canTakeClanModules) {

@@ -1,6 +1,7 @@
 import { Character } from '../characters';
 import { ValidationError } from '../errorMessage';
 import { LifeStage } from '../lifeStage';
+import { RuleName } from '../rule';
 import { Validator } from './validator';
 
 export class ChildLaborValidator implements Validator {
@@ -15,7 +16,7 @@ export class ChildLaborValidator implements Validator {
   public valid (character: Character): boolean {
     const legalChildLabor = character
       .affiliations()
-      .filter(a => a.module.legalChildLabor())
+      .filter(a => a.module.hasRuleFor(RuleName.LEGAL_CHILD_LABOR))
       .length > 0;
 
     this.errors = character.lifeModules().reduce(

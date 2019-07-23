@@ -1,5 +1,5 @@
 import { LifeStage } from './lifeStage';
-import { Rule } from './rules';
+import { Rule, RuleName } from './rule';
 
 export class LifeModule {
   public isClan: boolean;
@@ -25,13 +25,12 @@ export class LifeModule {
     this._memo = {};
   }
 
-  public legalChildLabor (): boolean {
-    if (this._memo.legalChildLabor) {
-      return this._memo.legalChildLabor;
-    } else {
-      this._memo.legalChildLabor = this.rules.includes(Rule.LEGAL_CHILD_LABOR);
-
-      return this._memo.legalChildLabor;
-    }
+  public hasRuleFor (name: RuleName): boolean {
+    return this.ruleFor(name) !== undefined;
   }
+
+  public ruleFor (name: RuleName): Rule {
+    return this.rules.find(r => r.name === name);
+  }
+
 }

@@ -1,6 +1,6 @@
 import { LifeModule } from '../../lifeModule';
 import { LifeStage } from '../../lifeStage';
-import { Rule } from '../../rules';
+import { mockRules } from './rules';
 
 const defaultAffiliation = new LifeModule(
   LifeStage.AFFILIATION,
@@ -8,10 +8,16 @@ const defaultAffiliation = new LifeModule(
   []
 );
 
+const cantBeOnly = new LifeModule(
+  LifeStage.AFFILIATION,
+  'lonely place',
+  [ mockRules.cannotBeOnlyAffiliation ]
+);
+
 const legalChildLabor = new LifeModule(
   LifeStage.AFFILIATION,
   'Not a very fun place',
-  [ Rule.LEGAL_CHILD_LABOR ]
+  [ mockRules.legalChildLabor ]
 );
 
 const clan = new LifeModule(
@@ -24,11 +30,12 @@ const clan = new LifeModule(
 const sphereClanHybrid = new LifeModule(
   LifeStage.AFFILIATION,
   'Hybrid Clan/Sphere',
-  [ Rule.ACTS_AS_CLAN ],
+  [ mockRules.actsAsClan ],
   false // Being explicit here because it's the point
 );
 
 export const mockAffiliations = {
+  cantBeOnly,
   childLabor: legalChildLabor,
   clan,
   default: defaultAffiliation,

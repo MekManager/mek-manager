@@ -1,4 +1,3 @@
-import { map } from 'ramda';
 import { Attributes, newAttributes } from './attributes';
 import { CharacterFlavor, newCharacterFlavor } from './characterFlavor';
 import { CharacterLifeModule } from './characterLifeModule';
@@ -77,11 +76,11 @@ export class Character {
   }
 
   public skillStrings (): string[] {
-    return map(s => s.toString(), this.skills);
+    return this.skills.map(s => s.toString());
   }
 
   public traitStrings (): string[] {
-    return map(t => t.toString(), this.traits);
+    return this.traits.map(t => t.toString());
   }
 }
 

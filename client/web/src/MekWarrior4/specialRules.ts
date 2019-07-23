@@ -1,8 +1,3 @@
-export interface SpecialRules {
-  childLabor?: boolean;
-}
-
-// TODO: An array of these should supercede the interface above
 export enum Rule {
   ACTS_AS_CLAN = 'acts_as_clan', // DONE
   CANNOT_BE_ONLY_AFFILIATION = 'cannot_be_only_affiliation',

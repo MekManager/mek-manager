@@ -89,4 +89,54 @@ describe("Character Creation", () => {
 
     expect(harness.validate()).to.equal(false);
   });
+
+  it("should be valid if a non-single affiliation is not the sole affiliation", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.cantBeOnly);
+    harness.addAffiliation(mockAffiliations.default);
+
+    expect(harness.validate()).to.equal(true);
+  });
+
+  it("should be invalid if it's taken an affiliation restricted by another", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.noFarm);
+    harness.addModule(1, mockLifeModules.farm);
+
+    expect(harness.validate()).to.equal(false);
+  });
+
+  it("should be valid if a restricted module is not present", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.noFarm);
+    harness.addModule(1, mockLifeModules.nobility);
+
+    expect(harness.validate()).to.equal(true);
+  });
+
+  it("should be invalid if the character lacks a required trait, and is not on the restricted path", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.royalSnob);
+    // missing the "Royalty" trait here
+    harness.addModule(1, mockLifeModules.nobility);
+
+    expect(harness.validate()).to.equal(false);
+  });
+
+  it("should be valid if the character lacks the required trait, but is on the restricted path", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.royalSnob);
+    harness.addModule(1, mockLifeModules.farm);
+
+    expect(harness.validate()).to.equal(true);
+  });
+
+  it("should be valid if the character has the required trait", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.royalSnob);
+    harness.addTrait(mockTraits.royalty);
+    harness.addModule(1, mockLifeModules.nobility);
+
+    expect(harness.validate()).to.equal(true);
+  });
 });

@@ -48,7 +48,7 @@ export class Character {
      * _affiliations array gets re-cached.
      */
     if (lm.stage === LifeStage.AFFILIATION) {
-      this._affiliations === undefined;
+      this._affiliations = [];
       this.affiliations();
     }
   }

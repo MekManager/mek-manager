@@ -1,7 +1,9 @@
 import { Character } from '../characters';
 import { Rule, RuleName } from '../rule';
+import { CantHaveModuleValidator } from './cantHaveModuleValidator';
 import { ChildLaborValidator } from './childLaborValidator';
 import { ClanValidator } from './clanValidator';
+import { ForcedPathWithoutTraitValidator } from './forcedPathWithoutTraitValidator';
 import { SingularAffiliationValidator } from './singularAffiliationValidator';
 import { Validator } from './validator';
 
@@ -40,6 +42,10 @@ export class ValidatorFactory {
     switch (rule.name) {
       case RuleName.CANNOT_BE_ONLY_AFFILIATION:
         return new SingularAffiliationValidator();
+      case RuleName.CANT_HAVE_MODULE:
+        return new CantHaveModuleValidator(rule.config);
+      case RuleName.FORCED_PATH_WITHOUT_TRAIT:
+        return new ForcedPathWithoutTraitValidator(rule.config);
       default:
         return undefined;
     }

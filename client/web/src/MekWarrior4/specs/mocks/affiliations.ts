@@ -1,5 +1,5 @@
 import { LifeModule } from '../../lifeModule';
-import { LifeStage } from '../../lifeStage';
+import { LifeStage, lifeStageName } from '../../lifeStage';
 import { mockRules } from './rules';
 
 const defaultAffiliation = new LifeModule(
@@ -34,10 +34,24 @@ const sphereClanHybrid = new LifeModule(
   false // Being explicit here because it's the point
 );
 
+const noFarm = new LifeModule(
+  LifeStage.AFFILIATION,
+  'NO FARMS!',
+  [ mockRules.noFarm ]
+);
+
+const royalSnob = new LifeModule(
+  LifeStage.AFFILIATION,
+  'Royal Snob',
+  [ mockRules.forcedToFarmUnlessRoyal ]
+);
+
 export const mockAffiliations = {
   cantBeOnly,
   childLabor: legalChildLabor,
   clan,
   default: defaultAffiliation,
+  noFarm,
+  royalSnob,
   sphereClanHybrid,
 };

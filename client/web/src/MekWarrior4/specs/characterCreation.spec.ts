@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import 'mocha';
+import { Attribute } from '../attributes';
 import { CharacterCreationHarness } from '../characterCreationHarness';
 import { mockAffiliations } from './mocks/affiliations';
 import { mockLifeModules } from './mocks/lifeModules';
@@ -136,6 +137,30 @@ describe("Character Creation", () => {
     harness.addAffiliation(mockAffiliations.royalSnob);
     harness.addTrait(mockTraits.royalty);
     harness.addModule(1, mockLifeModules.nobility);
+
+    expect(harness.validate()).to.equal(true);
+  });
+
+  it("should be invalid if the character doesn't have the trait that requires a minimum value", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.minimumAttrPlace);
+
+    expect(harness.validate()).to.equal(false);
+  });
+
+  it("should be invalid if the character doesn't have the appropriate attribute score", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.minimumAttrPlace);
+    harness.addTrait(mockTraits.naturalAptitude);
+
+    expect(harness.validate()).to.equal(false);
+  });
+
+  it("should be valid if the character has the trait, and the attribute score is high enough", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.minimumAttrPlace);
+    harness.addTrait(mockTraits.naturalAptitude);
+    harness.alterAttributeXP(Attribute.INT, 400);
 
     expect(harness.validate()).to.equal(true);
   });

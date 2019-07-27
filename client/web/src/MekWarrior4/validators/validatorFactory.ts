@@ -1,5 +1,6 @@
 import { Character } from '../characters';
 import { Rule, RuleName } from '../rule';
+import { AttributeMinimumForTraitValidator } from './attributeMinimumForTraitValidator';
 import { CantHaveModuleValidator } from './cantHaveModuleValidator';
 import { ChildLaborValidator } from './childLaborValidator';
 import { ClanValidator } from './clanValidator';
@@ -46,6 +47,8 @@ export class ValidatorFactory {
         return new CantHaveModuleValidator(rule.config);
       case RuleName.FORCED_PATH_WITHOUT_TRAIT:
         return new ForcedPathWithoutTraitValidator(rule.config);
+      case RuleName.MINIMUM_ATTRIBUTE_SCORE_FOR_TRAIT:
+        return new AttributeMinimumForTraitValidator(rule.config);
       default:
         return undefined;
     }

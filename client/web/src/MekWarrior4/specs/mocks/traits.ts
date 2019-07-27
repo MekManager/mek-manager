@@ -11,8 +11,14 @@ const royalty = new Trait(new TraitBase({
   multipleAllowed: false,
 }));
 
+const naturalAptitude = new Trait(new TraitBase({
+  name: 'Natural Aptitude',
+  multipleAllowed: true,
+}));
+
 
 export const mockTraits = {
   royalty,
   mechwarriorPhenotype,
+  naturalAptitude,
 };

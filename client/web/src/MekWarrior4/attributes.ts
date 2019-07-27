@@ -1,3 +1,7 @@
+/**
+ * Looking at this with new eyes several months after this was written I am NOT
+ * loving how this looks. I think this is due for a pretty extreme refactor.
+ */
 import { deepCopy } from "../Utils/objects";
 
 /**

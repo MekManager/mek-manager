@@ -6,7 +6,7 @@ export class CantHaveModuleValidator implements Validator {
   public name: string;
   public errors: ValidationError[];
 
-  private _config: {};
+  private readonly _config: {};
 
   constructor (config: {}) {
     this.name = `Can't Have Module Validator`;

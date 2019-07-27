@@ -6,7 +6,7 @@ export class ForcedPathWithoutTraitValidator implements Validator {
   public name: string;
   public errors: ValidationError[];
 
-  private _config: {};
+  private readonly _config: {};
 
   constructor (config: {}) {
     this.name = 'Forced Path Without Trait Validator';

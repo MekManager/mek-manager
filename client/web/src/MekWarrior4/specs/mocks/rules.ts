@@ -1,3 +1,4 @@
+import { Attribute } from '../../attributes';
 import { Rule, RuleName } from '../../rule';
 
 const truebornOnly = new Rule(RuleName.TRUEBORN_ONLY);
@@ -12,6 +13,13 @@ const forcedToFarmUnlessRoyal = new Rule(
     stage: 1,
     module: 'Farm',
   });
+const traitRequiresAttributeScore = new Rule(
+  RuleName.MINIMUM_ATTRIBUTE_SCORE_FOR_TRAIT,
+  {
+    trait: 'Natural Aptitude',
+    attribute: Attribute.INT,
+    score: 4,
+  });
 
 export const mockRules = {
   actsAsClan,
@@ -19,5 +27,6 @@ export const mockRules = {
   forcedToFarmUnlessRoyal,
   legalChildLabor,
   noFarm,
+  traitRequiresAttributeScore,
   truebornOnly,
 };

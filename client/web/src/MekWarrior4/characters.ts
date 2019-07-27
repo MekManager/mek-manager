@@ -1,4 +1,4 @@
-import { Attributes, newAttributes } from './attributes';
+import { Attribute, Attributes, changeXP, newAttributes } from './attributes';
 import { CharacterFlavor, newCharacterFlavor } from './characterFlavor';
 import { CharacterLifeModule } from './characterLifeModule';
 import { LifeModule } from './lifeModule';
@@ -64,6 +64,10 @@ export class Character {
 
       return this._affiliations;
     }
+  }
+
+  public alterAttributeXP (attr: Attribute, xp: number): void {
+    this.attributes = changeXP(this.attributes, attr, xp);
   }
 
   /* Putting a "getter" in place for this because I expect there are going to

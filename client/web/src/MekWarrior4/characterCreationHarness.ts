@@ -1,3 +1,4 @@
+import { Attribute } from './attributes';
 import { CharacterLifeModule } from './characterLifeModule';
 import { Character } from './characters';
 import { ValidationError } from './errorMessage';
@@ -28,6 +29,10 @@ export class CharacterCreationHarness {
     } else {
       this._character = new Character();
     }
+  }
+
+  public alterAttributeXP (attr: Attribute, xp: number): void {
+    this._character.alterAttributeXP(attr, xp);
   }
 
   public addAffiliation (lm: LifeModule): void {

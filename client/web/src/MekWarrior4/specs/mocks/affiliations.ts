@@ -46,11 +46,18 @@ const royalSnob = new LifeModule(
   [ mockRules.forcedToFarmUnlessRoyal ]
 );
 
+const minimumAttrPlace = new LifeModule(
+  LifeStage.AFFILIATION,
+  'Top Performers Club',
+  [ mockRules.traitRequiresAttributeScore ]
+);
+
 export const mockAffiliations = {
   cantBeOnly,
   childLabor: legalChildLabor,
   clan,
   default: defaultAffiliation,
+  minimumAttrPlace,
   noFarm,
   royalSnob,
   sphereClanHybrid,

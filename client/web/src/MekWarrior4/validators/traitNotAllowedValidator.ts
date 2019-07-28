@@ -19,7 +19,7 @@ export class TraitNotAllowedValidator implements Validator {
     this.errors = [];
     const traitName: string = this._config['trait'];
 
-    if (character.traits.find(t => t.name() === traitName)) {
+    if (character.hasTrait(traitName)) {
       this.errors.push({
         message: `The trait ${traitName} is not allowed`,
         origin: this.name,

@@ -22,12 +22,10 @@ export class TraitMustHaveOtherTraitValidator implements Validator {
     const mainTraitName: string = this._config['mainTrait'];
     const requiredTraitName: string = this._config['requiredTrait'];
 
-    const mainTrait = character.traits.find(t => t.name() === mainTraitName);
+    const mainTrait = character.getTrait(mainTraitName);
 
     if (mainTrait) {
-      const requiredTrait = character.traits.find(
-        t => t.name() === requiredTraitName
-      );
+      const requiredTrait = character.getTrait(requiredTraitName);
 
       if (requiredTrait) {
         return true;

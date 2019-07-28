@@ -70,6 +70,14 @@ export class Character {
     this.attributes = changeXP(this.attributes, attr, xp);
   }
 
+  public hasTrait (name: string): boolean {
+    return !!this.getTrait(name);
+  }
+
+  public getTrait (name: string): Trait {
+    return this.traits.find(t => t.name() === name);
+  }
+
   /* Putting a "getter" in place for this because I expect there are going to
    * be special access rules for life modules in the future. And it's better to
    * plan for that now then have to do a bunch of messy refactoring of a public

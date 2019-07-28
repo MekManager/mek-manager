@@ -20,7 +20,7 @@ export class AttributeMinimumForTraitValidator implements Validator {
     const traitName: string = this._config['trait'];
     const attributeName: Attribute = this._config['attribute'];
     const requiredScore: number = this._config['score'];
-    const trait = character.traits.find(t => t.name() === traitName);
+    const trait = character.getTrait(traitName);
 
     if (trait) {
       const currentScore = character.attributes.get(attributeName).score;

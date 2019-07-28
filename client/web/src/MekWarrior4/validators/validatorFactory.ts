@@ -6,6 +6,7 @@ import { ChildLaborValidator } from './childLaborValidator';
 import { ClanValidator } from './clanValidator';
 import { ForcedPathWithoutTraitValidator } from './forcedPathWithoutTraitValidator';
 import { SingularAffiliationValidator } from './singularAffiliationValidator';
+import { TraitMustHaveOtherTraitValidator } from './traitMustHaveOtherTraitValidator';
 import { Validator } from './validator';
 
 export class ValidatorFactory {
@@ -49,6 +50,8 @@ export class ValidatorFactory {
         return new ForcedPathWithoutTraitValidator(rule.config);
       case RuleName.MINIMUM_ATTRIBUTE_SCORE_FOR_TRAIT:
         return new AttributeMinimumForTraitValidator(rule.config);
+      case RuleName.TRAIT_MUST_HAVE_OTHER_TRAIT:
+        return new TraitMustHaveOtherTraitValidator(rule.config);
       default:
         return undefined;
     }

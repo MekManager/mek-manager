@@ -164,4 +164,29 @@ describe("Character Creation", () => {
 
     expect(harness.validate()).to.equal(true);
   });
+
+  it("should be valid if the main trait hasn't been taken", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.eliteFarmer);
+
+    expect(harness.validate()).to.equal(true);
+  });
+
+  it("should be invalid if the second required trait is missing", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.eliteFarmer);
+    harness.addTrait(mockTraits.greenThumb);
+
+    expect(harness.validate()).to.equal(false);
+  });
+
+  it("should be valid if the main trait has it's required trait", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.eliteFarmer);
+    harness.addAffiliation(mockAffiliations.eliteFarmer);
+    harness.addTrait(mockTraits.greenThumb);
+    harness.addTrait(mockTraits.animalEmpathy);
+
+    expect(harness.validate()).to.equal(true);
+  });
 });

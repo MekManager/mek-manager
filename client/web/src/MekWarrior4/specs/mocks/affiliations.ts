@@ -52,11 +52,18 @@ const minimumAttrPlace = new LifeModule(
   [ mockRules.traitRequiresAttributeScore ]
 );
 
+const eliteFarmer = new LifeModule(
+  LifeStage.AFFILIATION,
+  'Elite Farmer',
+  [ mockRules.linkedTraits ]
+);
+
 export const mockAffiliations = {
   cantBeOnly,
   childLabor: legalChildLabor,
   clan,
   default: defaultAffiliation,
+  eliteFarmer,
   minimumAttrPlace,
   noFarm,
   royalSnob,

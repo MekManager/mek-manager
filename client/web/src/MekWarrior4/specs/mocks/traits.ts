@@ -16,8 +16,19 @@ const naturalAptitude = new Trait(new TraitBase({
   multipleAllowed: true,
 }));
 
+const greenThumb = new Trait(new TraitBase({
+  name: 'Green Thumb',
+  multipleAllowed: false,
+}));
+
+const animalEmpathy = new Trait(new TraitBase({
+  name: 'Animal Empathy',
+  multipleAllowed: false,
+}));
 
 export const mockTraits = {
+  animalEmpathy,
+  greenThumb,
   royalty,
   mechwarriorPhenotype,
   naturalAptitude,

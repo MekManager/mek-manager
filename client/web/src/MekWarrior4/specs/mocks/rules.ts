@@ -20,12 +20,19 @@ const traitRequiresAttributeScore = new Rule(
     attribute: Attribute.INT,
     score: 4,
   });
+const linkedTraits = new Rule(
+  RuleName.TRAIT_MUST_HAVE_OTHER_TRAIT,
+  {
+    mainTrait: 'Green Thumb',
+    requiredTrait: 'Animal Empathy',
+  });
 
 export const mockRules = {
   actsAsClan,
   cannotBeOnlyAffiliation,
   forcedToFarmUnlessRoyal,
   legalChildLabor,
+  linkedTraits,
   noFarm,
   traitRequiresAttributeScore,
   truebornOnly,

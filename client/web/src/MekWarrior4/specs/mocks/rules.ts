@@ -40,15 +40,28 @@ const noGreenThumb = new Rule(
   {
     trait: 'Green Thumb',
   });
+const noHigherEducation = new Rule(
+  RuleName.MUST_SKIP_STAGE,
+  {
+    stage: LifeStage.HIGHER_EDUCATION,
+  });
+const apprenticeShipOnly = new Rule(
+  RuleName.ONLY_ONE_MODULE_ALLOWED_FOR_STAGE,
+  {
+    stage: LifeStage.HIGHER_EDUCATION,
+    module: 'Trade School',
+  });
 
 export const mockRules = {
   actsAsClan,
+  apprenticeShipOnly,
   cannotBeOnlyAffiliation,
   forcedToFarmUnlessRoyal,
   legalChildLabor,
   linkedTraits,
   noFarm,
   noGreenThumb,
+  noHigherEducation,
   traitRequiresAttributeScore,
   traitRequiresAttributeScoreForStage,
   truebornOnly,

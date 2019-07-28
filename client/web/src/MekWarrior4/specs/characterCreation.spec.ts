@@ -228,4 +228,34 @@ describe("Character Creation", () => {
 
     expect(harness.validate()).to.equal(true);
   });
+
+  it("should be invalid if the character has taken a module for the restricted stage", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.childLabor);
+    harness.addModule(1, mockLifeModules.farm);
+    harness.addModule(2, mockLifeModules.backwoods);
+    harness.addModule(3, mockLifeModules.tradeSchool);
+
+    expect(harness.validate()).to.equal(false);
+  });
+
+  it("should be invalid if any module is taken for the stage other than the exception", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.eliteFarmer);
+    harness.addModule(1, mockLifeModules.farm);
+    harness.addModule(2, mockLifeModules.backwoods);
+    harness.addModule(3, mockLifeModules.militaryAcademy);
+
+    expect(harness.validate()).to.equal(false);
+  });
+
+  it("should be valid if the character has taken the one exception for the restricted stage", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.eliteFarmer);
+    harness.addModule(1, mockLifeModules.farm);
+    harness.addModule(2, mockLifeModules.backwoods);
+    harness.addModule(3, mockLifeModules.tradeSchool);
+
+    expect(harness.validate()).to.equal(true);
+  });
 });

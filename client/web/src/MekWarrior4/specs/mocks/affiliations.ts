@@ -17,7 +17,7 @@ const cantBeOnly = new LifeModule(
 const legalChildLabor = new LifeModule(
   LifeStage.AFFILIATION,
   'Not a very fun place',
-  [ mockRules.legalChildLabor ]
+  [ mockRules.legalChildLabor, mockRules.noHigherEducation ]
 );
 
 const clan = new LifeModule(
@@ -61,7 +61,7 @@ const minimumAttrAffiliationPlace = new LifeModule(
 const eliteFarmer = new LifeModule(
   LifeStage.AFFILIATION,
   'Elite Farmer',
-  [ mockRules.linkedTraits ]
+  [ mockRules.linkedTraits, mockRules.apprenticeShipOnly ]
 );
 
 export const mockAffiliations = {

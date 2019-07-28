@@ -188,4 +188,19 @@ describe("Character Creation", () => {
 
     expect(harness.validate()).to.equal(true);
   });
+
+  it("should be invalid if the trait that's not allowed is present", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.noFarm);
+    harness.addTrait(mockTraits.greenThumb);
+
+    expect(harness.validate()).to.equal(false);
+  });
+
+  it("should be valid if the trait that's not allowed has not been taken", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.noFarm);
+
+    expect(harness.validate()).to.equal(true);
+  });
 });

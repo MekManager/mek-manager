@@ -7,6 +7,7 @@ import { ClanValidator } from './clanValidator';
 import { ForcedPathWithoutTraitValidator } from './forcedPathWithoutTraitValidator';
 import { SingularAffiliationValidator } from './singularAffiliationValidator';
 import { TraitMustHaveOtherTraitValidator } from './traitMustHaveOtherTraitValidator';
+import { TraitNotAllowedValidator } from './traitNotAllowedValidator';
 import { Validator } from './validator';
 
 export class ValidatorFactory {
@@ -52,6 +53,8 @@ export class ValidatorFactory {
         return new AttributeMinimumForTraitValidator(rule.config);
       case RuleName.TRAIT_MUST_HAVE_OTHER_TRAIT:
         return new TraitMustHaveOtherTraitValidator(rule.config);
+      case RuleName.TRAIT_NOT_ALLOWED:
+        return new TraitNotAllowedValidator(rule.config);
       default:
         return undefined;
     }

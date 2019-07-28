@@ -37,7 +37,7 @@ const sphereClanHybrid = new LifeModule(
 const noFarm = new LifeModule(
   LifeStage.AFFILIATION,
   'NO FARMS!',
-  [ mockRules.noFarm ]
+  [ mockRules.noFarm, mockRules.noGreenThumb ]
 );
 
 const royalSnob = new LifeModule(

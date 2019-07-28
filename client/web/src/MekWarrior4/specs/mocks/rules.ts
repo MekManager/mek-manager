@@ -26,6 +26,11 @@ const linkedTraits = new Rule(
     mainTrait: 'Green Thumb',
     requiredTrait: 'Animal Empathy',
   });
+const noGreenThumb = new Rule(
+  RuleName.TRAIT_NOT_ALLOWED,
+  {
+    trait: 'Green Thumb'
+  });
 
 export const mockRules = {
   actsAsClan,
@@ -34,6 +39,7 @@ export const mockRules = {
   legalChildLabor,
   linkedTraits,
   noFarm,
+  noGreenThumb,
   traitRequiresAttributeScore,
   truebornOnly,
 };

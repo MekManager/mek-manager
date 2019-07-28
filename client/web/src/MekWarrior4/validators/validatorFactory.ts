@@ -9,6 +9,7 @@ import { SingularAffiliationValidator } from './singularAffiliationValidator';
 import { TraitMustHaveOtherTraitValidator } from './traitMustHaveOtherTraitValidator';
 import { TraitNotAllowedValidator } from './traitNotAllowedValidator';
 import { Validator } from './validator';
+import { AttributeMinimumForTraitFromStageValidator } from './attributeMinimumForTraitFromStageValidator';
 
 export class ValidatorFactory {
 
@@ -51,6 +52,8 @@ export class ValidatorFactory {
         return new ForcedPathWithoutTraitValidator(rule.config);
       case RuleName.MINIMUM_ATTRIBUTE_SCORE_FOR_TRAIT:
         return new AttributeMinimumForTraitValidator(rule.config);
+      case RuleName.MINIMUM_ATTRIBUTE_SCORE_FOR_TRAIT_IN_STAGE:
+        return new AttributeMinimumForTraitFromStageValidator(rule.config);
       case RuleName.TRAIT_MUST_HAVE_OTHER_TRAIT:
         return new TraitMustHaveOtherTraitValidator(rule.config);
       case RuleName.TRAIT_NOT_ALLOWED:

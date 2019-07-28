@@ -52,6 +52,12 @@ const minimumAttrPlace = new LifeModule(
   [ mockRules.traitRequiresAttributeScore ]
 );
 
+const minimumAttrAffiliationPlace = new LifeModule(
+  LifeStage.AFFILIATION,
+  'Early Life Top Performers Club',
+  [ mockRules.traitRequiresAttributeScoreForStage ]
+);
+
 const eliteFarmer = new LifeModule(
   LifeStage.AFFILIATION,
   'Elite Farmer',
@@ -65,6 +71,7 @@ export const mockAffiliations = {
   default: defaultAffiliation,
   eliteFarmer,
   minimumAttrPlace,
+  minimumAttrAffiliationPlace,
   noFarm,
   royalSnob,
   sphereClanHybrid,

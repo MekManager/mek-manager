@@ -1,3 +1,5 @@
+import { LifeStage } from './lifeStage';
+
 export class TraitBase {
   /** The name of the `Trait` */
   public readonly name: string;
@@ -43,6 +45,10 @@ export class Trait {
    * This is a special field related to phenotypes
    */
   public type?: string;
+  /**
+   * The stage this trait was assigned to the character.
+   */
+  public stageTaken?: LifeStage;
 
   constructor (base: TraitBase) {
     this.base = base;

@@ -23,6 +23,7 @@ export enum RuleName {
   FORCED_PATH_WITHOUT_TRAIT = 'forced_path_without_trait',
   LEGAL_CHILD_LABOR = 'legal_child_labor', // DONE
   MINIMUM_ATTRIBUTE_SCORE_FOR_TRAIT = 'minimum_attribute_score_for_trait',
+  MINIMUM_ATTRIBUTE_SCORE_FOR_TRAIT_IN_STAGE = 'minimum_attribute_score_for_trait_in_stage',
   MUST_SKIP_STAGE = 'must_skip_stage',
   NO_MECHWARRIORS_OR_BATTLEARMOR = 'no_mechwarriors_or_battlearmor',
   ONLY_ONE_MODULE_ALLOWED_FOR_STAGE = 'only_one_module_allowed_for_stage',

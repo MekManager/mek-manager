@@ -1,16 +1,17 @@
 import { Attribute } from '../attributes';
 import { Character } from '../characters';
 import { ValidationError } from '../errorMessage';
+import { LifeStage } from '../lifeStage';
 import { Validator } from './validator';
 
-export class AttributeMinimumForTraitValidator implements Validator {
+export class AttributeMinimumForTraitFromStageValidator implements Validator {
   public name: string;
   public errors: ValidationError[];
 
   private readonly _config: {};
 
   constructor (config: {}) {
-    this.name = 'Attribute Minimum For Trait Validator';
+    this.name = 'Attribute Minimum For Trait From Stage Validator';
     this.errors = [];
     this._config = config;
   }
@@ -20,7 +21,10 @@ export class AttributeMinimumForTraitValidator implements Validator {
     const traitName: string = this._config['trait'];
     const attributeName: Attribute = this._config['attribute'];
     const requiredScore: number = this._config['score'];
-    const trait = character.getTrait(traitName);
+    const stage: LifeStage = this._config['stage'];
+    const trait = character.traits.find(
+      t => t.name() === traitName && t.stageTaken === stage
+    );
 
     if (trait) {
       const currentScore = character.attributes.get(attributeName).score;
@@ -29,7 +33,7 @@ export class AttributeMinimumForTraitValidator implements Validator {
         return true;
       } else {
         this.errors.push({
-          message: `The trait ${traitName} is required to have a score of ${requiredScore} for the attribute ${attributeName}, but it's current score is only ${currentScore}`,
+          message: `The trait ${traitName} is required to have a score of ${requiredScore} for the attribute ${attributeName} when taken during stage ${stage}, but it's current score is only ${currentScore}`,
           origin: this.name,
         });
 

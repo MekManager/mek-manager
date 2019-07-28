@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import 'mocha';
 import { Attribute } from '../attributes';
 import { CharacterCreationHarness } from '../characterCreationHarness';
+import { LifeStage } from '../lifeStage';
 import { mockAffiliations } from './mocks/affiliations';
 import { mockLifeModules } from './mocks/lifeModules';
 import { mockTraits } from './mocks/traits';
@@ -141,13 +142,6 @@ describe("Character Creation", () => {
     expect(harness.validate()).to.equal(true);
   });
 
-  it("should be invalid if the character doesn't have the trait that requires a minimum value", () => {
-    const harness = new CharacterCreationHarness();
-    harness.addAffiliation(mockAffiliations.minimumAttrPlace);
-
-    expect(harness.validate()).to.equal(false);
-  });
-
   it("should be invalid if the character doesn't have the appropriate attribute score", () => {
     const harness = new CharacterCreationHarness();
     harness.addAffiliation(mockAffiliations.minimumAttrPlace);
@@ -161,6 +155,37 @@ describe("Character Creation", () => {
     harness.addAffiliation(mockAffiliations.minimumAttrPlace);
     harness.addTrait(mockTraits.naturalAptitude);
     harness.alterAttributeXP(Attribute.INT, 400);
+
+    expect(harness.validate()).to.equal(true);
+  });
+
+  it("should be invalid if the character has the trait in the required stage, and doesn't have a high enough attribute score", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.minimumAttrAffiliationPlace);
+    const trait = mockTraits.naturalAptitude;
+    trait.stageTaken = LifeStage.AFFILIATION;
+    harness.addTrait(trait);
+
+    expect(harness.validate()).to.equal(false);
+  });
+
+  it("should be valid if the character has the trait in the required stage, and has a high enough attribute score", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.minimumAttrAffiliationPlace);
+    const trait = mockTraits.naturalAptitude;
+    trait.stageTaken = LifeStage.AFFILIATION;
+    harness.addTrait(trait);
+    harness.alterAttributeXP(Attribute.INT, 400);
+
+    expect(harness.validate()).to.equal(true);
+  });
+
+  it("should be valid if the character has the trait in a different stage, and doesn't have a high enough attribute score", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.minimumAttrAffiliationPlace);
+    const trait = mockTraits.naturalAptitude;
+    trait.stageTaken = LifeStage.LATE_CHILDHOOD;
+    harness.addTrait(trait);
 
     expect(harness.validate()).to.equal(true);
   });

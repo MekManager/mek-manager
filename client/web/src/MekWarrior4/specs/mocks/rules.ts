@@ -1,4 +1,5 @@
 import { Attribute } from '../../attributes';
+import { LifeStage } from '../../lifeStage';
 import { Rule, RuleName } from '../../rule';
 
 const truebornOnly = new Rule(RuleName.TRUEBORN_ONLY);
@@ -20,6 +21,14 @@ const traitRequiresAttributeScore = new Rule(
     attribute: Attribute.INT,
     score: 4,
   });
+const traitRequiresAttributeScoreForStage = new Rule(
+  RuleName.MINIMUM_ATTRIBUTE_SCORE_FOR_TRAIT_IN_STAGE,
+  {
+    trait: 'Natural Aptitude',
+    attribute: Attribute.INT,
+    score: 4,
+    stage: LifeStage.AFFILIATION,
+  });
 const linkedTraits = new Rule(
   RuleName.TRAIT_MUST_HAVE_OTHER_TRAIT,
   {
@@ -29,7 +38,7 @@ const linkedTraits = new Rule(
 const noGreenThumb = new Rule(
   RuleName.TRAIT_NOT_ALLOWED,
   {
-    trait: 'Green Thumb'
+    trait: 'Green Thumb',
   });
 
 export const mockRules = {
@@ -41,5 +50,6 @@ export const mockRules = {
   noFarm,
   noGreenThumb,
   traitRequiresAttributeScore,
+  traitRequiresAttributeScoreForStage,
   truebornOnly,
 };

@@ -32,7 +32,7 @@ export class Character {
     this.addLifeModule(LifeStage.AFFILIATION, lm);
   }
 
-  public addLifeModule (stage: LifeStage, lm: LifeModule): void {
+  public addLifeModule (stage: LifeStage, lm: LifeModule, field?: string): void {
     const alreadyTaken = this._lifeModules.filter(
       l => l.stage === stage && l.module.name === lm.name
     ).length > 0;
@@ -42,7 +42,12 @@ export class Character {
       return;
     }
 
-    this._lifeModules.push(new CharacterLifeModule(stage, lm));
+    const module = new CharacterLifeModule(stage, lm);
+    if (field) {
+      module.field = field;
+    }
+
+    this._lifeModules.push(module);
 
     /* If the `LifeModule` being added is an affiliation make sure that the
      * _affiliations array gets re-cached.
@@ -70,6 +75,12 @@ export class Character {
     this.attributes = changeXP(this.attributes, attr, xp);
   }
 
+  public currentAffiliation (): CharacterLifeModule {
+    const modules = this.affiliations();
+
+    return modules[modules.length - 1];
+  }
+
   public hasTrait (name: string): boolean {
     return !!this.getTrait(name);
   }
@@ -85,6 +96,10 @@ export class Character {
    */
   public lifeModules (): CharacterLifeModule[] {
     return this._lifeModules;
+  }
+
+  public originalAffiliation (): CharacterLifeModule {
+    return this.affiliations()[0];
   }
 
   public skillStrings (): string[] {

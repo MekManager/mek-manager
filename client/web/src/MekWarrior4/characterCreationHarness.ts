@@ -39,8 +39,8 @@ export class CharacterCreationHarness {
     this._character.addAffiliation(lm);
   }
 
-  public addModule (stage: LifeStage, module: LifeModule): void {
-    this._character.addLifeModule(stage, module);
+  public addModule (stage: LifeStage, module: LifeModule, field?: string): void {
+    this._character.addLifeModule(stage, module, field);
   }
 
   public addTrait (trait: Trait): void {

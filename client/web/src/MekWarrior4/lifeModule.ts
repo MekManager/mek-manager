@@ -5,11 +5,10 @@ export class LifeModule {
   public isClan: boolean;
   public name: string;
   public rules: Rule[];
+  // TODO: in the future this should have an enum, or a small class instead of
+  // just being a string.
+  public fields: string[];
   public stage: LifeStage;
-
-  private _memo: {
-    legalChildLabor?: boolean,
-  };
 
   constructor (
     stage: LifeStage,
@@ -21,8 +20,7 @@ export class LifeModule {
     this.name = name;
     this.rules = rules;
     this.isClan = isClan;
-
-    this._memo = {};
+    this.fields = [];
   }
 
   public hasRuleFor (name: RuleName): boolean {

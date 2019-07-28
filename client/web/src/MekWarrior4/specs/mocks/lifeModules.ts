@@ -8,6 +8,7 @@ const truebornCreche = new LifeModule(1, 'Trueborn Creche', [ mockRules.trueborn
 const freebornSibko = new LifeModule(2, 'Freeborn Sibko', [], true);
 const truebornSibko = new LifeModule(2, 'Trueborn Sibko', [ mockRules.truebornOnly ], true);
 const backwoods = new LifeModule(2, 'Back Woods', []);
+const militarySchool = new LifeModule(2, 'Military School', []);
 
 const tradeSchool = new LifeModule(3, 'Trade School', []);
 const militaryAcademy = new LifeModule(3, 'Military Academy', []);
@@ -20,6 +21,7 @@ export const mockLifeModules = {
   farm,
   freebornSibko,
   militaryAcademy,
+  militarySchool,
   nobility,
   tradeSchool,
   truebornCreche,

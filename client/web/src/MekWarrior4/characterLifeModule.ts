@@ -7,6 +7,8 @@ import { LifeStage } from './lifeStage';
 export class CharacterLifeModule {
   public module: LifeModule;
   public stage: LifeStage;
+  // TODO: This should get a proper type in the future.
+  public field?: string;
 
   constructor (stage: LifeStage, module: LifeModule) {
     this.stage = stage;

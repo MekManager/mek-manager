@@ -64,10 +64,17 @@ const eliteFarmer = new LifeModule(
   [ mockRules.linkedTraits, mockRules.apprenticeShipOnly ]
 );
 
+const deepPeriphery = new LifeModule(
+  LifeStage.AFFILIATION,
+  'Deep Periphery',
+  [ mockRules.noMekOrBattleArmor ]
+);
+
 export const mockAffiliations = {
   cantBeOnly,
   childLabor: legalChildLabor,
   clan,
+  deepPeriphery,
   default: defaultAffiliation,
   eliteFarmer,
   minimumAttrPlace,

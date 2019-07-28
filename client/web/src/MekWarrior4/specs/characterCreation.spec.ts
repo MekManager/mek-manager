@@ -258,4 +258,44 @@ describe("Character Creation", () => {
 
     expect(harness.validate()).to.equal(true);
   });
+
+  it("should be invalid if the character has taken Mek training", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.deepPeriphery);
+    harness.addModule(1, mockLifeModules.nobility);
+    harness.addModule(2, mockLifeModules.militarySchool);
+    harness.addModule(3, mockLifeModules.militaryAcademy, 'MekWarrior');
+
+    expect(harness.validate()).to.equal(false);
+  });
+  it("should be invalid if the character has taken Battle Armor training", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.deepPeriphery);
+    harness.addModule(1, mockLifeModules.nobility);
+    harness.addModule(2, mockLifeModules.militarySchool);
+    harness.addModule(3, mockLifeModules.militaryAcademy, 'Battle Armor');
+
+    expect(harness.validate()).to.equal(false);
+  });
+
+  it("should be valid if the character has not taken either Mek or Battle Armor training", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.deepPeriphery);
+    harness.addModule(1, mockLifeModules.nobility);
+    harness.addModule(2, mockLifeModules.militarySchool);
+    harness.addModule(3, mockLifeModules.militaryAcademy, 'Tank');
+
+    expect(harness.validate()).to.equal(true);
+  });
+  it("should be valid if the character has changed to an affiliation without the restriction", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.deepPeriphery);
+    harness.addAffiliation(mockAffiliations.default);
+    harness.addModule(1, mockLifeModules.nobility);
+    harness.addModule(2, mockLifeModules.militarySchool);
+    harness.addModule(3, mockLifeModules.militaryAcademy, 'MekWarrior');
+
+    expect(harness.validate()).to.equal(true);
+
+  });
 });

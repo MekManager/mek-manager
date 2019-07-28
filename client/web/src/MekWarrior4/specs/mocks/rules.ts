@@ -13,14 +13,16 @@ const forcedToFarmUnlessRoyal = new Rule(
     trait: 'Royalty',
     stage: 1,
     module: 'Farm',
-  });
+  }
+);
 const traitRequiresAttributeScore = new Rule(
   RuleName.MINIMUM_ATTRIBUTE_SCORE_FOR_TRAIT,
   {
     trait: 'Natural Aptitude',
     attribute: Attribute.INT,
     score: 4,
-  });
+  }
+);
 const traitRequiresAttributeScoreForStage = new Rule(
   RuleName.MINIMUM_ATTRIBUTE_SCORE_FOR_TRAIT_IN_STAGE,
   {
@@ -28,29 +30,35 @@ const traitRequiresAttributeScoreForStage = new Rule(
     attribute: Attribute.INT,
     score: 4,
     stage: LifeStage.AFFILIATION,
-  });
+  }
+);
 const linkedTraits = new Rule(
   RuleName.TRAIT_MUST_HAVE_OTHER_TRAIT,
   {
     mainTrait: 'Green Thumb',
     requiredTrait: 'Animal Empathy',
-  });
+  }
+);
 const noGreenThumb = new Rule(
   RuleName.TRAIT_NOT_ALLOWED,
   {
     trait: 'Green Thumb',
-  });
+  }
+);
 const noHigherEducation = new Rule(
   RuleName.MUST_SKIP_STAGE,
   {
     stage: LifeStage.HIGHER_EDUCATION,
-  });
+  }
+);
 const apprenticeShipOnly = new Rule(
   RuleName.ONLY_ONE_MODULE_ALLOWED_FOR_STAGE,
   {
     stage: LifeStage.HIGHER_EDUCATION,
     module: 'Trade School',
-  });
+  }
+);
+const noMekOrBattleArmor = new Rule(RuleName.NO_MECHWARRIORS_OR_BATTLEARMOR);
 
 export const mockRules = {
   actsAsClan,
@@ -62,6 +70,7 @@ export const mockRules = {
   noFarm,
   noGreenThumb,
   noHigherEducation,
+  noMekOrBattleArmor,
   traitRequiresAttributeScore,
   traitRequiresAttributeScoreForStage,
   truebornOnly,

@@ -7,6 +7,7 @@ import { ChildLaborValidator } from './childLaborValidator';
 import { ClanValidator } from './clanValidator';
 import { ForcedPathWithoutTraitValidator } from './forcedPathWithoutTraitValidator';
 import { MustSkipStageValidator } from './mustSkipStageValidator';
+import { NoMekWarriorsOrBattleArmorValidator } from './noMekwarriorsOrBattleArmorValidator';
 import { OnlyOneModuleAllowedForStageValidator } from './onlyOneModuleAllowedForStageValidator';
 import { SingularAffiliationValidator } from './singularAffiliationValidator';
 import { TraitMustHaveOtherTraitValidator } from './traitMustHaveOtherTraitValidator';
@@ -59,6 +60,8 @@ export class ValidatorFactory {
         return new MustSkipStageValidator(rule.config);
       case RuleName.ONLY_ONE_MODULE_ALLOWED_FOR_STAGE:
         return new OnlyOneModuleAllowedForStageValidator(rule.config);
+      case RuleName.NO_MECHWARRIORS_OR_BATTLEARMOR:
+        return new NoMekWarriorsOrBattleArmorValidator();
       default:
         return undefined;
     }

@@ -16,6 +16,7 @@ export class AttributeMinimumForTraitValidator implements Validator {
   }
 
   public valid (character: Character): boolean {
+    this.errors = [];
     const traitName: string = this._config['trait'];
     const attributeName: Attribute = this._config['attribute'];
     const requiredScore: number = this._config['score'];

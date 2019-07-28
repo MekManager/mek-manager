@@ -18,6 +18,7 @@ export class TraitMustHaveOtherTraitValidator implements Validator {
   }
 
   public valid (character: Character): boolean {
+    this.errors = [];
     const mainTraitName: string = this._config['mainTrait'];
     const requiredTraitName: string = this._config['requiredTrait'];
 

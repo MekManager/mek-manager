@@ -15,6 +15,7 @@ export class ForcedPathWithoutTraitValidator implements Validator {
   }
 
   public valid (character: Character): boolean {
+    this.errors = [];
     const name: string = this._config['trait'];
     const trait = character.traits.find(t => t.name() === name);
 

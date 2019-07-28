@@ -15,6 +15,7 @@ export class CantHaveModuleValidator implements Validator {
   }
 
   public valid (character: Character): boolean {
+    this.errors = [];
     const name: string = this._config['name'];
     const hasRestrictedModule = character
       .lifeModules()

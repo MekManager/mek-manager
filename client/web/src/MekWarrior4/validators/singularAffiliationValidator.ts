@@ -13,6 +13,7 @@ export class SingularAffiliationValidator implements Validator {
   }
 
   public valid (character: Character): boolean {
+    this.errors = [];
     const affiliationCount = character.affiliations().length;
     const nonSingularAffiliation = character.affiliations().find(
       a => a.module.hasRuleFor(RuleName.CANNOT_BE_ONLY_AFFILIATION)

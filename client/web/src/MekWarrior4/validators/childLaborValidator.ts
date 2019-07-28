@@ -14,6 +14,7 @@ export class ChildLaborValidator implements Validator {
   }
 
   public valid (character: Character): boolean {
+    this.errors = [];
     const legalChildLabor = character
       .affiliations()
       .filter(a => a.module.hasRuleFor(RuleName.LEGAL_CHILD_LABOR))

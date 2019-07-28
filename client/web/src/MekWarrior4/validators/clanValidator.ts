@@ -13,6 +13,7 @@ export class ClanValidator implements Validator {
   }
 
   public valid (character: Character): boolean {
+    this.errors = [];
     const hasClanAffiliation = character
       .affiliations()
       .filter(a => a.module.isClan)

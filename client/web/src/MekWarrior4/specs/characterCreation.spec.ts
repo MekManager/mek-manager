@@ -183,7 +183,6 @@ describe("Character Creation", () => {
   it("should be valid if the main trait has it's required trait", () => {
     const harness = new CharacterCreationHarness();
     harness.addAffiliation(mockAffiliations.eliteFarmer);
-    harness.addAffiliation(mockAffiliations.eliteFarmer);
     harness.addTrait(mockTraits.greenThumb);
     harness.addTrait(mockTraits.animalEmpathy);
 

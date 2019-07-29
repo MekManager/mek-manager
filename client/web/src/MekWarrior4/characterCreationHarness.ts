@@ -6,6 +6,7 @@ import { LifeModule } from './lifeModule';
 import { LifeStage } from './lifeStage';
 import { Trait } from './traits';
 import { ValidatorFactory } from './validators/validatorFactory';
+import { ClanCaste } from './clanCaste';
 
 /**
  * This "harness" is making less sense as I'm going on with it. I'm not sure if
@@ -37,6 +38,10 @@ export class CharacterCreationHarness {
 
   public addAffiliation (lm: LifeModule): void {
     this._character.addAffiliation(lm);
+  }
+
+  public addCaste (caste: ClanCaste): void {
+    this._character.caste = caste;
   }
 
   public addModule (stage: LifeStage, module: LifeModule, field?: string): void {

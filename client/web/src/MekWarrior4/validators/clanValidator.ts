@@ -28,6 +28,8 @@ export class ClanValidator implements Validator {
       .traits
       .find(t => t.base.name === 'Phenotype') !== undefined;
 
+    const canTakeClanModules = (hasClanAffiliation || canActAsClan);
+
     this.errors = character.lifeModules().reduce(
       (errors, lifeModule) => {
         // Skip affiliations, we care about early childhood and on
@@ -37,7 +39,6 @@ export class ClanValidator implements Validator {
 
         if (lifeModule.module.isClan) {
           const truebornExclusive = lifeModule.module.hasRuleFor(RuleName.TRUEBORN_ONLY);
-          const canTakeClanModules = (hasClanAffiliation || canActAsClan);
 
           if (!truebornExclusive && !canTakeClanModules) {
             errors.push({
@@ -56,6 +57,15 @@ export class ClanValidator implements Validator {
       },
       []
     );
+
+    if (canTakeClanModules && character.caste === undefined) {
+      if (character.currentAffiliation().module.name !== 'Independent/Pirate') {
+        this.errors.push({
+          message: `This character does not have a Caste. They must either take one, or join the "Dark Caste" by taking the Independent/Pirate affiliation`,
+          origin: this.name,
+        });
+      }
+    }
 
     return this.errors.length === 0;
   }

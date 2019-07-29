@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import 'mocha';
 import { Attribute } from '../attributes';
 import { CharacterCreationHarness } from '../characterCreationHarness';
+import { ClanCaste } from '../clanCaste';
 import { LifeStage } from '../lifeStage';
 import { mockAffiliations } from './mocks/affiliations';
 import { mockLifeModules } from './mocks/lifeModules';
@@ -51,6 +52,7 @@ describe("Character Creation", () => {
   it("should allow Clan characters to take Clan modules", () => {
     const harness = new CharacterCreationHarness();
     harness.addAffiliation(mockAffiliations.clan);
+    harness.addCaste(ClanCaste.MEKWARRIOR);
     harness.addModule(1, mockLifeModules.farm);
     harness.addModule(2, mockLifeModules.freebornSibko);
 
@@ -60,6 +62,7 @@ describe("Character Creation", () => {
   it("should allow hybrid IS/Clan affiliations to take Clan modules", () => {
     const harness = new CharacterCreationHarness();
     harness.addAffiliation(mockAffiliations.sphereClanHybrid);
+    harness.addCaste(ClanCaste.MEKWARRIOR);
     harness.addModule(1, mockLifeModules.farm);
     harness.addModule(2, mockLifeModules.freebornSibko);
 
@@ -69,6 +72,7 @@ describe("Character Creation", () => {
   it("should not allow hybrid IS/Clan affiliations to use trueborn restricted modules", () => {
     const harness = new CharacterCreationHarness();
     harness.addAffiliation(mockAffiliations.sphereClanHybrid);
+    harness.addCaste(ClanCaste.MEKWARRIOR);
     harness.addModule(1, mockLifeModules.farm);
     harness.addModule(2, mockLifeModules.truebornSibko);
 
@@ -78,11 +82,22 @@ describe("Character Creation", () => {
   it("should allow Trueborn Clan warriors to use Trueborn restricted modules", () => {
     const harness = new CharacterCreationHarness();
     harness.addAffiliation(mockAffiliations.clan);
+    harness.addCaste(ClanCaste.MEKWARRIOR);
     harness.addTrait(mockTraits.mechwarriorPhenotype);
     harness.addModule(1, mockLifeModules.truebornCreche);
     harness.addModule(2, mockLifeModules.truebornSibko);
 
     expect(harness.validate()).to.equal(true);
+  });
+
+  it("should be invalid if a Clan member has not taken a caste", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.clan);
+    harness.addTrait(mockTraits.mechwarriorPhenotype);
+    harness.addModule(1, mockLifeModules.truebornCreche);
+    harness.addModule(2, mockLifeModules.truebornSibko);
+
+    expect(harness.validate()).to.equal(false);
   });
 
   it("should be invalid if the only affiliation cannot be the sole affiliation", () => {

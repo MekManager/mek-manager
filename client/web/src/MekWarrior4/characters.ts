@@ -1,6 +1,7 @@
 import { Attribute, Attributes, changeXP, newAttributes } from './attributes';
 import { CharacterFlavor, newCharacterFlavor } from './characterFlavor';
 import { CharacterLifeModule } from './characterLifeModule';
+import { ClanCaste } from './clanCaste';
 import { LifeModule } from './lifeModule';
 import { LifeStage } from './lifeStage';
 import { Skill } from './skills';
@@ -13,6 +14,8 @@ export class Character {
   public attributes: Attributes;
   public skills: Skill[];
   public traits: Trait[];
+  /** For Clan characters */
+  public caste?: ClanCaste;
 
   private _affiliations: CharacterLifeModule[];
   private _lifeModules: CharacterLifeModule[];

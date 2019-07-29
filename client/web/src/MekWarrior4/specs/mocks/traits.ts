@@ -26,10 +26,22 @@ const animalEmpathy = new Trait(new TraitBase({
   multipleAllowed: false,
 }));
 
+const rank = new Trait(new TraitBase({
+  name: 'Rank',
+  multipleAllowed: false,
+}));
+
+const title = new Trait(new TraitBase({
+  name: 'Title',
+  multipleAllowed: false,
+}));
+
 export const mockTraits = {
   animalEmpathy,
   greenThumb,
+  rank,
   royalty,
   mechwarriorPhenotype,
   naturalAptitude,
+  title,
 };

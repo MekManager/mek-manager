@@ -287,6 +287,7 @@ describe("Character Creation", () => {
 
     expect(harness.validate()).to.equal(true);
   });
+
   it("should be valid if the character has changed to an affiliation without the restriction", () => {
     const harness = new CharacterCreationHarness();
     harness.addAffiliation(mockAffiliations.deepPeriphery);
@@ -296,6 +297,71 @@ describe("Character Creation", () => {
     harness.addModule(3, mockLifeModules.militaryAcademy, 'MekWarrior');
 
     expect(harness.validate()).to.equal(true);
+  });
 
+  it("should be valid if neither of the traits are present", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.royalSnob);
+
+    expect(harness.validate()).to.equal(true);
+  });
+
+  it("should be valid if only the restricting trait is present", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.royalSnob);
+    const title = mockTraits.title;
+    title.setXP(200);
+    harness.addTrait(title);
+
+    expect(harness.validate()).to.equal(true);
+  });
+
+  it("should be invalid if only the restricted trait is present", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.royalSnob);
+    const rank = mockTraits.rank;
+    rank.setXP(200);
+    harness.addTrait(rank);
+
+    expect(harness.validate()).to.equal(false);
+  });
+
+  it("should be invalid if the restricted trait has a higher level than the restricted trait", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.royalSnob);
+    const title = mockTraits.title;
+    title.setXP(100);
+    const rank = mockTraits.rank;
+    rank.setXP(200);
+    harness.addTrait(title);
+    harness.addTrait(rank);
+
+    expect(harness.validate()).to.equal(false);
+  });
+
+  it("should be valid if the restricted trait has an equal level to the restricted trait", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.royalSnob);
+    const title = mockTraits.title;
+    title.setXP(200);
+    const rank = mockTraits.rank;
+    rank.setXP(200);
+    harness.addTrait(title);
+    harness.addTrait(rank);
+
+    expect(harness.validate()).to.equal(true);
+  });
+
+  it("should be valid if the restricted trait has an lesser level to the restricted trait", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.royalSnob);
+    const title = mockTraits.title;
+    title.setXP(400);
+    const rank = mockTraits.rank;
+    rank.setXP(200);
+    harness.addTrait(title);
+    harness.addTrait(rank);
+
+    expect(harness.validate()).to.equal(true);
   });
 });

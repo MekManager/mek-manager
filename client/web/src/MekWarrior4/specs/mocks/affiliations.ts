@@ -43,7 +43,7 @@ const noFarm = new LifeModule(
 const royalSnob = new LifeModule(
   LifeStage.AFFILIATION,
   'Royal Snob',
-  [ mockRules.forcedToFarmUnlessRoyal ]
+  [ mockRules.forcedToFarmUnlessRoyal, mockRules.rankRestrictedByTrait ]
 );
 
 const minimumAttrPlace = new LifeModule(

@@ -10,6 +10,7 @@ import { MustSkipStageValidator } from './mustSkipStageValidator';
 import { NoMekWarriorsOrBattleArmorValidator } from './noMekwarriorsOrBattleArmorValidator';
 import { OnlyOneModuleAllowedForStageValidator } from './onlyOneModuleAllowedForStageValidator';
 import { SingularAffiliationValidator } from './singularAffiliationValidator';
+import { TraitCantGoHigherThanOtherTraitValidator } from './traitCantGoHigherThanOtherTraitValidator';
 import { TraitMustHaveOtherTraitValidator } from './traitMustHaveOtherTraitValidator';
 import { TraitNotAllowedValidator } from './traitNotAllowedValidator';
 import { Validator } from './validator';
@@ -62,6 +63,8 @@ export class ValidatorFactory {
         return new OnlyOneModuleAllowedForStageValidator(rule.config);
       case RuleName.NO_MECHWARRIORS_OR_BATTLEARMOR:
         return new NoMekWarriorsOrBattleArmorValidator();
+      case RuleName.TRAIT_CANT_GO_HIGHER_THAN_OTHER:
+        return new TraitCantGoHigherThanOtherTraitValidator(rule.config);
       default:
         return undefined;
     }

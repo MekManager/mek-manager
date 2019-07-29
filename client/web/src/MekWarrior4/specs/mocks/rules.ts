@@ -58,6 +58,13 @@ const apprenticeShipOnly = new Rule(
     module: 'Trade School',
   }
 );
+const rankRestrictedByTrait = new Rule(
+  RuleName.TRAIT_CANT_GO_HIGHER_THAN_OTHER,
+  {
+    trait: 'Rank',
+    restrictingTrait: 'Title',
+  }
+);
 const noMekOrBattleArmor = new Rule(RuleName.NO_MECHWARRIORS_OR_BATTLEARMOR);
 
 export const mockRules = {
@@ -71,6 +78,7 @@ export const mockRules = {
   noGreenThumb,
   noHigherEducation,
   noMekOrBattleArmor,
+  rankRestrictedByTrait,
   traitRequiresAttributeScore,
   traitRequiresAttributeScoreForStage,
   truebornOnly,

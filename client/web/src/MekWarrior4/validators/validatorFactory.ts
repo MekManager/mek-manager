@@ -8,6 +8,7 @@ import { ClanValidator } from './clanValidator';
 import { ForcedPathWithoutTraitValidator } from './forcedPathWithoutTraitValidator';
 import { MustSkipStageValidator } from './mustSkipStageValidator';
 import { NoMekWarriorsOrBattleArmorValidator } from './noMekwarriorsOrBattleArmorValidator';
+import { NoSkillsFromFieldWithoutTraitValidator } from './noSkillsFromFieldWithoutTraitValidator';
 import { OnlyOneModuleAllowedForStageValidator } from './onlyOneModuleAllowedForStageValidator';
 import { SingularAffiliationValidator } from './singularAffiliationValidator';
 import { TraitCantGoHigherThanOtherTraitValidator } from './traitCantGoHigherThanOtherTraitValidator';
@@ -65,6 +66,8 @@ export class ValidatorFactory {
         return new NoMekWarriorsOrBattleArmorValidator();
       case RuleName.TRAIT_CANT_GO_HIGHER_THAN_OTHER:
         return new TraitCantGoHigherThanOtherTraitValidator(rule.config);
+      case RuleName.NO_SKILLS_FROM_FIELD_WITHOUT_TRAIT:
+        return new NoSkillsFromFieldWithoutTraitValidator(rule.config);
       default:
         return undefined;
     }

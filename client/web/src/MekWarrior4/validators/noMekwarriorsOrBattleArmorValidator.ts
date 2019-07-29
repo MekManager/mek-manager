@@ -52,7 +52,7 @@ export class NoMekWarriorsOrBattleArmorValidator implements Validator {
         l => l.stage === LifeStage.HIGHER_EDUCATION
       );
       const brokenRule = higherEd.find(
-        l => disallowedFields.includes(l.field)
+        l => !!l.fields.find(f => disallowedFields.includes(f))
       );
 
       if (brokenRule) {

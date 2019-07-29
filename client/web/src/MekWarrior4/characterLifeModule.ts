@@ -8,10 +8,11 @@ export class CharacterLifeModule {
   public module: LifeModule;
   public stage: LifeStage;
   // TODO: This should get a proper type in the future.
-  public field?: string;
+  public fields?: string[];
 
   constructor (stage: LifeStage, module: LifeModule) {
     this.stage = stage;
     this.module = module;
+    this.fields = [];
   }
 }

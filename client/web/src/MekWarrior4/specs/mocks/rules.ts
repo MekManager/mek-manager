@@ -35,7 +35,7 @@ const traitRequiresAttributeScoreForStage = new Rule(
 const linkedTraits = new Rule(
   RuleName.TRAIT_MUST_HAVE_OTHER_TRAIT,
   {
-    mainTrait: 'Green Thumb',
+    trait: 'Green Thumb',
     requiredTrait: 'Animal Empathy',
   }
 );
@@ -66,6 +66,13 @@ const rankRestrictedByTrait = new Rule(
   }
 );
 const noMekOrBattleArmor = new Rule(RuleName.NO_MECHWARRIORS_OR_BATTLEARMOR);
+const noMekTraitingWithoutTitle = new Rule(
+  RuleName.NO_SKILLS_FROM_FIELD_WITHOUT_TRAIT,
+  {
+    trait: 'Title',
+    field: 'MekWarrior',
+  }
+);
 
 export const mockRules = {
   actsAsClan,
@@ -78,6 +85,7 @@ export const mockRules = {
   noGreenThumb,
   noHigherEducation,
   noMekOrBattleArmor,
+  noMekTraitingWithoutTitle,
   rankRestrictedByTrait,
   traitRequiresAttributeScore,
   traitRequiresAttributeScoreForStage,

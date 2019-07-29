@@ -364,4 +364,54 @@ describe("Character Creation", () => {
 
     expect(harness.validate()).to.equal(true);
   });
+
+  it("should be invalid if the character has the field, but not the trait", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.royalSnob);
+    harness.addTrait(mockTraits.royalty);
+    harness.addModule(1, mockLifeModules.nobility);
+    harness.addModule(2, mockLifeModules.militarySchool);
+    harness.addModule(3, mockLifeModules.militaryAcademy, 'MekWarrior');
+
+    expect(harness.validate()).to.equal(false);
+  });
+
+  it("should be valid if the character has neither the trait nor the field", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.royalSnob);
+    harness.addTrait(mockTraits.royalty);
+    harness.addModule(1, mockLifeModules.nobility);
+    harness.addModule(2, mockLifeModules.militarySchool);
+    harness.addModule(3, mockLifeModules.militaryAcademy, 'AeroSpace');
+
+    expect(harness.validate()).to.equal(true);
+  });
+
+  it("should be valid if the character has the trait but not the field", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.royalSnob);
+    harness.addTrait(mockTraits.royalty);
+    const title = mockTraits.title;
+    title.setXP(400);
+    harness.addTrait(title);
+    harness.addModule(1, mockLifeModules.nobility);
+    harness.addModule(2, mockLifeModules.militarySchool);
+    harness.addModule(3, mockLifeModules.militaryAcademy, 'AeroSpace');
+
+    expect(harness.validate()).to.equal(true);
+  });
+
+  it("should be valid if the character has both the trait and the field", () => {
+    const harness = new CharacterCreationHarness();
+    harness.addAffiliation(mockAffiliations.royalSnob);
+    harness.addTrait(mockTraits.royalty);
+    const title = mockTraits.title;
+    title.setXP(400);
+    harness.addTrait(title);
+    harness.addModule(1, mockLifeModules.nobility);
+    harness.addModule(2, mockLifeModules.militarySchool);
+    harness.addModule(3, mockLifeModules.militaryAcademy, 'MekWarrior');
+
+    expect(harness.validate()).to.equal(true);
+  });
 });

@@ -44,7 +44,7 @@ export class Character {
 
     const module = new CharacterLifeModule(stage, lm);
     if (field) {
-      module.field = field;
+      module.fields.push(field);
     }
 
     this._lifeModules.push(module);

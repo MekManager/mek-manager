@@ -64,7 +64,7 @@
     "ordered-imports": true,
     "prefer-const": true,
     "prefer-object-spread": true,
-    "prefer-readonly": true,
+    "prefer-readonly": false,
     "restrict-plus-operands": true,
     "return-undefined": true,
     "semicolon": [true, "always"],

@@ -5,8 +5,10 @@ import { AttributeMinimumForTraitValidator } from './attributeMinimumForTraitVal
 import { CantHaveModuleValidator } from './cantHaveModuleValidator';
 import { ChildLaborValidator } from './childLaborValidator';
 import { ClanValidator } from './clanValidator';
+import { ClanWarriorMustTakeTraitValidator } from './clanWarriorMustTakeTraitValidator';
 import { ForcedPathWithoutTraitValidator } from './forcedPathWithoutTraitValidator';
 import { MustSkipStageValidator } from './mustSkipStageValidator';
+import { MustUseOtherPhenotypeValidator } from './mustUseOtherPhenotypeValidator';
 import { NoMekWarriorsOrBattleArmorValidator } from './noMekwarriorsOrBattleArmorValidator';
 import { NoSkillsFromFieldWithoutTraitValidator } from './noSkillsFromFieldWithoutTraitValidator';
 import { OnlyOneModuleAllowedForStageValidator } from './onlyOneModuleAllowedForStageValidator';
@@ -68,6 +70,10 @@ export class ValidatorFactory {
         return new TraitCantGoHigherThanOtherTraitValidator(rule.config);
       case RuleName.NO_SKILLS_FROM_FIELD_WITHOUT_TRAIT:
         return new NoSkillsFromFieldWithoutTraitValidator(rule.config);
+      case RuleName.CLAN_MUST_USE_OTHER_PHENOTYPE:
+        return new MustUseOtherPhenotypeValidator(rule.config);
+      case RuleName.CLAN_WARRIOR_MUST_TAKE_TRAIT:
+        return new ClanWarriorMustTakeTraitValidator(rule.config);
       default:
         return undefined;
     }

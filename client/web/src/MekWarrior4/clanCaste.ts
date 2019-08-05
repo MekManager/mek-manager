@@ -11,3 +11,13 @@ export enum ClanCaste {
   MERCHANT_CASTE = 'merchant Caste',
   LABORER_CASTE = 'Laborer Caste',
 }
+
+export const isWarriorCaste = (caste: ClanCaste): boolean => [
+  ClanCaste.MEKWARRIOR,
+  ClanCaste.ELEMENTAL,
+  ClanCaste.ELEMENTAL_ADVANCED,
+  ClanCaste.AEROSPACE,
+  ClanCaste.AEROSPACE_NAVAL,
+  ClanCaste.PROTOMEK,
+  ClanCaste.WARRIOR_CASTE_OTHER,
+].includes(caste);

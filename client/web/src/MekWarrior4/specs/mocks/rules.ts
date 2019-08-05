@@ -73,14 +73,29 @@ const noMekTraitingWithoutTitle = new Rule(
     field: 'MekWarrior',
   }
 );
+const mustUseOtherPhenotype = new Rule(
+  RuleName.CLAN_MUST_USE_OTHER_PHENOTYPE,
+  {
+    phenotype: 'MekWarrior',
+    restrictedPhenotype: 'Aerospace',
+  }
+);
+const clanWarriorMustTakeTrait = new Rule(
+  RuleName.CLAN_WARRIOR_MUST_TAKE_TRAIT,
+  {
+    trait: 'Natural Aptitude',
+  }
+);
 
 export const mockRules = {
   actsAsClan,
   apprenticeShipOnly,
   cannotBeOnlyAffiliation,
+  clanWarriorMustTakeTrait,
   forcedToFarmUnlessRoyal,
   legalChildLabor,
   linkedTraits,
+  mustUseOtherPhenotype,
   noFarm,
   noGreenThumb,
   noHigherEducation,

@@ -1,12 +1,12 @@
 import { Attribute } from './attributes';
 import { CharacterLifeModule } from './characterLifeModule';
 import { Character } from './characters';
+import { ClanCaste } from './clanCaste';
 import { ValidationError } from './errorMessage';
 import { LifeModule } from './lifeModule';
 import { LifeStage } from './lifeStage';
 import { Trait } from './traits';
 import { ValidatorFactory } from './validators/validatorFactory';
-import { ClanCaste } from './clanCaste';
 
 /**
  * This "harness" is making less sense as I'm going on with it. I'm not sure if

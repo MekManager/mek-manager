@@ -74,7 +74,29 @@ const deepPeriphery = new LifeModule(
   [ mockRules.noMekOrBattleArmor ]
 );
 
+const bigBoyClan = new LifeModule(
+  LifeStage.AFFILIATION,
+  'Clan BigBoy',
+  [ mockRules.mustUseOtherPhenotype ],
+  true
+);
+
+const topTierClan = new LifeModule(
+  LifeStage.AFFILIATION,
+  'Clan TopTier',
+  [ mockRules.clanWarriorMustTakeTrait ],
+  true
+);
+
+const topTierAssociate = new LifeModule(
+  LifeStage.AFFILIATION,
+  'TopTier Associate',
+  [ mockRules.clanWarriorMustTakeTrait, mockRules.actsAsClan ]
+);
+
+
 export const mockAffiliations = {
+  bigBoyClan,
   cantBeOnly,
   childLabor: legalChildLabor,
   clan,
@@ -86,4 +108,6 @@ export const mockAffiliations = {
   noFarm,
   royalSnob,
   sphereClanHybrid,
+  topTierAssociate,
+  topTierClan,
 };

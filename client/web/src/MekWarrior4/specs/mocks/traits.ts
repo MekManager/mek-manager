@@ -1,9 +1,35 @@
 import { Trait, TraitBase } from "../../traits";
 
-const mechwarriorPhenotype = new Trait(new TraitBase({
-  name: 'Phenotype',
-  multipleAllowed: false,
-}));
+// TODO: Need to find a better way to create traits.
+const mekwarriorPhenotype = (() => {
+  const trait = new Trait(new TraitBase({
+    name: 'Phenotype',
+    multipleAllowed: false,
+  }));
+  trait.subDescription = 'MekWarrior';
+
+  return trait;
+})();
+
+const aerospacePhenotype = (() => {
+  const trait = new Trait(new TraitBase({
+    name: 'Phenotype',
+    multipleAllowed: false,
+  }));
+  trait.subDescription = 'Aerospace';
+
+  return trait;
+})();
+
+const elementalPhenotype = (() => {
+  const trait = new Trait(new TraitBase({
+    name: 'Phenotype',
+    multipleAllowed: false,
+  }));
+  trait.subDescription = 'Elemental';
+
+  return trait;
+})();
 
 // Not a real trait, just test data
 const royalty = new Trait(new TraitBase({
@@ -37,11 +63,13 @@ const title = new Trait(new TraitBase({
 }));
 
 export const mockTraits = {
+  aerospacePhenotype,
   animalEmpathy,
+  elementalPhenotype,
   greenThumb,
   rank,
   royalty,
-  mechwarriorPhenotype,
+  mekwarriorPhenotype,
   naturalAptitude,
   title,
 };

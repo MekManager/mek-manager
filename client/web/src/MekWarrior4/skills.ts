@@ -1,4 +1,4 @@
-import { findLastIndex } from 'ramda';
+import { findLastIndex } from '../Utils/collections';
 import { Attribute } from './attributes';
 import { Learning, xpList } from './learning';
 
@@ -67,8 +67,7 @@ export class Skill {
    * Determines and sets the level for the skill based on it's current XP.
    */
   private _calculateLevel (l: Learning): number {
-    const value = findLastIndex((n: number) =>
-      this.experience >= n, xpList(l));
+    const value = findLastIndex((n) => this.experience >= n, xpList(l));
     this.level = value;
 
     return value;

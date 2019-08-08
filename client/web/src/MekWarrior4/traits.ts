@@ -1,3 +1,5 @@
+import { LifeStage } from './lifeStage';
+
 export class TraitBase {
   /** The name of the `Trait` */
   public readonly name: string;
@@ -15,6 +17,7 @@ export class TraitBase {
     this.min = data['min'];
   }
 }
+
 export class Trait {
   public readonly base: TraitBase;
   /** The amount of Trait Points or TP a trait has. */
@@ -38,6 +41,14 @@ export class Trait {
    * identities this belongs to.
    */
   public identity?: string;
+  /**
+   * This is a special field related to phenotypes
+   */
+  public type?: string;
+  /**
+   * The stage this trait was assigned to the character.
+   */
+  public stageTaken?: LifeStage;
 
   constructor (base: TraitBase) {
     this.base = base;
@@ -53,6 +64,10 @@ export class Trait {
     return this.level !== 0;
   }
 
+  public name (): string {
+    return this.base.name;
+  }
+
   // NOTE: Why do traits have their XP set, but skills have their XP added?
   public setXP (newXP: number): void {
     this.experience = newXP;
@@ -62,6 +77,9 @@ export class Trait {
   public toString (): string {
     let str = this.base.name;
 
+    if (this.type) {
+      str =`${str}: ${this.type}`;
+    }
     if (this.isActive()) {
       str = `${str} (${this.level})`;
     }

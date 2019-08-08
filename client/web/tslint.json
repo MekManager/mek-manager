@@ -10,7 +10,7 @@
     "binary-expression-operand-order": true,
     "callable-types": true,
     "class-name": true,
-    "comment-format": [true, "check-space", "check-uppercase"],
+    "comment-format": [true, "check-space"],
     "curly": true,
     "cyclomatic-complexity": true,
     "deprecation": true,
@@ -64,12 +64,12 @@
     "ordered-imports": true,
     "prefer-const": true,
     "prefer-object-spread": true,
-    "prefer-readonly": true,
+    "prefer-readonly": false,
     "restrict-plus-operands": true,
     "return-undefined": true,
     "semicolon": [true, "always"],
     "space-before-function-paren": true,
-    "switch-default": true,
+    "switch-default": false,
     "trailing-comma": [
       true,
       {
@@ -84,7 +84,7 @@
     ],
     "triple-equals": true,
     "typedef": true,
-    "use-isnan": true 
+    "use-isnan": true
   },
   "rulesDirectory": []
 }

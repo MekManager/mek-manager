@@ -1,8 +1,6 @@
-import { map } from 'ramda';
-
 export const standardXP: number[] = [20, 30, 50, 80, 120, 170, 230, 300, 380, 470, 570];
-export const fastXP: number[] = map(x => Math.floor(x * 0.9), standardXP);
-export const slowXP: number[] = map(x => Math.floor(x * 1.1), standardXP);
+export const fastXP: number[] = standardXP.map(x => Math.floor(x * 0.9));
+export const slowXP: number[] = standardXP.map(x => Math.floor(x * 1.1));
 
 export enum Learning {
   FAST = 'Fast',

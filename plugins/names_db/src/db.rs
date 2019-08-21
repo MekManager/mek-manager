@@ -61,12 +61,12 @@ pub fn get_sexes(conn: Connection) -> Vec<Sex> {
 }
 
 fn row_to_name(row: Row) -> Name {
-    let id: i64 = row.get(0);
-    let latin_character_forms: Vec<String> = row.get(1);
-    let native_script_forms: Option<Vec<String>> = row.get(2);
-    let name_set_id: i64 = row.get(3);
-    let sex_id: i64 = row.get(4);
-    let type_id: i64 = row.get(5);
+    let id: i64 = row.get("id");
+    let latin_character_forms: Vec<String> = row.get("latin_character_forms");
+    let native_script_forms: Option<Vec<String>> = row.get("native_script_forms");
+    let name_set_id: i64 = row.get("name_set_id");
+    let sex_id: i64 = row.get("sex_id");
+    let type_id: i64 = row.get("type_id");
 
     Name {
         id,
@@ -79,9 +79,9 @@ fn row_to_name(row: Row) -> Name {
 }
 
 fn row_to_name_set(row: Row) -> NameSet {
-    let id: i64 = row.get(0);
-    let name: String = row.get(1);
-    let description: Option<String> = row.get(2);
+    let id: i64 = row.get("id");
+    let name: String = row.get("name");
+    let description: Option<String> = row.get("description");
 
     NameSet {
         id,
@@ -91,8 +91,8 @@ fn row_to_name_set(row: Row) -> NameSet {
 }
 
 fn row_to_sex(row: Row) -> Sex {
-    let id: i64 = row.get(0);
-    let name: String = row.get(1);
+    let id: i64 = row.get("id");
+    let name: String = row.get("name");
 
     Sex { id, name }
 }

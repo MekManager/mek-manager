@@ -1,7 +1,7 @@
-import { Character } from "../characters";
-import { ValidationError } from "../errorMessage";
-import { RuleName } from "../rule";
-import { Validator } from "./validator";
+import { Character } from '../characters';
+import { ValidationError } from '../errorMessage';
+import { RuleName } from '../rule';
+import { Validator } from './validator';
 
 export class SingularAffiliationValidator implements Validator {
   public name: string;

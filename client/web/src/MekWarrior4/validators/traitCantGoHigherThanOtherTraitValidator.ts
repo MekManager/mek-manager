@@ -9,7 +9,7 @@ export class TraitCantGoHigherThanOtherTraitValidator implements Validator {
   private readonly _config: {};
 
   constructor (config: {}) {
-    this.name = "Trait Can't Go Higher Than Other Trait Validator";
+    this.name = `Trait Can't Go Higher Than Other Trait Validator`;
     this.errors = [];
 
     this._config = config;

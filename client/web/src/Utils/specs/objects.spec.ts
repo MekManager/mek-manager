@@ -1,9 +1,9 @@
-import { expect } from "chai";
-import "mocha";
-import { deepCopy } from "../objects";
+import { expect } from 'chai';
+import 'mocha';
+import { deepCopy } from '../objects';
 
-describe("Object utility functions", () => {
-  it("can make a deep copy of an object", () => {
+describe('Object utility functions', () => {
+  it('can make a deep copy of an object', () => {
     const original = {
       a: {
         b: 1,

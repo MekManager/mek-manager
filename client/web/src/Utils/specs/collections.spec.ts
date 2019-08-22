@@ -1,17 +1,17 @@
-import { expect } from "chai";
-import "mocha";
-import { findLastIndex } from "../collections";
+import { expect } from 'chai';
+import 'mocha';
+import { findLastIndex } from '../collections';
 
-describe("Collection utility functions", () => {
-  describe("findLastIndex", () => {
-    it("should find the last index in a simple array", () => {
+describe('Collection utility functions', () => {
+  describe('findLastIndex', () => {
+    it('should find the last index in a simple array', () => {
       const sample: number[] = [1, 2, 3, 3, 4];
       const predicate = (x: number) => x === 3;
 
       expect(findLastIndex(predicate, sample)).to.equal(3);
     });
 
-    it("should find the last index in an array of objects", () => {
+    it('should find the last index in an array of objects', () => {
       const sample: { id: number, a: string }[] = [
         { id: 1, a: 'cool' },
         { id: 2, a: 'foo' },

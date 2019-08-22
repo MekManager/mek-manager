@@ -1,6 +1,6 @@
-import { fromEvents } from "kefir";
-import m, { route, RouteDefs, Vnode } from "mithril";
-import { compose, map } from "ramda";
+import { fromEvents } from 'kefir';
+import m, { route, RouteDefs, Vnode } from 'mithril';
+import { compose, map } from 'ramda';
 import { Character } from './MekWarrior4/characters';
 import { fastXP, slowXP, standardXP } from './MekWarrior4/learning';
 
@@ -38,7 +38,7 @@ interface State {
 
 // #region Initial
 const element = document.body;
-const EVENT_NAME = "user:event";
+const EVENT_NAME = 'user:event';
 const eventValue = (event: Event) => {
   const target = event.currentTarget as HTMLInputElement;
 
@@ -46,8 +46,8 @@ const eventValue = (event: Event) => {
 };
 const getSettings = (): RouteSettings => {
   const routes: Route[] = [
-    { name: "root", path: "/" },
-    { name: "secondary", path: "/foo" },
+    { name: 'root', path: '/' },
+    { name: 'secondary', path: '/foo' },
   ];
   const defaultRoute = routes[0].path;
 
@@ -65,7 +65,7 @@ const initialState: State = {
     params: undefined,
   },
   value: 20,
-  text: "",
+  text: '',
 };
 // #endregion
 
@@ -74,9 +74,9 @@ const initialState: State = {
  * A collection of action identifiers
  */
 enum ActionID {
-  TEMP_INCREASE = "temp:increase",
-  TEXT_CHANGE   = "text:change",
-  ROUTE_CHANGE  = "route:change",
+  TEMP_INCREASE = 'temp:increase',
+  TEXT_CHANGE   = 'text:change',
+  ROUTE_CHANGE  = 'route:change',
 }
 
 const dispatchAction = (name: ActionID) => (value: any) => {

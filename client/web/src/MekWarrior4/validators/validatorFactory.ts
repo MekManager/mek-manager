@@ -18,6 +18,19 @@ import { TraitMustHaveOtherTraitValidator } from './traitMustHaveOtherTraitValid
 import { TraitNotAllowedValidator } from './traitNotAllowedValidator';
 import { Validator } from './validator';
 
+/**
+ * Takes a list of validators and a rule, if that rule has a validator associated
+ * with it, it appends that validator to the given list.
+ */
+const validatorsForRule = (validators: Validator[], rule: Rule): Validator[] => {
+  const validator = ValidatorFactory.createFor(rule);
+  if (validator) {
+    validators.push(validator);
+  }
+
+  return validators;
+};
+
 export class ValidatorFactory {
 
   public static validators (character: Character): Validator[] {
@@ -30,16 +43,9 @@ export class ValidatorFactory {
      * the list of base validators that should always be checked.
      */
     const characterSpecificValidators = character.lifeModules().reduce(
-      (validators, lm) => {
-        return validators.concat(lm.module.rules.reduce((vs, rule) => {
-          const validator = ValidatorFactory.createFor(rule);
-          if (validator) {
-            vs.push(validator);
-          }
-
-          return vs;
-        }, [] as Validator[]));
-      }, [] as Validator[]);
+      (validators, lm) =>
+        validators.concat(lm.module.rules.reduce(validatorsForRule, [])), []
+    );
 
     return ValidatorFactory.baseValidators().concat(characterSpecificValidators);
   }

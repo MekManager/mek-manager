@@ -198,14 +198,3 @@ GitHub.sublime-settings
 # ======================================================================= }}}
 
 # ========================================================================== }}}
-
-# Client
-client/web/build/
-client/web/dist/
-client/web/node_modules/
-client/web/.rpt2_cache/
-
-# plugins
-plugins/names_db/target/
-# backup files created by `rustfmt`
-plugins/names_db/**/*.rs.bk

@@ -1,0 +1,28 @@
+{
+  "name": "@mekmanager/core",
+  "version": "0.1.0",
+  "description": "MekManager's core library",
+  "main": "build/index.js",
+  "repository": "git@gitlab.com:mek-manager/mek-manager.git",
+  "author": "Eric Hopkins <eric.on.tech@gmail.com>",
+  "license": "GPL-3.0",
+  "private": false,
+  "scripts": {
+    "build": "tsc -p ./config/tsconfig.json",
+    "build:watch": "tsc -w",
+    "test": "yarn run tsc && yarn mocha build/**/specs/*.spec.js",
+    "test:watch": "mocha -w build/**/specs/*.spec.js",
+    "dist:cjs": "tsc -p ./config/tsconfig.cjs.json",
+    "dist:esm5": "tsc -p ./config/tsconfig.esm5.json",
+    "dist:esm2015": "tsc -p ./config/tsconfig.esm2015.json",
+    "dist:types": "tsc -p ./config/tsconfig.types.json",
+    "dist:all": "yarn run dist:cjs && yarn run dist:esm5 && yarn run dist:esm2015 && yarn run dist:types"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.7",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0",
+    "typescript": "^3.6.2"
+  }
+}

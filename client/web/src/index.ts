@@ -1,14 +1,23 @@
+import {
+  Character,
+  fastXP,
+  slowXP,
+  standardXP
+} from '@mekmanager/core';
 import { fromEvents } from 'kefir';
 import m, { route, RouteDefs, Vnode } from 'mithril';
 import { compose, map } from 'ramda';
-import { Character } from './MekWarrior4/characters';
-import { fastXP, slowXP, standardXP } from './MekWarrior4/learning';
 
 // #region Testing
+// This code exists just to ensure that the library code is being imported
+// and is working as expected.
 const character = new Character();
 const xp1 = standardXP;
 const xp2 = slowXP;
 const xp3 = fastXP;
+
+const num = xp1[0] + xp2[0] + xp3[0];
+character.name = String(num);
 // #endregion
 
 // #region Interfaces

@@ -2,7 +2,7 @@
 
 # Variables ====================================================================
 WEB_DIR := client/web
-PLUGINS_DIR := plugins
+PLUGINS_DIR := plugin
 
 # Prelude ======================================================================
 ci-web-echo:

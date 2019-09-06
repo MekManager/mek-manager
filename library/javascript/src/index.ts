@@ -47,4 +47,4 @@ export {
   TraitNotAllowedValidator,
   Validator,
   ValidatorFactory,
-} from './MekWarrior4'
+} from './MekWarrior4';

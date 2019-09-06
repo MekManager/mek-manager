@@ -1,4 +1,5 @@
 import {
+  Attribute,
   Character,
   fastXP,
   slowXP,
@@ -15,9 +16,10 @@ const character = new Character();
 const xp1 = standardXP;
 const xp2 = slowXP;
 const xp3 = fastXP;
+const attr = Attribute.BOD;
 
 const num = xp1[0] + xp2[0] + xp3[0];
-character.name = String(num);
+character.name = String(num) + attr;
 // #endregion
 
 // #region Interfaces

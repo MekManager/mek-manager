@@ -11,7 +11,7 @@ ci-web-echo:
 	node -v
 	npm -v
 
-ci-web-prelude: ci-web-echo core-javascript-dist web-install
+ci-web-prelude: ci-web-echo core-javascript-build web-install
 
 names-db-prelude:
 	pwd
@@ -41,16 +41,20 @@ core-javascript-build:
 	yarn install && \
 	yarn build
 
-core-javascript-dist:
-	cd ${LIB_DIR}/javascript && \
-	yarn install && \
-	yarn run dist:cjs
 # Lint =========================================================================
 web-lint:
 	cd ${WEB_DIR} && \
+	yarn run lint
+
+core-javascript-lint:
+	cd ${LIB_DIR}/javascript && \
 	yarn run lint
 
 # Test =========================================================================
 web-test:
 	cd ${WEB_DIR} && \
 	yarn run test:ci
+
+core-javascript-test:
+	cd ${LIB_DIR}/javascript && \
+	yarn run test

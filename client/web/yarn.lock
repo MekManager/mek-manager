@@ -18,8 +18,8 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
-"@mekmanager/core@file:../../library/javascript/dist":
-  version "0.0.0"
+"@mekmanager/core@file:../../library/javascript":
+  version "0.1.0"
 
 "@types/chai@^4.1.7":
   version "4.1.7"

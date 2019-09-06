@@ -18,8 +18,10 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
-"@mekmanager/core@file:../../library/javascript":
+"@mekmanager/core@~0":
   version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@mekmanager/core/-/core-0.1.0.tgz#1976fdd1229d28cb381c30040679deda751b7cb6"
+  integrity sha512-/XXE5RnE6p6owb0DXC3+811rOIqBl4FkS6g+5vI0C4sI99pCxcfI4DSEizDOBDlFuLGGohUwXLF2C1M5OMKXnA==
 
 "@types/chai@^4.1.7":
   version "4.1.7"

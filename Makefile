@@ -2,6 +2,7 @@
 
 # Variables ====================================================================
 WEB_DIR := client/web
+LIB_DIR := library
 PLUGINS_DIR := plugin
 
 # Prelude ======================================================================
@@ -10,7 +11,7 @@ ci-web-echo:
 	node -v
 	npm -v
 
-ci-web-prelude: ci-web-echo web-install
+ci-web-prelude: ci-web-echo core-javascript-build web-install
 
 names-db-prelude:
 	pwd
@@ -35,12 +36,25 @@ names-db-build:
 	cd ${PLUGINS_DIR}/names_db && \
 	cargo build --release
 
+core-javascript-build:
+	cd ${LIB_DIR}/javascript && \
+	yarn install && \
+	yarn build
+
 # Lint =========================================================================
 web-lint:
 	cd ${WEB_DIR} && \
+	yarn run lint
+
+core-javascript-lint:
+	cd ${LIB_DIR}/javascript && \
 	yarn run lint
 
 # Test =========================================================================
 web-test:
 	cd ${WEB_DIR} && \
 	yarn run test:ci
+
+core-javascript-test:
+	cd ${LIB_DIR}/javascript && \
+	yarn run test

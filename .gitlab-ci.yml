@@ -18,12 +18,17 @@ build-names-db:
   script:
     - make names-db-build-unoptimized
 
-tslint:
+web-lint:
   stage: test
   script:
     - make web-lint
 
-test:
+core-js-lint:
   stage: test
   script:
-    - make web-test
+    - make core-javascript-lint
+
+core-js-test:
+  stage: test
+  script:
+    - make core-javascript-test

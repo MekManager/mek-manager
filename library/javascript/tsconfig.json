@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "outDir": "./dist",
+    "declaration": true,
+    "declarationDir": "./dist",
+    "removeComments": false,
+    "noImplicitAny": false,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./src/",
+    "lib": [
+      "es5",
+      "es6",
+      "es2015.collection",
+      "es2015.promise",
+      "es2015.iterable",
+      "es2016.array.include"
+    ]
+  },
+  "include": [
+    "./src/**/*.ts"
+  ],
+  "exclude": [
+    "./node_modules"
+  ]
+}

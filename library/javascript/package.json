@@ -1,6 +1,6 @@
 {
   "name": "@mekmanager/core",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "MekManager's core library",
   "main": "dist/index.js",
   "repository": "git@gitlab.com:mek-manager/mek-manager.git",

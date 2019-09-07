@@ -16,14 +16,14 @@ export class SingularAffiliationValidator implements Validator {
     this.errors = [];
     const affiliationCount = character.affiliations().length;
     const nonSingularAffiliation = character.affiliations().find(
-      a => a.module.hasRuleFor(RuleName.CANNOT_BE_ONLY_AFFILIATION)
+      a => a.hasRuleFor(RuleName.CANNOT_BE_ONLY_AFFILIATION)
     );
 
     if (nonSingularAffiliation) {
       const alone = affiliationCount === 1;
       if (alone) {
         this.errors.push({
-          message: `Module ${nonSingularAffiliation.module.name} cannot be a sole affiliation`,
+          message: `Module ${nonSingularAffiliation.name} cannot be a sole affiliation`,
           origin: this.name,
         });
 

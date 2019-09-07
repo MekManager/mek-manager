@@ -31,13 +31,32 @@ export class Character {
     this.traits = [] as Trait[];
   }
 
+  /**
+   * Returns an array of all life modules that are currently active on the
+   * character. For example, this excludeds any affiliation other than the most
+   * recent one, as only rules from the most recent (i.e. "active") affiliation
+   * count.
+   */
+  public activeLifeModules (): CharacterLifeModule[] {
+    const nonAffilations = this._lifeModules.filter(
+      lm => lm.stage !== LifeStage.AFFILIATION
+    );
+    const currentAffiliation = this.currentAffiliation();
+
+    if (currentAffiliation === undefined) {
+      return nonAffilations;
+    } else {
+      return [ currentAffiliation, ...nonAffilations ];
+    }
+  }
+
   public addAffiliation (lm: LifeModule): void {
     this.addLifeModule(LifeStage.AFFILIATION, lm);
   }
 
   public addLifeModule (stage: LifeStage, lm: LifeModule, field?: string): void {
     const alreadyTaken = this._lifeModules.filter(
-      l => l.stage === stage && l.module.name === lm.name
+      l => l.stage === stage && l.name === lm.name
     ).length > 0;
 
     // Can't take the same affiliation twice

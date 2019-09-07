@@ -22,11 +22,11 @@ export class ClanWarriorMustTakeTraitValidator implements Validator {
     const trait = character.traits.find(t => t.base.name === traitName);
     const hasClanAffiliation = character
       .affiliations()
-      .filter(a => a.module.isClan)
+      .filter(a => a.isClan)
       .length > 0;
     const canActAsClan = character
       .affiliations()
-      .filter(a => a.module.hasRuleFor(RuleName.ACTS_AS_CLAN))
+      .filter(a => a.hasRuleFor(RuleName.ACTS_AS_CLAN))
       .length > 0;
 
     if (isWarriorCaste(character.caste) && (hasClanAffiliation || canActAsClan)) {

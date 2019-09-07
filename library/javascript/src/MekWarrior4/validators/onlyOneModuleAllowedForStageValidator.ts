@@ -21,7 +21,7 @@ export class OnlyOneModuleAllowedForStageValidator implements Validator {
     const stage: LifeStage = this._config['stage'];
     const allowedModule: string = this._config['module'];
     const modules = character.lifeModules().filter(
-      m => m.stage === stage && m.module.name !== allowedModule
+      m => m.stage === stage && m.name !== allowedModule
     );
 
     if (modules.length === 0) {

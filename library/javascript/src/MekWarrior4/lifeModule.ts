@@ -24,10 +24,10 @@ export class LifeModule {
   }
 
   public hasRuleFor (name: RuleName): boolean {
-    return this.ruleFor(name) !== undefined;
+    return this._ruleFor(name) !== undefined;
   }
 
-  public ruleFor (name: RuleName): Rule {
+  private _ruleFor (name: RuleName): Rule {
     return this.rules.find(r => r.name === name);
   }
 

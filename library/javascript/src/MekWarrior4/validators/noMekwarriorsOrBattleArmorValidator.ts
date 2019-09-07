@@ -31,45 +31,25 @@ export class NoMekWarriorsOrBattleArmorValidator implements Validator {
       return true;
     }
 
-    /* This is one of the specific things about this rule. It's meant to
-     * represent a character living in a much less developed part of human space
-     * where Meks and especially Battle Armor aren't present.
-     *
-     * This validator will get pulled in if this restriction is anywhere in the
-     * character's life. But it should only be *checked* if the character still
-     * currently holds the affiliation that brought this validator in.
-     *
-     * If there affiliation has changed, they would be in a different part of
-     * space where they'd have access to Meks and Battle Armor.
-     */
-    const needToCheck = currentAffiliation.module.ruleFor(
-      RuleName.NO_MECHWARRIORS_OR_BATTLEARMOR
+    const higherEd = character.lifeModules().filter(
+      l => l.stage === LifeStage.HIGHER_EDUCATION
+    );
+    const brokenRule = higherEd.find(
+      l => !!l.fields.find(f => disallowedFields.includes(f))
     );
 
-    if (needToCheck) {
-      this.errors = [];
-      const higherEd = character.lifeModules().filter(
-        l => l.stage === LifeStage.HIGHER_EDUCATION
-      );
-      const brokenRule = higherEd.find(
-        l => !!l.fields.find(f => disallowedFields.includes(f))
-      );
+    if (brokenRule) {
+      this.errors.push({
+        message: `This character cannot be trained to use either a Mek or Battle Armor`,
+        origin: this.name,
+      });
 
-      if (brokenRule) {
-        this.errors.push({
-          message: `This character cannot be trained to use either a Mek or Battle Armor`,
-          origin: this.name,
-        });
-
-        return false;
-      } else {
-        // They are still subject to the rule, but are abiding by it
-        return true;
-      }
+      return false;
     } else {
-      // The character is no longer subject to this rule
+      // They are still subject to the rule, but are abiding by it
       return true;
     }
+
   }
 }
 

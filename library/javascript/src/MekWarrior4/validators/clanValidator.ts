@@ -16,12 +16,12 @@ export class ClanValidator implements Validator {
     this.errors = [];
     const hasClanAffiliation = character
       .affiliations()
-      .filter(a => a.module.isClan)
+      .filter(a => a.isClan)
       .length > 0;
 
     const canActAsClan = character
       .affiliations()
-      .filter(a => a.module.hasRuleFor(RuleName.ACTS_AS_CLAN))
+      .filter(a => a.hasRuleFor(RuleName.ACTS_AS_CLAN))
       .length > 0;
 
     const characterIsTrueborn = character
@@ -37,17 +37,17 @@ export class ClanValidator implements Validator {
           return errors;
         }
 
-        if (lifeModule.module.isClan) {
-          const truebornExclusive = lifeModule.module.hasRuleFor(RuleName.TRUEBORN_ONLY);
+        if (lifeModule.isClan) {
+          const truebornExclusive = lifeModule.hasRuleFor(RuleName.TRUEBORN_ONLY);
 
           if (!truebornExclusive && !canTakeClanModules) {
             errors.push({
-              message: `Module ${lifeModule.module.name} is restricted to Clan characters`,
+              message: `Module ${lifeModule.name} is restricted to Clan characters`,
               origin: this.name,
             });
           } else if (truebornExclusive && !characterIsTrueborn) {
             errors.push({
-              message: `Module ${lifeModule.module.name} is exclusive to TrueBorn characters`,
+              message: `Module ${lifeModule.name} is exclusive to TrueBorn characters`,
               origin: this.name,
             });
           }
@@ -59,7 +59,7 @@ export class ClanValidator implements Validator {
     );
 
     if (canTakeClanModules && character.caste === undefined) {
-      if (character.currentAffiliation().module.name !== 'Independent/Pirate') {
+      if (character.currentAffiliation().name !== 'Independent/Pirate') {
         this.errors.push({
           message: `This character does not have a Caste. They must either take one, or join the "Dark Caste" by taking the Independent/Pirate affiliation`,
           origin: this.name,

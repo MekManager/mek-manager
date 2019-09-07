@@ -42,9 +42,9 @@ export class ValidatorFactory {
      * module reduces it's rules into a list of validators. Then adds that to
      * the list of base validators that should always be checked.
      */
-    const characterSpecificValidators = character.lifeModules().reduce(
+    const characterSpecificValidators = character.activeLifeModules().reduce(
       (validators, lm) =>
-        validators.concat(lm.module.rules.reduce(validatorsForRule, [])), []
+        validators.concat(lm.rules.reduce(validatorsForRule, [])), []
     );
 
     return ValidatorFactory.baseValidators().concat(characterSpecificValidators);

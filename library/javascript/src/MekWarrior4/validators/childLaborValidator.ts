@@ -17,7 +17,7 @@ export class ChildLaborValidator implements Validator {
     this.errors = [];
     const legalChildLabor = character
       .affiliations()
-      .filter(a => a.module.hasRuleFor(RuleName.LEGAL_CHILD_LABOR))
+      .filter(a => a.hasRuleFor(RuleName.LEGAL_CHILD_LABOR))
       .length > 0;
 
     this.errors = character.lifeModules().reduce(
@@ -25,10 +25,10 @@ export class ChildLaborValidator implements Validator {
         if (
           !legalChildLabor &&
           lifeModule.stage === LifeStage.LATE_CHILDHOOD &&
-          lifeModule.module.stage === LifeStage.REAL_LIFE
+          lifeModule.baseStage === LifeStage.REAL_LIFE
         ) {
           errors.push({
-            message: `Module ${lifeModule.module.name} cannot be used for stage ${lifeModule.stage} it is a stage ${lifeModule.module.stage} module`,
+            message: `Module ${lifeModule.name} cannot be used for stage ${lifeModule.stage} it is a stage ${lifeModule.baseStage} module`,
             origin: this.name,
           });
         }

@@ -4,12 +4,12 @@ import { CharacterLifeModule } from './characterLifeModule';
 import { ClanCaste } from './clanCaste';
 import { LifeModule } from './lifeModule';
 import { LifeStage } from './lifeStage';
+import { Name } from './name';
 import { Skill } from './skills';
 import { Trait } from './traits';
 
 export class Character {
-  // TODO: names should have more to them than just being a single string.
-  public name: string;
+  public name: Name;
   public flavor: CharacterFlavor;
   public attributes: Attributes;
   public skills: Skill[];
@@ -21,7 +21,7 @@ export class Character {
   private _lifeModules: CharacterLifeModule[];
 
   constructor () {
-    this.name = '';
+    this.name = new Name();
     this._affiliations = undefined;
     this._affiliations = [];
     this._lifeModules = [];

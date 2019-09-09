@@ -21,6 +21,7 @@
     "@types/chai": "^4.1.7",
     "@types/mocha": "^5.2.7",
     "chai": "^4.2.0",
+    "cucumber": "^5.1.0",
     "mocha": "^6.2.0",
     "tslint": "^5.19.0",
     "typescript": "^3.6.2"

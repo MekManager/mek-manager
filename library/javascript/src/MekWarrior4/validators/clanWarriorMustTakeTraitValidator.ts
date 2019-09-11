@@ -1,4 +1,4 @@
-import { Character } from '../characters';
+import { Character } from '../character';
 import { isWarriorCaste } from '../clanCaste';
 import { ValidationError } from '../errorMessage';
 import { RuleName } from '../rule';

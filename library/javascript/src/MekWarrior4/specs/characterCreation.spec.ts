@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import 'mocha';
-import { Attribute } from '../attributes';
+import { Attribute } from '../attribute';
 import { CharacterCreationHarness } from '../characterCreationHarness';
 import { ClanCaste } from '../clanCaste';
 import { LifeStage } from '../lifeStage';

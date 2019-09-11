@@ -6,7 +6,7 @@ import {
   changeXP,
   emptyAttributeValues,
   newAttributes,
-} from '../attributes';
+} from '../attribute';
 
 describe('Attributes', () => {
   it('should create an empty attribute set', () => {

@@ -1,5 +1,5 @@
 import { findLastIndex } from '../Utils/collections';
-import { Attribute } from './attributes';
+import { Attribute } from './attribute';
 import { Learning, xpList } from './learning';
 
 export class SkillBase {

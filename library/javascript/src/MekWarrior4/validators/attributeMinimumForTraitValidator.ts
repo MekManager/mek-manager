@@ -1,5 +1,5 @@
-import { Attribute } from '../attributes';
-import { Character } from '../characters';
+import { Attribute } from '../attribute';
+import { Character } from '../character';
 import { ValidationError } from '../errorMessage';
 import { Validator } from './validator';
 

@@ -1,4 +1,4 @@
-import { Attribute } from '../../attributes';
+import { Attribute } from '../../attribute';
 import { LifeStage } from '../../lifeStage';
 import { Rule, RuleName } from '../../rule';
 

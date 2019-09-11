@@ -1,4 +1,4 @@
-import { Trait, TraitBase } from '../../traits';
+import { Trait, TraitBase } from '../../trait';
 
 // TODO: Need to find a better way to create traits.
 const mekwarriorPhenotype = (() => {

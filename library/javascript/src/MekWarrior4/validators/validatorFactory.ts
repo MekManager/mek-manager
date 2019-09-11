@@ -1,4 +1,4 @@
-import { Character } from '../characters';
+import { Character } from '../character';
 import { Rule, RuleName } from '../rule';
 import { AttributeMinimumForTraitFromStageValidator } from './attributeMinimumForTraitFromStageValidator';
 import { AttributeMinimumForTraitValidator } from './attributeMinimumForTraitValidator';

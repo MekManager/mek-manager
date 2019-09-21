@@ -1,5 +1,4 @@
-import { LifeModule } from '../../lifeModule';
-import { LifeStage, lifeStageName } from '../../lifeStage';
+import { LifeModule, LifeStage } from '../../MekWarrior4';
 import { mockRules } from './rules';
 
 const defaultAffiliation = new LifeModule(
@@ -88,26 +87,25 @@ const topTierClan = new LifeModule(
   true
 );
 
+// TODO: Figure out what this was for. Some Clan testing it looks like
 const topTierAssociate = new LifeModule(
   LifeStage.AFFILIATION,
   'TopTier Associate',
   [ mockRules.clanWarriorMustTakeTrait, mockRules.actsAsClan ]
 );
 
-
 export const mockAffiliations = {
-  bigBoyClan,
-  cantBeOnly,
-  childLabor: legalChildLabor,
-  clan,
-  deepPeriphery,
-  default: defaultAffiliation,
-  eliteFarmer,
-  minimumAttrPlace,
-  minimumAttrAffiliationPlace,
-  noFarm,
-  royalSnob,
-  sphereClanHybrid,
-  topTierAssociate,
-  topTierClan,
+  "Can't Be Only": cantBeOnly,
+  'Big Boy Clan': bigBoyClan,
+  'Child Labor': legalChildLabor,
+  'Clan': clan,
+  'Deep Periphery': deepPeriphery,
+  'Default': defaultAffiliation,
+  'Elite Farmer': eliteFarmer,
+  'Minimum Attr for Affiliation': minimumAttrAffiliationPlace,
+  'Minimum Attrs': minimumAttrPlace,
+  'No Farm': noFarm,
+  'Royal Snob': royalSnob,
+  'Sphere/Clan Hybrid': sphereClanHybrid,
+  'Top Tier Clan': topTierClan,
 };

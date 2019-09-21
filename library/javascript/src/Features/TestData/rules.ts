@@ -1,6 +1,5 @@
-import { Attribute } from '../../attribute';
-import { LifeStage } from '../../lifeStage';
-import { Rule, RuleName } from '../../rule';
+import { Attribute, LifeStage, Rule, RuleName } from '../../MekWarrior4';
+
 
 const truebornOnly = new Rule(RuleName.TRUEBORN_ONLY);
 const cannotBeOnlyAffiliation = new Rule(RuleName.CANNOT_BE_ONLY_AFFILIATION);

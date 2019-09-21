@@ -1,4 +1,4 @@
-import { LifeModule } from '../../lifeModule';
+import { LifeModule } from '../../MekWarrior4';
 import { mockRules } from './rules';
 
 const farm = new LifeModule(1, 'Farm', []);
@@ -16,14 +16,14 @@ const militaryAcademy = new LifeModule(3, 'Military Academy', []);
 const civilianJob = new LifeModule(4, 'Civilian Job', []);
 
 export const mockLifeModules = {
-  backwoods,
-  civilianJob,
-  farm,
-  freebornSibko,
-  militaryAcademy,
-  militarySchool,
-  nobility,
-  tradeSchool,
-  truebornCreche,
-  truebornSibko,
+  'Backwoods': backwoods,
+  'Civilian Job': civilianJob,
+  'Farm': farm,
+  'Freeborn Sibko': freebornSibko,
+  'Military Academy': militaryAcademy,
+  'Military School': militarySchool,
+  'Nobility': nobility,
+  'Trade School': tradeSchool,
+  'Trueborn Creche': truebornCreche,
+  'Trueborn Sibko': truebornSibko,
 };

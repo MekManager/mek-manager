@@ -1,13 +1,6 @@
-export {
-  Attribute,
-  Attributes,
-  AttributeValues,
-  calculateLinkValue,
-  calculateScore,
-  changeXP,
-  emptyAttributeValues,
-  newAttributes,
-} from './attribute';
+export { Attribute } from './attribute';
+export { AttributeValues } from './attributeValues';
+export { Attributes } from './attributes';
 export { CharacterCreationHarness } from './characterCreationHarness';
 export { CharacterFlavor, newCharacterFlavor } from './characterFlavor';
 export { CharacterLifeModule } from './characterLifeModule';

@@ -27,7 +27,7 @@ export class AttributeMinimumForTraitFromStageValidator implements Validator {
     );
 
     if (trait) {
-      const currentScore = character.attributes.get(attributeName).score;
+      const currentScore = character.attributes.getValues(attributeName).score;
 
       if (currentScore >= requiredScore) {
         return true;

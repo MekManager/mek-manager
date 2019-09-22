@@ -1,4 +1,5 @@
-import { Attribute, Attributes, changeXP, newAttributes } from './attribute';
+import { Attribute } from './attribute';
+import { Attributes } from './attributes';
 import { CharacterFlavor, newCharacterFlavor } from './characterFlavor';
 import { CharacterLifeModule } from './characterLifeModule';
 import { ClanCaste } from './clanCaste';
@@ -26,7 +27,7 @@ export class Character {
     this._affiliations = [];
     this._lifeModules = [];
     this.flavor = newCharacterFlavor();
-    this.attributes = newAttributes();
+    this.attributes = new Attributes();
     this.skills = [] as Skill[];
     this.traits = [] as Trait[];
   }
@@ -93,8 +94,10 @@ export class Character {
     }
   }
 
+  // TODO: The character class shouldn't default to setting attribute XP
+  // directly. It should really be using the addXP and removeXP methods.
   public alterAttributeXP (attr: Attribute, xp: number): void {
-    this.attributes = changeXP(this.attributes, attr, xp);
+    this.attributes.setXP(attr, xp);
   }
 
   public currentAffiliation (): CharacterLifeModule {

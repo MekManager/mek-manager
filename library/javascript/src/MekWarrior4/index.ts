@@ -10,11 +10,13 @@ export { ValidationError } from './errorMessage';
 export { Learning, fastXP, slowXP, standardXP, xpList } from './learning';
 export { LifeModule } from './lifeModule';
 export { LifeStage, lifeStageName } from './lifeStage';
-export { Skill, SkillBase } from './skill';
-export { Trait, TraitBase } from './trait';
 export { Rule } from './rule';
 export { RuleName } from './ruleName';
 export { HookName } from './hookName';
+export { Skill } from './skill';
+export { SkillBase } from './skillBase';
+export { Trait } from './trait';
+export { TraitBase } from './traitBase';
 export {
   AttributeMinimumForTraitFromStageValidator,
   AttributeMinimumForTraitValidator,

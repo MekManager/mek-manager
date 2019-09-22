@@ -12,14 +12,13 @@
   ],
   "scripts": {
     "link-features": "cd ./dist/Features && ln -s ../../../shared/features/*.feature .",
-    "clear-features": "rm ./dist/Features/*.feature",
+    "clear-features": "rm -f ./dist/Features/*.feature",
     "relink-features": "yarn run clear-features && yarn run link-features",
     "build": "tsc -p ./tsconfig.json",
     "build:watch": "tsc -w",
-    "feature-test": "cucumber-js ./dist/Features",
-    "lint": "tslint -p . src/**/*.ts",
     "test": "yarn run tsc && yarn mocha dist/**/specs/*.spec.js",
-    "test:watch": "mocha -w dist/**/specs/*.spec.js"
+    "full-feature-test": "yarn run relink-features && yarn run tsc && yarn run test-features",
+    "test-features": "cucumber-js ./dist/Features"
   },
   "devDependencies": {
     "@types/chai": "^4.1.7",

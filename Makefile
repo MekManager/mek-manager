@@ -57,4 +57,6 @@ web-test:
 
 core-javascript-test:
 	cd ${LIB_DIR}/javascript && \
-	yarn run test
+	yarn run test && \
+	yarn run relink-features && \
+	yarn run test-features

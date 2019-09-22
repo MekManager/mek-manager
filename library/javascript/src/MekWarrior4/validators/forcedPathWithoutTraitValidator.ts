@@ -31,7 +31,7 @@ export class ForcedPathWithoutTraitValidator implements Validator {
 
       // Find any modules that have been taken for the restricted stage but
       // AREN'T the allowed module.
-      const offPath = character.lifeModules().filter(l =>
+      const offPath = character.lifeModules.filter(l =>
         l.stage === restrictedStage && l.name !== moduleName
       ).length > 0;
 

@@ -19,7 +19,7 @@ export class MustSkipStageValidator implements Validator {
   public valid (character: Character): boolean {
     this.errors = [];
     const stage: LifeStage = this._config['stage'];
-    const modules = character.lifeModules().filter(m => m.stage === stage);
+    const modules = character.lifeModules.filter(m => m.stage === stage);
 
     if (modules.length === 0) {
       return true;

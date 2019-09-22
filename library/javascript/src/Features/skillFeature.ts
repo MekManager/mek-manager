@@ -16,16 +16,16 @@ When(`the character's learning is {string}`, (learning: Learning) => {
 });
 
 When('the skill has {int} XP', (xp: number) => {
-  world.skill.setXP(world.learning, xp);
+  world.skill.setXP(xp, world.learning);
   world.level = world.skill.level;
 });
 
 When('level is at or below level 3', () => {
-  world.skill.setXP(Learning.STANDARD, 80);
+  world.skill.setXP(80, Learning.STANDARD);
 });
 
 When('level is at or above level 4', () => {
-  world.skill.setXP(Learning.STANDARD, 120);
+  world.skill.setXP(120, Learning.STANDARD);
 });
 
 Then('the skill level should be {int}', (level: number) => {

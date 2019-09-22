@@ -1,3 +1,4 @@
+import { Experience, toString } from '../interfaces';
 import { Attribute } from './attribute';
 import { Attributes } from './attributes';
 import { CharacterFlavor, newCharacterFlavor } from './characterFlavor';
@@ -9,8 +10,9 @@ import { Name } from './name';
 import { Skill } from './skill';
 import { Trait } from './trait';
 
-export class Character {
+export class Character implements Experience {
   public name: Name;
+  public xp: number;
   public flavor: CharacterFlavor;
   public attributes: Attributes;
   public skills: Skill[];
@@ -23,6 +25,7 @@ export class Character {
 
   constructor () {
     this.name = new Name();
+    this.xp = 0;
     this._affiliations = undefined;
     this._affiliations = [];
     this._lifeModules = [];
@@ -33,16 +36,39 @@ export class Character {
   }
 
   /**
+   * Returns all life modules, regardless of if they are currently active.
+   */
+  get lifeModules (): CharacterLifeModule[] {
+    return this._lifeModules;
+  }
+
+  /**
+   * The first affiliation a character took.
+   */
+  get originalAffiliation (): CharacterLifeModule {
+    return this.affiliations()[0];
+  }
+
+  /**
+   * The affiliation this character currently holds.
+   */
+  get currentAffiliation (): CharacterLifeModule {
+    const modules = this.affiliations();
+
+    return modules[modules.length - 1];
+  }
+
+  /**
    * Returns an array of all life modules that are currently active on the
    * character. For example, this excludeds any affiliation other than the most
    * recent one, as only rules from the most recent (i.e. "active") affiliation
    * count.
    */
-  public activeLifeModules (): CharacterLifeModule[] {
+  get activeLifeModules (): CharacterLifeModule[] {
     const nonAffilations = this._lifeModules.filter(
       lm => lm.stage !== LifeStage.AFFILIATION
     );
-    const currentAffiliation = this.currentAffiliation();
+    const currentAffiliation = this.currentAffiliation;
 
     if (currentAffiliation === undefined) {
       return nonAffilations;
@@ -51,18 +77,64 @@ export class Character {
     }
   }
 
+  /**
+   * Adds the given XP amount to this `Character`.
+   *
+   * @param xp The amount of XP to be added
+   */
+  public addXP (xp: number): void {
+    this.xp += xp;
+  }
+
+  /**
+   * Sets the given XP amount to this `Character`.
+   *
+   * @param xp The amount of XP to be set
+   */
+  public setXP (xp: number): void {
+    this.xp = xp;
+  }
+
+  /**
+   * Removes the given XP amount from this `Character`.
+   *
+   * @param xp The amount of XP to remove
+   */
+  public removeXP (xp: number): void {
+    this.xp -= xp;
+  }
+
+  /**
+   * Adds the provided `LifeModule` to this character as an affiliation. The
+   * `LifeModule` provided will become this characters latest (i.e. active)
+   * affiliation.
+   *
+   * @param lm The `LifeModule` to add to this character.
+   */
   public addAffiliation (lm: LifeModule): void {
     this.addLifeModule(LifeStage.AFFILIATION, lm);
   }
 
+  /**
+   * Adds the provided `LifeModule` at the given `LifeStage` of this
+   * character's life. These will be constructed into  a `CharacterLifeModule`
+   * and if the optional field is provided it will be associated with the
+   * `CharacterLifeModule`.
+   *
+   * @param stage The stage to take this `LifeModule` for
+   * @param lm The `LifeModule` to use
+   * @param [field] Optional: a field to be associated with this module
+   */
   public addLifeModule (stage: LifeStage, lm: LifeModule, field?: string): void {
-    const alreadyTaken = this._lifeModules.filter(
-      l => l.stage === stage && l.name === lm.name
-    ).length > 0;
-
     // Can't take the same affiliation twice
-    if (stage === LifeStage.AFFILIATION && alreadyTaken) {
-      return;
+    if (stage === LifeStage.AFFILIATION) {
+      const alreadyTaken = this._lifeModules.filter(
+        l => l.stage === stage && l.name === lm.name
+      ).length > 0;
+
+      if (alreadyTaken) {
+        return;
+      }
     }
 
     const module = new CharacterLifeModule(stage, lm);
@@ -72,20 +144,22 @@ export class Character {
 
     this._lifeModules.push(module);
 
-    /* If the `LifeModule` being added is an affiliation make sure that the
-     * _affiliations array gets re-cached.
-     */
+    // If the `LifeModule` being added is an affiliation make sure that the
+    // _affiliations array gets re-cached.
     if (lm.stage === LifeStage.AFFILIATION) {
       this._affiliations = [];
       this.affiliations();
     }
   }
 
+  /**
+   * A list of a characters affiliations. This method utilizes a cache.
+   */
   public affiliations (): CharacterLifeModule[] {
     if (this._affiliations.length === 0) {
       this._affiliations = this._lifeModules.filter(
         lm => lm.stage === LifeStage.AFFILIATION
-      ) as CharacterLifeModule[];
+      );
 
       return this._affiliations;
     } else {
@@ -94,45 +168,56 @@ export class Character {
     }
   }
 
-  // TODO: The character class shouldn't default to setting attribute XP
-  // directly. It should really be using the addXP and removeXP methods.
-  public alterAttributeXP (attr: Attribute, xp: number): void {
-    this.attributes.setXP(attr, xp);
+  /**
+   * Adds the given amount of XP to this character's `Attribute`.
+   *
+   * @param attr The attribute to add the XP to
+   * @param xp The amount of XP that's being added
+   */
+  public addAttributeXP (attr: Attribute, xp: number): void {
+    this.attributes.addXP(xp, attr);
   }
 
-  public currentAffiliation (): CharacterLifeModule {
-    const modules = this.affiliations();
-
-    return modules[modules.length - 1];
+  /**
+   * Removes the given amount of XP from this character's `Attribute`.
+   *
+   * @param attr The attribute to add the XP to
+   * @param xp The amount of XP that's being added
+   */
+  public removeAttributeXP (attr: Attribute, xp: number): void {
+    this.attributes.removeXP(xp, attr);
   }
 
+  /**
+   * Checks if this character has a trait by the provided name.
+   *
+   * @param name The name of the trait to check for
+   */
   public hasTrait (name: string): boolean {
     return !!this.getTrait(name);
   }
 
-  public getTrait (name: string): Trait {
-    return this.traits.find(t => t.name() === name);
-  }
-
-  /* Putting a "getter" in place for this because I expect there are going to
-   * be special access rules for life modules in the future. And it's better to
-   * plan for that now then have to do a bunch of messy refactoring of a public
-   * value down the line.
+  /**
+   * Gets the trait of this character by the provided name.
+   *
+   * @param name The name of the trait to get
    */
-  public lifeModules (): CharacterLifeModule[] {
-    return this._lifeModules;
+  public getTrait (name: string): Trait {
+    return this.traits.find(t => t.name === name);
   }
 
-  public originalAffiliation (): CharacterLifeModule {
-    return this.affiliations()[0];
-  }
-
+  /**
+   * Returns all of this character's skills in stringified form.
+   */
   public skillStrings (): string[] {
-    return this.skills.map(s => s.toString());
+    return this.skills.map(toString);
   }
 
+  /**
+   * Returns all of this character's traits in stringified form.
+   */
   public traitStrings (): string[] {
-    return this.traits.map(t => t.toString());
+    return this.traits.map(toString);
   }
 }
 

@@ -32,8 +32,12 @@ export class CharacterCreationHarness {
     }
   }
 
-  public alterAttributeXP (attr: Attribute, xp: number): void {
-    this._character.alterAttributeXP(attr, xp);
+  public addAttributeXP (attr: Attribute, xp: number): void {
+    this._character.addAttributeXP(attr, xp);
+  }
+
+  public removeAttributeXP (attr: Attribute, xp: number): void {
+    this._character.removeAttributeXP(attr, xp);
   }
 
   public addAffiliation (lm: LifeModule): void {
@@ -58,7 +62,7 @@ export class CharacterCreationHarness {
 
   // NOTE: this is again showing how this is pretty quickly being outgrown.
   public modules (): CharacterLifeModule[] {
-    return this._character.lifeModules();
+    return this._character.lifeModules;
   }
 
   public validate (): boolean {

@@ -18,7 +18,7 @@ export class CantHaveModuleValidator implements Validator {
     this.errors = [];
     const name: string = this._config['name'];
     const hasRestrictedModule = character
-      .lifeModules()
+      .lifeModules
       .find(l => l.name === name) !== undefined;
 
     if (hasRestrictedModule) {

@@ -14,11 +14,7 @@ const world: {
   attributeSetTwo: undefined,
 };
 
-const emptyValues: AttributeValues = {
-  xp: 0,
-  score: 0,
-  link: -4,
-};
+const emptyValues = new AttributeValues();
 
 Given('a new set of attributes', () => {
   world.attributeSet = new Attributes();
@@ -38,7 +34,7 @@ Then(`each attribute should equal it's base value`, () => {
 });
 
 When(`it has {int} XP added to it's {string} attribute`, (xp: number, attr: Attribute) => {
-  world.attributeSet.addXP(attr, xp);
+  world.attributeSet.addXP(xp, attr);
 });
 
 When('a second set of attributes is constructed with it', () => {
@@ -46,7 +42,7 @@ When('a second set of attributes is constructed with it', () => {
 });
 
 When(`the second has {int} XP added to it's {string} attribute`, (xp: number, attr: Attribute) => {
-  world.attributeSetTwo.addXP(attr, xp);
+  world.attributeSetTwo.addXP(xp, attr);
 });
 
 Then('they should not be equal', () => {

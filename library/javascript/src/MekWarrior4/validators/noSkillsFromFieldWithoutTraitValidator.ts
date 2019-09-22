@@ -37,7 +37,7 @@ export class NoSkillsFromFieldWithoutTraitValidator implements Validator {
     const fieldName: string = this._config['field'];
     const traitName: string = this._config['trait'];
 
-    const hasField = !!character.lifeModules().find(
+    const hasField = !!character.lifeModules.find(
       l => !!l.fields.find(f => f === fieldName)
     );
     const trait = character.getTrait(traitName);

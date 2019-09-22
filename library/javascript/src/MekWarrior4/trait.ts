@@ -1,12 +1,13 @@
+import { Experience, Stringify } from '../interfaces';
 import { LifeStage } from './lifeStage';
 import { TraitBase } from './traitBase';
 
-export class Trait {
+export class Trait implements Experience, Stringify {
   public readonly base: TraitBase;
   /** The amount of Trait Points or TP a trait has. */
   public level: number;
   /** The amount of raw XP a trait has. */
-  public experience: number;
+  public xp: number;
   /**
    * A further description of a trait, usually to differentiate a trait taken
    * multiple times.
@@ -45,27 +46,57 @@ export class Trait {
  *
  * @returns if the trait is actively effecting a character
  */
-  public isActive (): boolean {
+  get isActive (): boolean {
     return this.level !== 0;
   }
 
-  public name (): string {
+  /**
+   * The base name of this `Trait`.
+   */
+  get name (): string {
     return this.base.name;
   }
 
-  // NOTE: Why do traits have their XP set, but skills have their XP added?
-  public setXP (newXP: number): void {
-    this.experience = newXP;
-    this.level = this._calculatePoints(newXP);
+  /**
+   * Adds the given amount of XP to be added to this `Trait`.
+   *
+   * @param xp The amount of XP to add
+   */
+  public addXP (xp: number): void {
+    this.xp = xp;
+    this.level = this._calculatePoints(xp);
   }
 
+  /**
+   * Sets the XP of this `Trait` to the given amount.
+   *
+   * @param xp The amount of XP to set
+   */
+  public setXP (xp: number): void {
+    this.xp = xp;
+    this.level = this._calculatePoints(xp);
+  }
+
+  /**
+   * Removes the given amount of XP from this `Trait`.
+   *
+   * @param xp The amount of XP to remove
+   */
+  public removeXP (xp: number): void {
+    this.xp = xp;
+    this.level = this._calculatePoints(xp);
+  }
+
+  /**
+   * The string representation of this `Trait`.
+   */
   public toString (): string {
     let str = this.base.name;
 
     if (this.type) {
       str =`${str}: ${this.type}`;
     }
-    if (this.isActive()) {
+    if (this.isActive) {
       str = `${str} (${this.level})`;
     }
     if (this.subDescription) {

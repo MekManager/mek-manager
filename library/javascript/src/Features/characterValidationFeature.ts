@@ -66,7 +66,7 @@ When(
 );
 
 When('the character adds {int} XP to their {string} attribute', (xp: number, attr: string) => {
-  world.harness.alterAttributeXP(attr as Attribute, xp);
+  world.harness.addAttributeXP(attr as Attribute, xp);
 });
 
 

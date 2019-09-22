@@ -30,7 +30,7 @@ export class ClanValidator implements Validator {
 
     const canTakeClanModules = (hasClanAffiliation || canActAsClan);
 
-    this.errors = character.lifeModules().reduce(
+    this.errors = character.lifeModules.reduce(
       (errors, lifeModule) => {
         // Skip affiliations, we care about early childhood and on
         if (lifeModule.stage === LifeStage.AFFILIATION) {
@@ -59,7 +59,7 @@ export class ClanValidator implements Validator {
     );
 
     if (canTakeClanModules && character.caste === undefined) {
-      if (character.currentAffiliation().name !== 'Independent/Pirate') {
+      if (character.currentAffiliation.name !== 'Independent/Pirate') {
         this.errors.push({
           message: `This character does not have a Caste. They must either take one, or join the "Dark Caste" by taking the Independent/Pirate affiliation`,
           origin: this.name,

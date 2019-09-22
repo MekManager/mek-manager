@@ -23,7 +23,7 @@ export class AttributeMinimumForTraitFromStageValidator implements Validator {
     const requiredScore: number = this._config['score'];
     const stage: LifeStage = this._config['stage'];
     const trait = character.traits.find(
-      t => t.name() === traitName && t.stageTaken === stage
+      t => t.name === traitName && t.stageTaken === stage
     );
 
     if (trait) {

@@ -20,7 +20,7 @@ export class ChildLaborValidator implements Validator {
       .filter(a => a.hasRuleFor(RuleName.LEGAL_CHILD_LABOR))
       .length > 0;
 
-    this.errors = character.lifeModules().reduce(
+    this.errors = character.lifeModules.reduce(
       (errors, lifeModule) => {
         if (
           !legalChildLabor &&

@@ -31,7 +31,7 @@ Then('it should have {int} trait points', (points: number) => {
 
 Then(`it's active state should be {string}`, (bool: string) => {
   const state = bool === 'true';
-  expect(world.trait.isActive()).to.equal(state);
+  expect(world.trait.isActive).to.equal(state);
 });
 
 Then('the string value should be {string}', (str: string) => {

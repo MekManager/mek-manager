@@ -23,14 +23,14 @@ export class NoMekWarriorsOrBattleArmorValidator implements Validator {
   public valid (character: Character): boolean {
     this.errors = [];
     const disallowedFields = ['MekWarrior', 'Battle Armor'];
-    const currentAffiliation = character.currentAffiliation();
+    const currentAffiliation = character.currentAffiliation;
 
     // There's nothing to check yet
     if (currentAffiliation === undefined) {
       return true;
     }
 
-    const higherEd = character.lifeModules().filter(
+    const higherEd = character.lifeModules.filter(
       l => l.stage === LifeStage.HIGHER_EDUCATION
     );
     const brokenRule = higherEd.find(

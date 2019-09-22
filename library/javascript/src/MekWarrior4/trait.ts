@@ -15,7 +15,9 @@ export class Trait {
   /**
    * Further clarification on a `subDescription`. This is useful in
    * situations where there's multiple of the same thing. i.e:
+   *
    *   Dependent (-2)/Son (Albert)
+   *
    *   Dependent (-2)/Son (Brent)
    */
   public subject?: string;

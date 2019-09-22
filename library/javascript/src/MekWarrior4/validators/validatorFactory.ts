@@ -35,15 +35,13 @@ const validatorsForRule = (validators: Validator[], rule: Rule): Validator[] => 
 export class ValidatorFactory {
 
   public static validators (character: Character): Validator[] {
-    /* NOTE: This loop is pretty tight, but I'm not overly worried about it
-     * because the collections it loops over are rarely even going to be in the
-     * 10's of items.
-     *
-     * This reduces over each of a characters life modules, and for each life
-     * module reduces it's rules into a list of validators. Then adds that to
-     * the list of base validators that should always be checked.
-     */
-    const characterSpecificValidators = character.activeLifeModules().reduce(
+    // NOTE: This loop is pretty tight, but I'm not overly worried about it
+    // because the collections it loops over are rarely even going to be in the
+    // 10's of items.
+    //
+    // This reduces over each of a characters life modules, and for each life
+    // module reduces it's rules into a list of validators. Then adds that to
+    // the list of base validators that should always be checked.
       (validators, lm) =>
         validators.concat(lm.rules.reduce(validatorsForRule, [])), []
     );

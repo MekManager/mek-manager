@@ -1,6 +1,7 @@
 import { LifeModule } from './lifeModule';
 import { LifeStage } from './lifeStage';
-import { Rule, RuleName } from './rule';
+import { Rule } from './rule';
+import { RuleName } from './ruleName';
 
 /**
  * A wrapper class that describes how a character is using a given `LifeModule`

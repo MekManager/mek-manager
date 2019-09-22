@@ -1,7 +1,7 @@
 import { Character } from '../character';
 import { isWarriorCaste } from '../clanCaste';
 import { ValidationError } from '../errorMessage';
-import { RuleName } from '../rule';
+import { RuleName } from '../ruleName';
 import { Validator } from './validator';
 
 export class ClanWarriorMustTakeTraitValidator implements Validator {

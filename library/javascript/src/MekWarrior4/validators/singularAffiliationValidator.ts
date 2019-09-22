@@ -1,6 +1,6 @@
 import { Character } from '../character';
 import { ValidationError } from '../errorMessage';
-import { RuleName } from '../rule';
+import { RuleName } from '../ruleName';
 import { Validator } from './validator';
 
 export class SingularAffiliationValidator implements Validator {

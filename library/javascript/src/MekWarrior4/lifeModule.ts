@@ -1,5 +1,6 @@
 import { LifeStage } from './lifeStage';
-import { Rule, RuleName } from './rule';
+import { Rule } from './rule';
+import { RuleName } from './ruleName';
 
 export class LifeModule {
   public isClan: boolean;

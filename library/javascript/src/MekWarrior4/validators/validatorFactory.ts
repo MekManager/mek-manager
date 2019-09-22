@@ -1,5 +1,6 @@
 import { Character } from '../character';
-import { Rule, RuleName } from '../rule';
+import { Rule } from '../rule';
+import { RuleName } from '../ruleName';
 import { AttributeMinimumForTraitFromStageValidator } from './attributeMinimumForTraitFromStageValidator';
 import { AttributeMinimumForTraitValidator } from './attributeMinimumForTraitValidator';
 import { CantHaveModuleValidator } from './cantHaveModuleValidator';

@@ -1,12 +1,12 @@
-import { Attribute, Attributes, changeXP, newAttributes } from './attributes';
+import { Attribute, Attributes, changeXP, newAttributes } from './attribute';
 import { CharacterFlavor, newCharacterFlavor } from './characterFlavor';
 import { CharacterLifeModule } from './characterLifeModule';
 import { ClanCaste } from './clanCaste';
 import { LifeModule } from './lifeModule';
 import { LifeStage } from './lifeStage';
 import { Name } from './name';
-import { Skill } from './skills';
-import { Trait } from './traits';
+import { Skill } from './skill';
+import { Trait } from './trait';
 
 export class Character {
   public name: Name;

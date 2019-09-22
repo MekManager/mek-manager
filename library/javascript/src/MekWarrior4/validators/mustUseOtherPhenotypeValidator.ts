@@ -1,4 +1,4 @@
-import { Character } from '../characters';
+import { Character } from '../character';
 import { ValidationError } from '../errorMessage';
 import { Validator } from './validator';
 

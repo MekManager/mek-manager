@@ -1,11 +1,11 @@
-import { Attribute } from './attributes';
+import { Attribute } from './attribute';
+import { Character } from './character';
 import { CharacterLifeModule } from './characterLifeModule';
-import { Character } from './characters';
 import { ClanCaste } from './clanCaste';
 import { ValidationError } from './errorMessage';
 import { LifeModule } from './lifeModule';
 import { LifeStage } from './lifeStage';
-import { Trait } from './traits';
+import { Trait } from './trait';
 import { ValidatorFactory } from './validators/validatorFactory';
 
 /**

@@ -12,7 +12,7 @@ export class Name {
    */
   public givenName: string;
   /**
-   * Any extra names this character is identified. These are conventionally
+   * Any extra names this character is identified by. These are conventionally
    * listed between the given and family name.
    */
   public middleNames: string[];

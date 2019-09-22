@@ -1,4 +1,43 @@
-import { Trait, TraitBase } from '../../traits';
+import { Trait, TraitBase } from '../../MekWarrior4';
+
+// TODO: this should be an object
+export const stringToTrait = (which: string): Trait => {
+  switch (which) {
+    case 'capped':
+      return cappedTrait;
+    case 'cool':
+      return coolTrait;
+    case 'minimum':
+      return minimumTrait;
+    default:
+      return minimalTrait;
+  }
+};
+
+export const minimalBase = new TraitBase({
+  name: 'test',
+  multipleAllowed: false,
+});
+export const minimalTrait = new Trait(minimalBase);
+
+export const cappedTraitBase = new TraitBase({
+  name: 'test',
+  multipleAllowed: false,
+  max: 5,
+});
+export const cappedTrait = new Trait(cappedTraitBase);
+
+export const minimumBase = new TraitBase({
+  name: 'test',
+  multipleAllowed: false,
+  min: 2,
+});
+export const minimumTrait = new Trait(minimumBase);
+
+export const coolTrait = new Trait(new TraitBase({ name: 'Coolness' }));
+
+// NOTE: Everything below here was originally part of the Character creation
+// testing files.
 
 // TODO: Need to find a better way to create traits.
 const mekwarriorPhenotype = (() => {
@@ -63,13 +102,13 @@ const title = new Trait(new TraitBase({
 }));
 
 export const mockTraits = {
-  aerospacePhenotype,
-  animalEmpathy,
-  elementalPhenotype,
-  greenThumb,
-  rank,
-  royalty,
-  mekwarriorPhenotype,
-  naturalAptitude,
-  title,
+  'MekWarrior Phenotype': mekwarriorPhenotype,
+  'Aerospace Phenotype': aerospacePhenotype,
+  'Animal Empathy': animalEmpathy,
+  'Elemental Phenotype': elementalPhenotype,
+  'Green Thumb': greenThumb,
+  'Rank': rank,
+  'Royalty': royalty,
+  'Natural Aptitude': naturalAptitude,
+  'Title': title,
 };
